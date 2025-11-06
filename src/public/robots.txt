@@ -1,0 +1,14 @@
+# robots.txt para Portfolio Jabier García Sanz
+
+# Permitir a todos los robots rastrear el sitio
+User-agent: *
+Allow: /
+
+# Bloquear el panel de administración
+Disallow: /admin
+
+# Crawl-delay para ser respetuoso con los servidores
+Crawl-delay: 1
+
+# Sitemap (actualizar con dominio cuando esté disponible)
+# Sitemap: https://tudominio.com/sitemap.xml

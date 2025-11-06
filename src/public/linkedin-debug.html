@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔍 LinkedIn Debugging - Jabier García Sanz</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #10252a 0%, #2d5367 100%);
+      padding: 2rem;
+      min-height: 100vh;
+      color: white;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      padding: 3rem;
+      color: #10252a;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #10252a;
+    }
+    
+    .subtitle {
+      color: #70b8ba;
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+    }
+    
+    .alert {
+      background: #fff3cd;
+      border-left: 5px solid #ffc107;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      color: #856404;
+      line-height: 1.6;
+    }
+    
+    .alert strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .section {
+      background: #f8f9fa;
+      padding: 2rem;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+      border: 2px solid #e9ecef;
+    }
+    
+    .section h2 {
+      color: #10252a;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .step {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      border-left: 4px solid #70b8ba;
+    }
+    
+    .step:last-child {
+      margin-bottom: 0;
+    }
+    
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: #70b8ba;
+      color: white;
+      border-radius: 50%;
+      font-weight: 700;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .step-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .step-content {
+      color: #495057;
+      line-height: 1.6;
+      margin-left: 48px;
+    }
+    
+    .url-box {
+      background: #e9ecef;
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      word-break: break-all;
+      margin: 0.5rem 0;
+      border: 2px dashed #adb5bd;
+    }
+    
+    .url-box.clickable {
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid #70b8ba;
+    }
+    
+    .url-box.clickable:hover {
+      background: #d8f878;
+      border-color: #10252a;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.75rem;
+      background: #70b8ba;
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    
+    .btn:hover {
+      background: #5a9a9c;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(112, 184, 186, 0.4);
+    }
+    
+    .btn-secondary {
+      background: #d8f878;
+      color: #10252a;
+    }
+    
+    .btn-secondary:hover {
+      background: #c5e560;
+      box-shadow: 0 8px 20px rgba(216, 248, 120, 0.4);
+    }
+    
+    .btn-danger {
+      background: #d4183d;
+    }
+    
+    .btn-danger:hover {
+      background: #b01432;
+      box-shadow: 0 8px 20px rgba(212, 24, 61, 0.4);
+    }
+    
+    .buttons-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    
+    .status-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+    
+    .status-box.success {
+      background: #d1f4dd;
+      border: 2px solid #28a745;
+    }
+    
+    .status-box.error {
+      background: #f8d7da;
+      border: 2px solid #d4183d;
+    }
+    
+    .status-box.warning {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+    }
+    
+    .status-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    
+    .status-content h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+    
+    .status-content p {
+      color: #495057;
+      line-height: 1.6;
+    }
+    
+    .copy-btn {
+      padding: 0.5rem 1rem;
+      background: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    
+    .copy-btn:hover {
+      background: #545b62;
+    }
+    
+    .copy-btn.copied {
+      background: #28a745;
+    }
+    
+    code {
+      background: #e9ecef;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .test-result {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+    }
+    
+    .test-result.loading {
+      background: #e7f3ff;
+      color: #004085;
+      border: 2px solid #b8daff;
+    }
+    
+    .test-result.success {
+      background: #d1f4dd;
+      color: #155724;
+      border: 2px solid #28a745;
+    }
+    
+    .test-result.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 2px solid #d4183d;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 LinkedIn Debugging</h1>
+    <p class="subtitle">Guía paso a paso para solucionar problemas de compartir en LinkedIn</p>
+    
+    <div class="alert">
+      <strong>⚠️ Problema Detectado:</strong>
+      LinkedIn no está mostrando la imagen de tu portfolio. Esto se debe a uno de estos 3 problemas comunes. Sigue los pasos abajo para solucionarlo.
+    </div>
+    
+    <!-- Problema 1: URL del dominio -->
+    <div class="section">
+      <h2>🌐 Paso 1: Verifica tu URL Real</h2>
+      
+      <div class="status-box warning">
+        <div class="status-icon">⚠️</div>
+        <div class="status-content">
+          <h3>Tu URL Actual</h3>
+          <p>La URL que LinkedIn necesita es la URL REAL de tu portfolio desplegado, NO localhost.</p>
+          <div class="url-box" id="currentUrl">Cargando...</div>
+        </div>
+      </div>
+      
+      <div class="step">
+        <div class="step-title">
+          <span class="step-number">1</span>
+          Confirma tu dominio de producción
+        </div>
+        <div class="step-content">
+          <p>¿Cuál es la URL real donde está desplegado tu portfolio?</p>
+          <ul style="margin-top: 0.5rem; margin-left: 1.5rem; line-height: 1.8;">
+            <li>¿Es <code>jabiergarcia.com</code>?</li>
+            <li>¿Es <code>www.jabiergarcia.com</code>?</li>
+            <li>¿Es un dominio de Vercel como <code>portfolio-xyz.vercel.app</code>?</li>
+            <li>¿Es un dominio de Netlify como <code>portfolio-xyz.netlify.app</code>?</li>
+          </ul>
+          <p style="margin-top: 1rem;"><strong>Esta es la URL que debes usar en LinkedIn.</strong></p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Problema 2: Imagen no accesible -->
+    <div class="section">
+      <h2>🖼️ Paso 2: Verifica que la Imagen sea Pública</h2>
+      
+      <div class="step">
+        <div class="step-title">
+          <span class="step-number">2</span>
+          Prueba si la imagen carga públicamente
+        </div>
+        <div class="step-content">
+          <p>Haz clic en el botón para abrir la imagen en una nueva pestaña de incógnito:</p>
+          <div class="buttons-row">
+            <a href="https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/javier-profile.png" 
+               target="_blank" 
+               class="btn">
+              🔗 Abrir Imagen de Supabase
+            </a>
+          </div>
+          
+          <div id="imageTest" class="test-result" style="display: none;">
+            <strong>Testing...</strong>
+          </div>
+          
+          <div style="margin-top: 1.5rem; padding: 1rem; background: white; border-radius: 8px;">
+            <strong style="display: block; margin-bottom: 0.75rem;">✅ Si la imagen carga:</strong>
+            <p>La imagen es pública. Pasa al Paso 3.</p>
+            
+            <strong style="display: block; margin-top: 1.5rem; margin-bottom: 0.75rem;">❌ Si NO carga o pide login:</strong>
+            <p>La imagen NO es pública. Necesitas hacer el bucket público en Supabase:</p>
+            <ol style="margin-top: 0.5rem; margin-left: 1.5rem; line-height: 1.8;">
+              <li>Ve a <strong>Supabase Dashboard</strong></li>
+              <li>Storage → <code>portfolio-assets</code></li>
+              <li>Clic en configuración del bucket</li>
+              <li>Marca como <strong>"Public bucket"</strong></li>
+              <li>Guarda cambios</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Problema 3: Cache de LinkedIn -->
+    <div class="section">
+      <h2>🔄 Paso 3: Fuerza la Actualización en LinkedIn</h2>
+      
+      <div class="step">
+        <div class="step-title">
+          <span class="step-number">3</span>
+          Usa LinkedIn Post Inspector
+        </div>
+        <div class="step-content">
+          <p>LinkedIn guarda en caché las previews. Debes forzar la actualización:</p>
+          
+          <ol style="margin-top: 1rem; margin-left: 1.5rem; line-height: 2;">
+            <li>Haz clic en el botón de abajo para abrir LinkedIn Post Inspector</li>
+            <li>Pega tu URL real (del Paso 1)</li>
+            <li>Haz clic en <strong>"Inspect"</strong></li>
+            <li>Espera 10-15 segundos</li>
+            <li>Verifica la preview</li>
+          </ol>
+          
+          <div class="buttons-row">
+            <a href="https://www.linkedin.com/post-inspector/" 
+               target="_blank" 
+               class="btn">
+              🔗 Abrir LinkedIn Post Inspector
+            </a>
+          </div>
+          
+          <div style="margin-top: 1.5rem; padding: 1rem; background: #fff3cd; border-radius: 8px; border-left: 4px solid #ffc107;">
+            <strong>⚡ Importante:</strong> Debes usar la URL EXACTA que aparece en tu navegador cuando visitas tu portfolio desplegado. NO uses localhost.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Solución alternativa -->
+    <div class="section">
+      <h2>🎨 Solución Alternativa: Imagen Personalizada</h2>
+      
+      <div class="step">
+        <div class="step-title">
+          <span class="step-number">4</span>
+          Si nada funciona, sube la imagen directamente en LinkedIn
+        </div>
+        <div class="step-content">
+          <p>Como último recurso, cuando crees el post en LinkedIn:</p>
+          <ol style="margin-top: 1rem; margin-left: 1.5rem; line-height: 2;">
+            <li><strong>NO pegues la URL primero</strong></li>
+            <li>Escribe tu mensaje</li>
+            <li>Usa el botón de "Añadir imagen" en LinkedIn</li>
+            <li>Sube una imagen 1200x630px con:
+              <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                <li>Tu foto de perfil</li>
+                <li>Título "UX/UI Designer"</li>
+                <li>URL de tu portfolio</li>
+                <li>Colores: #d8f878, #70b8ba, #ffccb6</li>
+              </ul>
+            </li>
+            <li>Luego menciona la URL en el texto del post</li>
+          </ol>
+          
+          <div style="margin-top: 1.5rem; padding: 1rem; background: #d1f4dd; border-radius: 8px; border-left: 4px solid #28a745;">
+            <strong>💡 Ventaja:</strong> Tienes control total sobre la imagen que aparece y puedes hacerla más atractiva con un diseño personalizado.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Herramientas -->
+    <div class="section">
+      <h2>🛠️ Herramientas Útiles</h2>
+      
+      <div class="buttons-row">
+        <a href="/meta-check.html" class="btn btn-secondary">
+          🔍 Verificar Meta Tags
+        </a>
+        <a href="https://www.opengraph.xyz/" target="_blank" class="btn btn-secondary">
+          🌐 Open Graph Checker
+        </a>
+        <a href="https://developers.facebook.com/tools/debug/" target="_blank" class="btn btn-secondary">
+          🐛 Facebook Debugger
+        </a>
+        <a href="/" class="btn btn-danger">
+          🏠 Volver al Portfolio
+        </a>
+      </div>
+    </div>
+    
+    <!-- URLs para copiar -->
+    <div class="section">
+      <h2>📋 URLs para Copiar</h2>
+      
+      <div class="step">
+        <div class="step-title">URL de tu imagen de Supabase:</div>
+        <div class="step-content">
+          <div class="url-box">
+            https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/javier-profile.png
+          </div>
+          <button class="copy-btn" onclick="copyToClipboard('https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/javier-profile.png', this)">
+            📋 Copiar
+          </button>
+        </div>
+      </div>
+      
+      <div class="step">
+        <div class="step-title">URL configurada en los meta tags:</div>
+        <div class="step-content">
+          <div class="url-box">https://www.jabiergarcia.com</div>
+          <button class="copy-btn" onclick="copyToClipboard('https://www.jabiergarcia.com', this)">
+            📋 Copiar
+          </button>
+          <p style="margin-top: 1rem; color: #856404; background: #fff3cd; padding: 0.75rem; border-radius: 6px;">
+            ⚠️ <strong>Importante:</strong> Si tu dominio real es diferente (ej: vercel.app), debes usar ESE dominio en LinkedIn Post Inspector.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Show current URL
+    window.addEventListener('load', () => {
+      const currentUrl = document.getElementById('currentUrl');
+      const url = window.location.origin;
+      currentUrl.textContent = url;
+      currentUrl.style.color = '#10252a';
+      currentUrl.style.fontWeight = '600';
+    });
+    
+    // Copy to clipboard function
+    function copyToClipboard(text, button) {
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = button.textContent;
+        button.textContent = '✅ Copiado!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        alert('Error al copiar: ' + err);
+      });
+    }
+    
+    // Test image accessibility
+    async function testImageAccess() {
+      const imageUrl = 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/javier-profile.png';
+      const testResult = document.getElementById('imageTest');
+      
+      testResult.style.display = 'block';
+      testResult.className = 'test-result loading';
+      testResult.innerHTML = '<strong>⏳ Probando acceso a la imagen...</strong>';
+      
+      try {
+        const response = await fetch(imageUrl, { method: 'HEAD' });
+        
+        if (response.ok) {
+          testResult.className = 'test-result success';
+          testResult.innerHTML = '<strong>✅ Imagen accesible públicamente!</strong><br>LinkedIn debería poder leerla. Si no aparece, usa LinkedIn Post Inspector para forzar actualización.';
+        } else {
+          testResult.className = 'test-result error';
+          testResult.innerHTML = '<strong>❌ Imagen NO accesible (HTTP ' + response.status + ')</strong><br>El bucket de Supabase NO es público. Sigue las instrucciones arriba para hacerlo público.';
+        }
+      } catch (error) {
+        testResult.className = 'test-result error';
+        testResult.innerHTML = '<strong>❌ Error al probar acceso</strong><br>' + error.message;
+      }
+    }
+    
+    // Auto-test image on load
+    window.addEventListener('load', () => {
+      setTimeout(testImageAccess, 500);
+    });
+  </script>
+</body>
+</html>

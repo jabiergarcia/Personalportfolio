@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Deploy - Jabier García</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #10252a 0%, #2d5367 100%);
+            color: #fffbf8;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .test-section {
+            background: rgba(255, 251, 248, 0.1);
+            border: 2px solid #70b8ba;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .test-section h2 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: #d8f878;
+        }
+        
+        .test-item {
+            padding: 12px;
+            margin-bottom: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .test-item.success {
+            border-left: 4px solid #d8f878;
+        }
+        
+        .test-item.error {
+            border-left: 4px solid #d4183d;
+        }
+        
+        .test-item.warning {
+            border-left: 4px solid #ffccb6;
+        }
+        
+        .status {
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .status.success {
+            background: #d8f878;
+            color: #10252a;
+        }
+        
+        .status.error {
+            background: #d4183d;
+            color: #fffbf8;
+        }
+        
+        .status.pending {
+            background: #ffccb6;
+            color: #10252a;
+        }
+        
+        button {
+            background: #70b8ba;
+            color: #fffbf8;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #5da8aa;
+            transform: translateY(-2px);
+        }
+        
+        .info {
+            background: rgba(216, 248, 120, 0.1);
+            border: 1px solid #d8f878;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #d8f878;
+        }
+        
+        a {
+            color: #70b8ba;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Verificación de Deploy</h1>
+        
+        <div class="test-section">
+            <h2>Archivos Estáticos</h2>
+            <div id="static-tests"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Meta Tags (Home)</h2>
+            <div id="meta-tests"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Build Information</h2>
+            <div id="build-info"></div>
+        </div>
+        
+        <button onclick="runTests()">🔄 Ejecutar Tests</button>
+        
+        <div class="info">
+            <strong>ℹ️ Información:</strong><br>
+            Esta página verifica que el deploy se haya realizado correctamente.<br>
+            <br>
+            <strong>Tests que se ejecutan:</strong><br>
+            • Verifica que <code>/linkedin.html</code> sea accesible<br>
+            • Verifica que los meta tags estén actualizados<br>
+            • Muestra información del build actual<br>
+            <br>
+            <strong>Archivos relacionados:</strong><br>
+            • <a href="/linkedin.html" target="_blank">/linkedin.html</a><br>
+            • <a href="/meta-check.html" target="_blank">/meta-check.html</a><br>
+            • <a href="/" target="_blank">Home (index.html)</a>
+        </div>
+    </div>
+    
+    <script>
+        const expectedDescription = 'Portfolio de UX/UI Designer especializado en Design Systems y experiencias digitales. 13 años en moda + bootcamp en Neoland. Proyectos: PuffyKitten, Chupsee, GotApp y Pomeranian Design System.';
+        const buildId = 'meta-fix-final-20250109-2345';
+        
+        function createTestItem(label, status, message) {
+            const statusClass = status === 'OK' ? 'success' : status === 'ERROR' ? 'error' : 'warning';
+            const statusLabel = status === 'OK' ? 'success' : status === 'ERROR' ? 'error' : 'pending';
+            
+            return `
+                <div class="test-item ${statusClass}">
+                    <span>${label}</span>
+                    <span class="status ${statusLabel}">${status}</span>
+                </div>
+                ${message ? `<div style="padding: 8px 12px; font-size: 14px; opacity: 0.8;">${message}</div>` : ''}
+            `;
+        }
+        
+        async function runTests() {
+            // Test 1: Verificar linkedin.html
+            const staticTestsDiv = document.getElementById('static-tests');
+            staticTestsDiv.innerHTML = '<p>Ejecutando tests...</p>';
+            
+            try {
+                const response = await fetch('/linkedin.html');
+                const html = await response.text();
+                
+                const hasTitle = html.includes('Jabier García Sanz - UX/UI Designer Portfolio');
+                const hasDescription = html.includes(expectedDescription);
+                const hasMetaRefresh = html.includes('meta http-equiv="refresh"');
+                
+                let tests = '';
+                tests += createTestItem(
+                    'linkedin.html accesible',
+                    response.ok ? 'OK' : 'ERROR',
+                    response.ok ? 'Archivo HTML estático se sirve correctamente' : 'No se puede acceder al archivo'
+                );
+                tests += createTestItem(
+                    'Title correcto',
+                    hasTitle ? 'OK' : 'ERROR',
+                    hasTitle ? null : 'Title no encontrado en linkedin.html'
+                );
+                tests += createTestItem(
+                    'Description actualizada',
+                    hasDescription ? 'OK' : 'ERROR',
+                    hasDescription ? 'Meta description de 181 caracteres' : 'Description antigua o incorrecta'
+                );
+                tests += createTestItem(
+                    'Redirección automática',
+                    hasMetaRefresh ? 'OK' : 'ERROR',
+                    hasMetaRefresh ? 'Meta refresh configurado' : 'No se encontró meta refresh'
+                );
+                
+                staticTestsDiv.innerHTML = tests;
+            } catch (error) {
+                staticTestsDiv.innerHTML = createTestItem(
+                    'Error al cargar linkedin.html',
+                    'ERROR',
+                    error.message
+                );
+            }
+            
+            // Test 2: Verificar meta tags en página actual
+            const metaTestsDiv = document.getElementById('meta-tests');
+            const description = document.querySelector('meta[name="description"]')?.content || '';
+            const ogDescription = document.querySelector('meta[property="og:description"]')?.content || '';
+            const ogImage = document.querySelector('meta[property="og:image"]')?.content || '';
+            
+            let metaTests = '';
+            metaTests += createTestItem(
+                'Meta description',
+                description.includes('Portfolio de UX/UI Designer') ? 'OK' : 'WARN',
+                description || 'No encontrada'
+            );
+            metaTests += createTestItem(
+                'OG description',
+                ogDescription.includes('Portfolio de UX/UI Designer') ? 'OK' : 'WARN',
+                ogDescription || 'No encontrada'
+            );
+            metaTests += createTestItem(
+                'OG image',
+                ogImage.includes('Image-linkedin.png') ? 'OK' : 'WARN',
+                ogImage || 'No encontrada'
+            );
+            
+            metaTestsDiv.innerHTML = metaTests;
+            
+            // Build info
+            const buildInfoDiv = document.getElementById('build-info');
+            buildInfoDiv.innerHTML = `
+                <div class="test-item">
+                    <span>Build ID esperado</span>
+                    <code>${buildId}</code>
+                </div>
+                <div class="test-item">
+                    <span>Deploy timestamp</span>
+                    <code>2025-01-09 23:45</code>
+                </div>
+                <div class="test-item">
+                    <span>Cambio crítico</span>
+                    <span>vercel.json rewritesexplícitos</span>
+                </div>
+            `;
+        }
+        
+        // Run tests on load
+        window.addEventListener('load', runTests);
+    </script>
+</body>
+</html>

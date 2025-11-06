@@ -1,0 +1,640 @@
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Typography Scale - Mobile First */
+  --font-size: 16px;
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 1.875rem;   /* 30px */
+  --text-4xl: 2.25rem;    /* 36px */
+  --text-5xl: 3rem;       /* 48px */
+  
+  /* Colors */
+  --background: #fffbf8;
+  --foreground: #10252a;
+  --card: #fffbf8;
+  --card-foreground: #10252a;
+  --popover: #fffbf8;
+  --popover-foreground: #10252a;
+  --primary: #10252a;
+  --primary-foreground: #fffbf8;
+  --secondary: #70b8ba;
+  --secondary-foreground: #fffbf8;
+  --muted: #ffccb6;
+  --muted-foreground: #2d5367;
+  --accent: #d8f878;
+  --accent-foreground: #10252a;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(16, 37, 42, 0.1);
+  --input: transparent;
+  --input-background: rgba(255, 204, 182, 0.15);
+  --switch-background: #70b8ba;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #70b8ba;
+  --chart-1: #d8f878;
+  --chart-2: #70b8ba;
+  --chart-3: #ffccb6;
+  --chart-4: #2d5367;
+  --chart-5: #10252a;
+  --radius: 1.5rem;
+  --sidebar: #fffbf8;
+  --sidebar-foreground: #10252a;
+  --sidebar-primary: #10252a;
+  --sidebar-primary-foreground: #fffbf8;
+  --sidebar-accent: #d8f878;
+  --sidebar-accent-foreground: #10252a;
+  --sidebar-border: rgba(16, 37, 42, 0.1);
+  --sidebar-ring: #70b8ba;
+}
+
+/* Tablet breakpoint adjustments */
+@media (min-width: 768px) {
+  :root {
+    --text-base: 1rem;      /* 16px */
+    --text-lg: 1.125rem;    /* 18px */
+    --text-xl: 1.375rem;    /* 22px */
+    --text-2xl: 1.625rem;   /* 26px */
+    --text-3xl: 2rem;       /* 32px */
+    --text-4xl: 2.5rem;     /* 40px */
+    --text-5xl: 3.5rem;     /* 56px */
+  }
+}
+
+/* Desktop breakpoint adjustments */
+@media (min-width: 1024px) {
+  :root {
+    --text-base: 1rem;      /* 16px */
+    --text-lg: 1.125rem;    /* 18px */
+    --text-xl: 1.25rem;     /* 20px */
+    --text-2xl: 1.5rem;     /* 24px */
+    --text-3xl: 1.875rem;   /* 30px */
+    --text-4xl: 2.25rem;    /* 36px */
+    --text-5xl: 3rem;       /* 48px */
+  }
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.45 0.1 185);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.35 0 0);
+  --muted-foreground: oklch(0.85 0 0);
+  --accent: oklch(0.75 0.15 120);
+  --accent-foreground: oklch(0.145 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.35 0 0);
+  --input: oklch(0.35 0 0);
+  --input-background: oklch(0.25 0 0);
+  --ring: oklch(0.55 0.1 185);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.35 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.35 0 0);
+  --sidebar-ring: oklch(0.55 0.1 185);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Clash Display', sans-serif;
+  }
+  
+  #root {
+    min-height: 100vh;
+  }
+}
+
+/**
+ * Unified Typography System - Responsive across all breakpoints
+ * Applied to elements without explicit text-* classes
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: var(--text-3xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+    }
+
+    h2 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+    }
+
+    h3 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h5 {
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.6;
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+
+    li {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.6;
+    }
+
+    span {
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+  scroll-behavior: smooth;
+}
+
+/* Optimize animations and smooth scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Prevent browser scroll anchoring */
+body, html {
+  overflow-anchor: none;
+  /* Prevent iOS Safari from bouncing and affecting fixed elements */
+  position: relative;
+  /* Ensure smooth scrolling without jank on mobile */
+  overscroll-behavior-y: none;
+  /* Optimize scrolling performance on mobile */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Optimize rendering for project cards on mobile */
+@media (max-width: 768px) {
+  [data-project-card] {
+    /* Contain paint to reduce repaints during scroll */
+    contain: layout style;
+  }
+  
+  /* Disable hover effects on mobile */
+  [data-project-card]:hover {
+    transform: none;
+    box-shadow: inherit;
+  }
+  
+  /* Prevent image transforms on mobile */
+  [data-project-card] img {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Prevent scroll when lightbox or modal is open */
+body.lightbox-open,
+body.modal-open {
+  overflow: hidden !important;
+  /* Don't use position: fixed as it causes scroll position jumps */
+  /* Instead rely on touch-action and overflow for mobile */
+  touch-action: none !important;
+  -webkit-overflow-scrolling: auto !important;
+  overscroll-behavior: none !important;
+}
+
+/* Lightbox image container - responsive padding with safe area support */
+@media (max-width: 639px) {
+  .lightbox-image-container {
+    padding-top: max(56px, env(safe-area-inset-top, 56px)) !important;
+    padding-left: max(8px, env(safe-area-inset-left, 8px)) !important;
+    padding-right: max(8px, env(safe-area-inset-right, 8px)) !important;
+    padding-bottom: max(90px, env(safe-area-inset-bottom, 90px)) !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .lightbox-image-container {
+    padding: 80px 16px 100px !important;
+  }
+  
+  [data-desktop-padding="true"] {
+    padding-bottom: 80px !important;
+  }
+}
+
+/* Ensure lightbox content is properly centered on mobile */
+@media (max-width: 639px) {
+  .lightbox-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    /* Prevent any overflow that could cause misalignment */
+    overflow: visible;
+  }
+}
+
+/* Native Fullscreen API - Cross-browser support for Figma prototypes */
+/* When fullscreen is activated on the CONTAINER (not iframe), it fills the screen */
+*:fullscreen,
+*:-webkit-full-screen,
+*:-moz-full-screen,
+*:-ms-fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  background: var(--background) !important;
+}
+
+/* Ensure iframe inside fullscreen container also fills completely */
+*:fullscreen iframe,
+*:-webkit-full-screen iframe,
+*:-moz-full-screen iframe,
+*:-ms-fullscreen iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+}
+
+/* Custom scrollbar styling */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 8px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 8px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Smooth transitions for all interactive elements */
+@layer base {
+  button, a, input, textarea {
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+/* Enhanced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  /* Eliminar animaciones decorativas completamente */
+  *[data-hero-animation],
+  *[data-decorative-animation] {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  /* Mantener animaciones funcionales pero hacerlas instant */
+  button:hover,
+  a:hover,
+  .project-card:hover {
+    transition-duration: 0.05s !important;
+  }
+  
+  /* Scroll reveals instant pero mantener el efecto */
+  .scroll-reveal,
+  [class*="scroll-reveal"] {
+    transition-duration: 0.05s !important;
+  }
+  
+  /* Reducir todas las demás animaciones */
+  *:not(button):not(a):not(.scroll-reveal),
+  *::before,
+  *::after {
+    animation-duration: 0.05s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.05s !important;
+  }
+  
+  /* Deshabilitar smooth scroll */
+  * {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Timeline icon colors - unified for mobile and desktop in both light/dark modes */
+/* Using solid colors instead of opacity to prevent showing the line behind icons */
+
+/* bg-muted-foreground (light: #2d5367 - dark blue) */
+.rounded-full.bg-muted-foreground {
+  background: #2d5367 !important;
+}
+
+.dark .rounded-full.bg-muted-foreground {
+  background: oklch(0.30 0.05 230) !important;
+}
+
+/* bg-secondary (light: #70b8ba - teal) */
+.rounded-full.bg-secondary {
+  background: #70b8ba !important;
+}
+
+.dark .rounded-full.bg-secondary {
+  background: oklch(0.65 0.12 190) !important;
+}
+
+/* bg-muted (light: #ffccb6 - warm peach) */
+.rounded-full.bg-muted {
+  background: #ffccb6 !important;
+}
+
+.dark .rounded-full.bg-muted {
+  background: oklch(0.65 0.10 40) !important;
+}
+
+/* Timeline icon state variants - Future state (dimmed solid colors) */
+.timeline-icon-future.bg-muted-foreground {
+  background: #6a8995 !important; /* Lighter version of #2d5367 */
+}
+
+.dark .timeline-icon-future.bg-muted-foreground {
+  background: oklch(0.40 0.03 230) !important;
+}
+
+.timeline-icon-future.bg-secondary {
+  background: #a8d4d6 !important; /* Lighter version of #70b8ba */
+}
+
+.dark .timeline-icon-future.bg-secondary {
+  background: oklch(0.45 0.08 190) !important;
+}
+
+.timeline-icon-future.bg-muted {
+  background: #ffe5d9 !important; /* Lighter version of #ffccb6 */
+}
+
+.dark .timeline-icon-future.bg-muted {
+  background: oklch(0.45 0.06 40) !important;
+}
+
+/* Timeline icon state variants - Past state (slightly dimmed solid colors) */
+.timeline-icon-past.bg-muted-foreground {
+  background: #476875 !important; /* Mid-tone version of #2d5367 */
+}
+
+.dark .timeline-icon-past.bg-muted-foreground {
+  background: oklch(0.35 0.04 230) !important;
+}
+
+.timeline-icon-past.bg-secondary {
+  background: #8cc9cc !important; /* Mid-tone version of #70b8ba */
+}
+
+.dark .timeline-icon-past.bg-secondary {
+  background: oklch(0.55 0.10 190) !important;
+}
+
+.timeline-icon-past.bg-muted {
+  background: #ffd9c8 !important; /* Mid-tone version of #ffccb6 */
+}
+
+.dark .timeline-icon-past.bg-muted {
+  background: oklch(0.55 0.08 40) !important;
+}
+
+/**
+ * Image Quality Optimization
+ * Enhanced rendering for better visual quality across devices
+ */
+
+/* Default: High quality smooth rendering for all images (photos, screenshots, etc) */
+img {
+  /* Smooth, high quality rendering (best for photos) */
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
+  -ms-interpolation-mode: bicubic;
+  
+  /* Better color accuracy */
+  color-profile: sRGB;
+  
+  /* Prevent white flash on load */
+  background-color: transparent;
+}
+
+/* Only apply responsive sizing for images without explicit dimensions */
+img:not([class*="w-full"]):not([class*="h-full"]):not([class*="w-"]):not([class*="h-"]):not([style*="width"]):not([style*="height"]) {
+  max-width: 100%;
+  height: auto;
+}
+
+/* High quality rendering class (explicit) */
+.image-render-high-quality,
+[data-image-type="photo"] img {
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
+  -ms-interpolation-mode: bicubic;
+}
+
+/* Auto rendering for general images */
+.image-render-auto {
+  image-rendering: auto;
+}
+
+/* Crisp rendering ONLY for icons, logos, pixel art (explicit opt-in) */
+.image-render-crisp,
+[data-image-type="icon"] img,
+[data-image-type="logo"] img,
+[data-image-type="pixel-art"] img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
+/* Error state */
+.image-error {
+  opacity: 0.7;
+  filter: grayscale(0.5);
+}
+
+/* Retina/HiDPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-quality;
+  }
+}
+
+/* Performance optimizations for images */
+img[loading="lazy"] {
+  content-visibility: auto;
+}
+
+/* Prevent CLS (Cumulative Layout Shift) */
+img[width][height] {
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* Better rendering on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  .image-loading {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Dark mode adjustments for images - DISABLED by default */
+/* Only apply if explicitly requested via data attribute */
+.dark img[data-dim-in-dark="true"] {
+  filter: brightness(0.95);
+}
+
+.dark .image-error {
+  opacity: 0.6;
+  filter: grayscale(0.7) brightness(0.8);
+}
+
+/* Optimize for print */
+@media print {
+  img {
+    image-rendering: auto;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

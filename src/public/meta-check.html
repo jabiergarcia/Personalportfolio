@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verificación de Meta Tags - Jabier García Sanz</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #fffbf8 0%, #d8f878 100%);
+      padding: 2rem;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      padding: 2.5rem;
+    }
+    
+    h1 {
+      color: #10252a;
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+    
+    .subtitle {
+      color: #70b8ba;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+    
+    .status.success {
+      background: #d8f878;
+      color: #10252a;
+    }
+    
+    .status.error {
+      background: #ffccb6;
+      color: #d4183d;
+    }
+    
+    .meta-group {
+      margin-bottom: 2rem;
+      border: 2px solid #f0f0f0;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    
+    .meta-group h2 {
+      color: #10252a;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .meta-item {
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      border-left: 4px solid #70b8ba;
+    }
+    
+    .meta-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .meta-label {
+      font-weight: 600;
+      color: #2d5367;
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+    }
+    
+    .meta-value {
+      color: #10252a;
+      word-break: break-all;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 4px;
+    }
+    
+    .image-preview {
+      margin-top: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid #e0e0e0;
+    }
+    
+    .image-preview img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    
+    .btn {
+      padding: 0.875rem 1.5rem;
+      border-radius: 10px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      font-size: 1rem;
+    }
+    
+    .btn-primary {
+      background: #70b8ba;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #5a9a9c;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(112, 184, 186, 0.3);
+    }
+    
+    .btn-secondary {
+      background: #d8f878;
+      color: #10252a;
+    }
+    
+    .btn-secondary:hover {
+      background: #c5e560;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(216, 248, 120, 0.3);
+    }
+    
+    .icon {
+      font-size: 1.2rem;
+    }
+    
+    code {
+      background: #f0f0f0;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+    
+    .warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      color: #856404;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 Verificación de Meta Tags</h1>
+    <p class="subtitle">Diagnóstico de Open Graph para LinkedIn</p>
+    
+    <div id="statusContainer"></div>
+    
+    <div class="meta-group">
+      <h2><span class="icon">🎯</span> Meta Tags Básicos</h2>
+      <div id="basicMetas"></div>
+    </div>
+    
+    <div class="meta-group">
+      <h2><span class="icon">📱</span> Open Graph Tags</h2>
+      <div id="ogMetas"></div>
+    </div>
+    
+    <div class="meta-group">
+      <h2><span class="icon">🐦</span> Twitter Card Tags</h2>
+      <div id="twitterMetas"></div>
+    </div>
+    
+    <div class="meta-group">
+      <h2><span class="icon">🖼️</span> Preview de Imagen</h2>
+      <div id="imagePreview"></div>
+    </div>
+    
+    <div class="buttons">
+      <a href="https://www.linkedin.com/post-inspector/" target="_blank" class="btn btn-primary">
+        <span class="icon">🔗</span>
+        LinkedIn Post Inspector
+      </a>
+      <a href="https://developers.facebook.com/tools/debug/" target="_blank" class="btn btn-secondary">
+        <span class="icon">🐛</span>
+        Facebook Debugger
+      </a>
+      <a href="/" class="btn btn-secondary">
+        <span class="icon">🏠</span>
+        Volver al Portfolio
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Fetch and parse meta tags from main site
+    async function checkMetaTags() {
+      try {
+        const response = await fetch('/');
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        // Check basic meta tags
+        const basicMetas = {
+          'Title': doc.querySelector('title')?.textContent || 'NO ENCONTRADO',
+          'Description': doc.querySelector('meta[name="description"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'Author': doc.querySelector('meta[name="author"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'Canonical': doc.querySelector('link[rel="canonical"]')?.getAttribute('href') || 'NO ENCONTRADO'
+        };
+        
+        // Check Open Graph tags
+        const ogMetas = {
+          'og:type': doc.querySelector('meta[property="og:type"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'og:url': doc.querySelector('meta[property="og:url"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'og:title': doc.querySelector('meta[property="og:title"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'og:description': doc.querySelector('meta[property="og:description"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'og:image': doc.querySelector('meta[property="og:image"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'og:image:secure_url': doc.querySelector('meta[property="og:image:secure_url"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'og:image:type': doc.querySelector('meta[property="og:image:type"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'og:image:width': doc.querySelector('meta[property="og:image:width"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'og:image:height': doc.querySelector('meta[property="og:image:height"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'og:image:alt': doc.querySelector('meta[property="og:image:alt"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'og:site_name': doc.querySelector('meta[property="og:site_name"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'og:locale': doc.querySelector('meta[property="og:locale"]')?.getAttribute('content') || 'NO ENCONTRADO'
+        };
+        
+        // Check Twitter Card tags
+        const twitterMetas = {
+          'twitter:card': doc.querySelector('meta[name="twitter:card"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'twitter:title': doc.querySelector('meta[name="twitter:title"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'twitter:description': doc.querySelector('meta[name="twitter:description"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'twitter:image': doc.querySelector('meta[name="twitter:image"]')?.getAttribute('content') || 'NO ENCONTRADO',
+          'twitter:image:alt': doc.querySelector('meta[name="twitter:image:alt"]')?.getAttribute('content') || 'NO ENCONTRADO'
+        };
+        
+        // Check if all critical tags exist
+        const criticalTags = [
+          basicMetas.Author,
+          ogMetas['og:image'],
+          ogMetas['og:image:secure_url'],
+          ogMetas['og:title'],
+          ogMetas['og:description']
+        ];
+        
+        const allTagsExist = criticalTags.every(tag => tag !== 'NO ENCONTRADO');
+        
+        // Display status
+        const statusContainer = document.getElementById('statusContainer');
+        if (allTagsExist) {
+          statusContainer.innerHTML = `
+            <div class="status success">
+              <span class="icon">✅</span>
+              <span>Todos los meta tags críticos están configurados correctamente</span>
+            </div>
+          `;
+        } else {
+          statusContainer.innerHTML = `
+            <div class="status error">
+              <span class="icon">⚠️</span>
+              <span>Faltan algunos meta tags críticos - revisa abajo</span>
+            </div>
+          `;
+        }
+        
+        // Display basic metas
+        const basicMetasContainer = document.getElementById('basicMetas');
+        basicMetasContainer.innerHTML = Object.entries(basicMetas).map(([key, value]) => `
+          <div class="meta-item">
+            <div class="meta-label">${key}</div>
+            <div class="meta-value">${value}</div>
+          </div>
+        `).join('');
+        
+        // Display Open Graph metas
+        const ogMetasContainer = document.getElementById('ogMetas');
+        ogMetasContainer.innerHTML = Object.entries(ogMetas).map(([key, value]) => `
+          <div class="meta-item">
+            <div class="meta-label">${key}</div>
+            <div class="meta-value">${value}</div>
+          </div>
+        `).join('');
+        
+        // Display Twitter metas
+        const twitterMetasContainer = document.getElementById('twitterMetas');
+        twitterMetasContainer.innerHTML = Object.entries(twitterMetas).map(([key, value]) => `
+          <div class="meta-item">
+            <div class="meta-label">${key}</div>
+            <div class="meta-value">${value}</div>
+          </div>
+        `).join('');
+        
+        // Display image preview
+        const imagePreview = document.getElementById('imagePreview');
+        const imageUrl = ogMetas['og:image'];
+        if (imageUrl && imageUrl !== 'NO ENCONTRADO') {
+          imagePreview.innerHTML = `
+            <div class="meta-value">${imageUrl}</div>
+            <div class="image-preview">
+              <img src="${imageUrl}" alt="Preview de OG Image" onerror="this.parentElement.innerHTML='<div class=warning>⚠️ Error al cargar la imagen. Verifica que la URL sea accesible públicamente.</div>'">
+            </div>
+          `;
+        } else {
+          imagePreview.innerHTML = `
+            <div class="warning">
+              ⚠️ No se encontró la etiqueta og:image. Esto es crítico para LinkedIn.
+            </div>
+          `;
+        }
+        
+      } catch (error) {
+        console.error('Error checking meta tags:', error);
+        document.getElementById('statusContainer').innerHTML = `
+          <div class="status error">
+            <span class="icon">❌</span>
+            <span>Error al verificar meta tags: ${error.message}</span>
+          </div>
+        `;
+      }
+    }
+    
+    // Run check on page load
+    checkMetaTags();
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    
+    <!-- FORCED REBUILD: 2025-01-09 23:45 - CRITICAL FIX vercel.json + Meta Tags -->
+    <!-- Build ID: meta-fix-final-20250109-2345 -->
+    
+    <!-- Preconnect for better font loading performance -->
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://api.fontshare.com">
+    
+    <!-- Initial meta tags (will be updated by usePageMeta) -->
+    <title>Jabier García Sanz - UX/UI Designer Portfolio</title>
+    <meta name="description" content="Portfolio de UX/UI Designer especializado en Design Systems y experiencias digitales. 13 años en moda + bootcamp en Neoland. Proyectos: PuffyKitten, Chupsee, GotApp y Pomeranian Design System." />
+    
+    <!-- Open Graph meta tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jabiergarcia.com" />
+    <meta property="og:title" content="Jabier García - UX/UI Designer Portfolio" />
+    <meta property="og:description" content="Portfolio de UX/UI Designer especializado en Design Systems y experiencias digitales. 13 años en moda + bootcamp en Neoland. Proyectos: PuffyKitten, Chupsee, GotApp y Pomeranian Design System." />
+    <meta property="og:image" content="https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png" />
+    <meta property="og:image:secure_url" content="https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Jabier García- UX/UI Designer Portfolio" />
+    <meta property="og:site_name" content="Jabier García Sanz" />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Jabier García - UX/UI Designer Portfolio" />
+    <meta name="twitter:description" content="Portfolio de UX/UI Designer especializado en Design Systems y experiencias digitales. 13 años en moda + bootcamp en Neoland. Proyectos: PuffyKitten, Chupsee, GotApp y Pomeranian Design System." />
+    <meta name="twitter:image" content="https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png" />
+    <meta name="twitter:image:alt" content="Jabier García Sanz - UX/UI Designer Portfolio" />
+    
+    <!-- Additional meta tags -->
+    <meta name="author" content="Jabier García Sanz" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Spanish" />
+    <meta name="theme-color" content="#fffbf8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#10252a" media="(prefers-color-scheme: dark)" />
+    <link rel="canonical" href="https://jabiergarcia.com" />
+    
+    <!-- Viewport meta for better mobile experience -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    
+    <!-- Force deploy: 2025-01-09 -->
+    
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Person",
+      "name": "Jabier García Sanz",
+      "alternateName": [
+        "Javier García Sanz",
+        "Xavi García Sanz",
+        "Xabi García Sanz"
+      ],
+      "url": "https://jabiergarcia.com",
+      "image": "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png",
+      "sameAs": [
+        "https://www.linkedin.com/in/jabiergarcia/",
+        "https://www.behance.net/jabiergarciasanz"
+      ],
+      "jobTitle": "UX/UI Designer | Design System | UI Interface | UX Research",
+      "email": "garciasanz.j@gmail.com",
+      "telephone": "+34608412974",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Madrid",
+        "addressCountry": "ES"
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Neoland"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Theme detection script - runs before React to prevent FOUC (Flash of Unstyled Content) -->
+    <script>
+      (function() {
+        try {
+          // Check localStorage first
+          const savedTheme = localStorage.getItem('theme');
+          
+          // If user has a saved preference, use it
+          if (savedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            return;
+          }
+          if (savedTheme === 'light') {
+            document.documentElement.classList.remove('dark');
+            return;
+          }
+          
+          // No saved preference - check system preference
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (prefersDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {
+          // Fallback to light mode if there's any error
+          console.error('Theme detection error:', e);
+        }
+      })();
+    </script>
+    
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
