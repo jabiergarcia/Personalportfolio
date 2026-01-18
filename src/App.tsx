@@ -52,6 +52,11 @@ const GotAppProject = createLazyComponent(
   'GotAppProject'
 );
 
+const AssortaProject = createLazyComponent(
+  () => import('./components/projects/assorta-project').then(m => ({ default: m.AssortaProject })),
+  'AssortaProject'
+);
+
 const AdminPage = createLazyComponent(
   () => import('./components/admin-page').then(m => ({ default: m.AdminPage })),
   'AdminPage'
@@ -289,6 +294,20 @@ export default function App() {
           </LazyLoader>
         ),
         page: 'gotapp'
+      },
+      assorta: {
+        component: (
+          <LazyLoader fallback={<PageLoader />}>
+            <AssortaProject 
+              onNavigateHome={navigateToHome} 
+              onNavigateToProjects={navigateToProjects} 
+              onProjectClick={navigateToProject}
+              isDark={isDark}
+              onToggleTheme={toggleTheme}
+            />
+          </LazyLoader>
+        ),
+        page: 'assorta'
       }
     };
 

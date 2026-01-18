@@ -14,6 +14,9 @@ interface ProjectCardProps {
  * Componente compartido entre WorksSection y ProjectsPage
  */
 export function ProjectCard({ project, onClick, priority = false }: ProjectCardProps) {
+  // Assorta necesita zoom adicional para destacar el logo
+  const isAssorta = project.slug === 'assorta';
+  
   return (
     <Card 
       className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-border bg-card hover:scale-[1.01] overflow-hidden flex flex-col h-full"
@@ -29,7 +32,7 @@ export function ProjectCard({ project, onClick, priority = false }: ProjectCardP
         <ImageWithFallback 
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover shadow-lg md:transition-transform md:duration-500 md:group-hover:scale-105"
+          className={`w-full h-full object-cover shadow-lg md:transition-transform md:duration-500 ${isAssorta ? 'scale-110 md:group-hover:scale-[1.20]' : 'md:group-hover:scale-105'}`}
           style={{
             transform: 'translateZ(0)',
             backfaceVisibility: 'hidden',

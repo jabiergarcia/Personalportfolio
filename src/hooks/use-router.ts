@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export type Page = 'home' | 'projects' | 'experiences' | 'puffykitten' | 'chupsee' | 'ds-pomeranian' | 'gotapp' | 'admin';
+export type Page = 'home' | 'projects' | 'experiences' | 'puffykitten' | 'chupsee' | 'ds-pomeranian' | 'gotapp' | 'assorta' | 'admin';
 
 // Route mapping - Spanish URLs
 const routeMap: Record<Page, string> = {
@@ -11,6 +11,7 @@ const routeMap: Record<Page, string> = {
   chupsee: '/proyectos/chupsee',
   'ds-pomeranian': '/proyectos/pomeranian',
   gotapp: '/proyectos/gotapp',
+  assorta: '/proyectos/assorta',
   admin: '/admin'
 };
 
@@ -40,6 +41,7 @@ function getPageFromPath(pathname: string): Page {
     if (slug === 'chupsee') return 'chupsee';
     if (slug === 'pomeranian') return 'ds-pomeranian';
     if (slug === 'gotapp') return 'gotapp';
+    if (slug === 'assorta') return 'assorta';
   }
   
   // Check for experiences page

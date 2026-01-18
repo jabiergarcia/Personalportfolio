@@ -18,6 +18,18 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
+    id: 9,
+    slug: "assorta",
+    title: "Assorta | Retail Visual Platform",
+    subtitle: "SaaS B2B",
+    category: "Product Design",
+    description: "Plataforma SaaS B2B que digitaliza el proceso de Visual Merchandising en retail de moda mediante una solución centralizada y operativa.",
+    shortDescription: "SaaS B2B que digitaliza Visual Merchandising en retail mediante gestión visual centralizada.",
+    image: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Cover%20Assorta%20Final.png",
+    color: "bg-gradient-to-br from-[#2d5367]/20 to-[#70b8ba]/20",
+    tags: ["Retail", "Visual Merchandising", "SaaS", "B2B", "Product Design"]
+  },
+  {
     id: 1,
     slug: "puffykitten",
     title: "PuffyKitten | E-commerce B2C",
@@ -76,7 +88,8 @@ export function getProjectUrl(slug: string): string {
     'puffykitten': '/proyectos/puffykitten',
     'chupsee': '/proyectos/chupsee',
     'ds-pomeranian': '/proyectos/pomeranian',
-    'gotapp': '/proyectos/gotapp'
+    'gotapp': '/proyectos/gotapp',
+    'assorta': '/proyectos/assorta'
   };
   
   const path = routeMap[slug] || `/proyectos/${slug}`;
@@ -99,7 +112,8 @@ export function getShareableProjectUrl(slug: string): string {
     'puffykitten': '/proyectos/puffykitten',
     'chupsee': '/proyectos/chupsee',
     'ds-pomeranian': '/proyectos/pomeranian',
-    'gotapp': '/proyectos/gotapp'
+    'gotapp': '/proyectos/gotapp',
+    'assorta': '/proyectos/assorta'
   };
   
   const path = routeMap[slug] || `/proyectos/${slug}`;

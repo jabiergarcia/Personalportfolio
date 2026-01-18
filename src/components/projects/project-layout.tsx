@@ -54,6 +54,11 @@ interface ProjectLayoutProps {
       type?: 'mobile' | 'web'; // New: Specify prototype type for responsive aspect ratios
       previewImage?: string; // Optional: Custom preview image for the prototype card
     };
+    externalLink?: {
+      label: string;
+      url: string;
+      description: string;
+    };
   }[];
   relatedProjects?: {
     title: string;
@@ -535,7 +540,55 @@ export function ProjectLayout({
                   </div>
                 )}
 
+                {/* Section External Link */}
+                {section.externalLink && section.externalLink.url && (
+                  <div className="w-full">
+                    {/* Minimalista Clean CTA Card */}
+                    <Card className="relative overflow-hidden border-2 border-border/30 bg-muted/20 hover:border-secondary/50 transition-all duration-300">
+                      <div className="p-8 md:p-12 lg:p-16 text-center space-y-6">
+                        {/* Status Badge */}
+                        <div className="flex items-center justify-center gap-2">
+                          <span className="relative flex h-3 w-3">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-3 w-3 bg-secondary"></span>
+                          </span>
+                          <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                            Aplicación en vivo
+                          </span>
+                        </div>
 
+                        {/* Headline */}
+                        <div className="space-y-3">
+                          <h3 className="text-2xl md:text-3xl font-semibold text-foreground">
+                            {section.externalLink.label}
+                          </h3>
+                          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                            {section.externalLink.description}
+                          </p>
+                        </div>
+
+                        {/* CTA Button */}
+                        <div className="pt-2">
+                          <Button
+                            size="lg"
+                            onClick={() => window.open(section.externalLink!.url, '_blank', 'noopener,noreferrer')}
+                            className="bg-gradient-to-r from-secondary to-accent text-foreground hover:from-secondary/90 hover:to-accent/90 px-10 py-6 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                          >
+                            Abrir {section.externalLink.url.replace(/^https?:\/\/(www\.)?/, '')}
+                            <ExternalLink className="w-5 h-5 ml-2" />
+                          </Button>
+                        </div>
+
+                        {/* URL Display */}
+                        <div className="pt-4 border-t border-border/30">
+                          <p className="text-sm text-muted-foreground/70">
+                            {section.externalLink.url}
+                          </p>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
+                )}
               </div>
             </ScrollReveal>
           ))}

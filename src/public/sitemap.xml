@@ -33,6 +33,14 @@
     <priority>0.8</priority>
   </url>
   
+  <!-- Proyecto: Assorta -->
+  <url>
+    <loc>https://www.jabiergarcia.com/proyectos/assorta</loc>
+    <lastmod>2025-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
   <!-- Proyecto: Chupsee -->
   <url>
     <loc>https://www.jabiergarcia.com/proyectos/chupsee</loc>

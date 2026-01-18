@@ -33,6 +33,12 @@ const pageMeta: Record<string, PageMeta> = {
     path: '/proyectos/puffykitten',
     ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png'
   },
+  assorta: {
+    title: 'Assorta | Retail Visual Platform - Jabier García Sanz',
+    description: 'Caso de estudio: SaaS B2B que digitaliza Visual Merchandising en retail de moda mediante Product-driven development.',
+    path: '/proyectos/assorta',
+    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png'
+  },
   chupsee: {
     title: 'Chupsee | App móvil B2C - Jabier García Sanz',
     description: 'Caso de estudio: App móvil con IA para identificación de plantas con metodología Design Sprint.',

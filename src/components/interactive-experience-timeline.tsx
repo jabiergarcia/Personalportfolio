@@ -27,18 +27,18 @@ const timelineData: TimelineEvent[] = [
     location: 'Madrid, España',
     period: '2025 - Presente',
     typeLabel: 'Tiempo completo',
-    description: 'Desarrollo de proyectos de diseño UX/UI para diferentes clientes, aplicando metodologías de Design Thinking y creando prototipos interactivos en Figma.',
+    description: 'Desarrollo de proyectos de diseño UX/UI basados en la formación intensiva del Bootcamp de UX/UI Design en Neoland y en proyectos personales, aplicando metodologías de diseño centrado en el usuario y herramientas como Figma para crear experiencias digitales intuitivas y coherentes.',
     achievements: [
-      'Investigación de usuarios y creación de user personas',
-      'Diseño de interfaces para aplicaciones móviles y web',
-      'Creación de sistemas de diseño escalables',
-      'Colaboración con equipos de desarrollo frontend'
+      'Investigación de usuarios y definición de user personas fundamentadas en datos cualitativos',
+      'Diseño de flujos de usuario, wireframes y prototipos de alta fidelidad para aplicaciones web y mobile',
+      'Creación y documentación de sistemas de diseño escalables utilizando principios de Atomic Design',
+      'Desarrollo de casos prácticos end-to-end, desde la investigación hasta la validación con pruebas de usabilidad'
     ],
     functions: [
-      'Análisis y investigación de usuarios mediante entrevistas y encuestas',
-      'Diseño de wireframes y prototipos de alta fidelidad',
-      'Desarrollo de guías de estilo y componentes reutilizables',
-      'Testing de usabilidad y iteración basada en feedback'
+      'Analizar y comprender las necesidades de usuarios mediante entrevistas, encuestas y benchmark competitivo',
+      'Definir la arquitectura de la información y diseñar user flows que facilitan la navegación',
+      'Crear interfaces visuales accesibles, consistentes y eficaces empleando Figma',
+      'Prototipar interacciones y realizar user testing básico para iterar diseños según feedback'
     ],
     skills: ['Figma', 'User Interface', 'Prototyping', 'User Research', 'Design Systems'],
     color: 'bg-muted-foreground'

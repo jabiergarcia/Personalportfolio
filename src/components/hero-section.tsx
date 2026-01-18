@@ -116,13 +116,12 @@ export function HeroSection({ onNavigateToProjects, onNavigateToExperiences, onO
                 <Badge variant="secondary" className="bg-accent text-accent-foreground border-none self-start sm:self-center text-sm md:text-xs px-3 py-1">disponible</Badge>
               </div>
               <p className="text-foreground mb-4 leading-relaxed">
-                Del escaparate al wireframe, diseño experiencias con estilo y propósito.
-                Tras 13 años en moda y un Bootcamp de UX/UI en Neoland, transformé mi visión: del maniquí al usuario, del lineal al flujo digital.
+                Soy UX/UI Designer con más de 13 años de experiencia en moda y Visual Merchandising, y formación especializada en UX/UI (Neoland).
                 <br /><br />
-                Aporto estética, storytelling, empatía y liderazgo, junto con herramientas UX/UI (research, user flows, prototipos y Figma).
-                Creo en el diseño como puente entre marcas y personas, uniendo lo físico y lo digital con sensibilidad y humor.
+                Transformo la toma de decisiones visuales en experiencias digitales claras, usables y orientadas a negocio, conectando lo físico y lo digital.
                 <br /><br />
-                Ahora busco sumarme a equipos creativos para construir experiencias de producto digital memorables.
+                Aporto visión estética, pensamiento de producto, empatía y liderazgo, trabajando con research, user flows, prototipos y Figma.
+Actualmente busco sumarme a equipos de producto para diseñar experiencias digitales con impacto real.
               </p>
               <motion.div 
                 className="flex gap-3"
