@@ -657,16 +657,22 @@ const ImageLightboxV2: React.FC<ImageLightboxV2Props> = ({
                 style={{
                   transformOrigin: 'center center',
                   willChange: gestureState === 'idle' ? 'auto' : 'transform',
-                  transition: gestureState === 'idle' ? 'transform 0.1s ease-out' : 'none'
+                  transition: gestureState === 'idle' ? 'transform 0.1s ease-out' : 'none',
+                  transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+                  maxWidth: '90vw',
+                  maxHeight: '90vh',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
                 }}
               >
                 <ImageWithFallback
                   src={currentImage.src}
                   alt={currentImage.alt}
-                  className="w-auto h-auto object-contain rounded-lg shadow-2xl select-none pointer-events-none"
+                  className="max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-2xl select-none pointer-events-none"
                   style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
+                    maxWidth: '90vw',
+                    maxHeight: '90vh',
                     imageRendering: 'auto'
                   }}
                   onLoad={() => setIsLoading(false)}

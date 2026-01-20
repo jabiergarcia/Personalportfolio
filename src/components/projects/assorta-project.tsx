@@ -21,7 +21,7 @@ export function AssortaProject({
   // ============================================
   const contextCarouselImages = [
     {
-      src: "https://images.unsplash.com/photo-1610650394144-a778795cf585?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdG9yZSUyMGxheW91dCUyMHBsYW5uaW5nfGVufDF8fHx8MTc2NTc5NDM3NHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Img%201%20Contexto%20Problema%20-%20Editor%20Layouts.png",
       alt: "Editor visual de layouts de tienda",
       title: "Editor de layouts",
       description: "Planificación visual real de tienda",
@@ -29,7 +29,7 @@ export function AssortaProject({
       layout: "full" as const
     },
     {
-      src: "https://images.unsplash.com/photo-1762267659914-4cbfa2605627?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXRhaWwlMjBwcm9kdWN0JTIwZGlzcGxheXxlbnwxfHx8fDE3NjU3OTQzNzV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Img%202%20Contexto%20Problema%20-%20Sample%20Picking%20Visual.png",
       alt: "Asignación visual de producto a zonas",
       title: "Sample picking visual",
       description: "Asignación directa de producto",
@@ -37,7 +37,7 @@ export function AssortaProject({
       layout: "full" as const
     },
     {
-      src: "https://images.unsplash.com/photo-1760287363707-851f4780b98c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwcmV0YWlsJTIwaW50ZXJpb3J8ZW58MXx8fHwxNzY1Nzk0Mzc1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Img%203%20Contexto%20Problema%20-%20Overview%20Tienda.png",
       alt: "Vista general de implantaciones de tienda",
       title: "Overview de tienda",
       description: "Visión global de implantaciones",
@@ -51,7 +51,7 @@ export function AssortaProject({
   // ============================================
   const problemCarouselImages = [
     {
-      src: "https://images.unsplash.com/photo-1758543102367-da8b00ddf4da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXRhaWwlMjB3b3JrZmxvdyUyMG1hbmFnZW1lbnR8ZW58MXx8fHwxNzY1Nzk0Mzc1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Img%204%20Definicion%20Problema%20-%20Roles%20Operativos.png",
       alt: "Roles operativos dentro del retail",
       title: "Roles operativos",
       description: "Estructura real de retail",
@@ -59,7 +59,7 @@ export function AssortaProject({
       layout: "full" as const
     },
     {
-      src: "https://images.unsplash.com/photo-1709313779222-afea06b15286?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXRhaWwlMjB6b25lcyUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NjU3OTQzNzZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Img%205%20Definicion%20Problema%20-%20Zonas%20Tienda.png",
       alt: "Zonas y áreas de tienda",
       title: "Zonas de tienda",
       description: "Claridad espacial operativa",
@@ -67,7 +67,7 @@ export function AssortaProject({
       layout: "full" as const
     },
     {
-      src: "https://images.unsplash.com/photo-1762530351373-5d77b5c13d3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwcmV0YWlsJTIwcGxhbm5pbmd8ZW58MXx8fHwxNzY1Nzk0Mzc2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Img%206%20Definicion%20Problema%20-%20Flujo%20Operativo.png",
       alt: "Flujo operativo de trabajo",
       title: "Flujo operativo",
       description: "Proceso claro y repetible",
@@ -81,7 +81,7 @@ export function AssortaProject({
   // ============================================
   const productDecisionsCarouselImages = [
     {
-      src: "https://images.unsplash.com/photo-1570894808314-677b57f25e45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXRhaWwlMjBkYXNoYm9hcmQlMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzY1Nzk0Mzc2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Img%207%20Decisiones%20Producto%20-%20Flujo%20Producto.png",
       alt: "Flujo principal del producto",
       title: "Flujo del producto",
       description: "El core del sistema",
@@ -89,7 +89,7 @@ export function AssortaProject({
       layout: "full" as const
     },
     {
-      src: "https://images.unsplash.com/photo-1705164686320-cf877bf7f338?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXRhaWwlMjBzdG9yZSUyMG1hbmFnZW1lbnR8ZW58MXx8fHwxNzY1Nzk0Mzc3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Img%208%20Decisiones%20Producto%20-%20Detalles%20Editor.png",
       alt: "Detalle del editor visual",
       title: "Detalle del editor",
       description: "UX pensada para uso diario",
@@ -97,7 +97,7 @@ export function AssortaProject({
       layout: "full" as const
     },
     {
-      src: "https://images.unsplash.com/photo-1761244105557-72d8e83ec4d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwbWVyY2hhbmRpc2luZyUyMGRpc3BsYXl8ZW58MXx8fHwxNzY1Nzk0Mzc4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Img%209%20Decision%20Producto%20-%20Moodboard%20Aplicado.png",
       alt: "Moodboard aplicado a tienda",
       title: "Moodboard aplicado",
       description: "Del concepto a tienda",
@@ -111,15 +111,7 @@ export function AssortaProject({
   // ============================================
   const buildCarouselImages = [
     {
-      src: "https://images.unsplash.com/photo-1610650394144-a778795cf585?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdG9yZSUyMGxheW91dCUyMHBsYW5uaW5nfGVufDF8fHx8MTc2NTc5NDM3NHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      alt: "Aplicación web funcional",
-      title: "App funcional",
-      description: "Producto real en uso",
-      icon: "business" as const,
-      layout: "full" as const
-    },
-    {
-      src: "https://images.unsplash.com/photo-1762267659914-4cbfa2605627?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXRhaWwlMjBwcm9kdWN0JTIwZGlzcGxheXxlbnwxfHx8fDE3NjU3OTQzNzV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Img%2010%20Construccion%20Producto%20-%20Editor%202D.png",
       alt: "Editor 2D de tienda",
       title: "Editor 2D",
       description: "Espacio físico digitalizado",
@@ -127,7 +119,7 @@ export function AssortaProject({
       layout: "full" as const
     },
     {
-      src: "https://images.unsplash.com/photo-1760287363707-851f4780b98c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwcmV0YWlsJTIwaW50ZXJpb3J8ZW58MXx8fHwxNzY1Nzk0Mzc1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Img%2011%20Construccion%20Producto%20-%20Drag&Drop.png",
       alt: "Interacción drag and drop",
       title: "Drag & drop",
       description: "Interacción directa y visual",
@@ -135,7 +127,7 @@ export function AssortaProject({
       layout: "full" as const
     },
     {
-      src: "https://images.unsplash.com/photo-1710073505347-8e892c1922e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXRhaWwlMjBhbmFseXRpY3MlMjBrcGl8ZW58MXx8fHwxNzY1Nzk0Mzc4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Img%2012%20Construccion%20Prooducto%20-%20KPIs.png",
       alt: "KPIs visuales de tienda",
       title: "KPIs de tienda",
       description: "Impacto comercial visible",
@@ -150,7 +142,7 @@ export function AssortaProject({
   const projectDetails = [
     {
       label: "Creación del proyecto",
-      value: "2025 - 2026"
+      value: "2026"
     },
     {
       label: "Personas participantes",
@@ -219,7 +211,7 @@ export function AssortaProject({
       ],
       externalLink: {
         label: "Explorar la aplicación en vivo",
-        url: "https://assorta.app",
+        url: "https://assorta.figma.site/",
         description: "Accede a la plataforma y explora el producto en funcionamiento"
       }
     }

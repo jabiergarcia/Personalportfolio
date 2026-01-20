@@ -1142,6 +1142,10 @@
     height: 100%;
   }
 
+  .max-h-full {
+    max-height: 100%;
+  }
+
   .min-h-16 {
     min-height: calc(var(--spacing) * 16);
   }
@@ -1300,6 +1304,10 @@
 
   .max-w-\[calc\(100\%-2rem\)\] {
     max-width: calc(100% - 2rem);
+  }
+
+  .max-w-full {
+    max-width: 100%;
   }
 
   .max-w-lg {
@@ -2225,6 +2233,16 @@
     }
   }
 
+  .bg-secondary\/20 {
+    background-color: var(--secondary);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-secondary\/20 {
+      background-color: color-mix(in oklab, var(--secondary) 20%, transparent);
+    }
+  }
+
   .bg-secondary\/30 {
     background-color: var(--secondary);
   }
@@ -2397,6 +2415,17 @@
   @supports (color: color-mix(in lab, red, red)) {
     .from-secondary\/5 {
       --tw-gradient-from: color-mix(in oklab, var(--secondary) 5%, transparent);
+    }
+  }
+
+  .from-secondary\/10 {
+    --tw-gradient-from: var(--secondary);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .from-secondary\/10 {
+      --tw-gradient-from: color-mix(in oklab, var(--secondary) 10%, transparent);
     }
   }
 
@@ -2743,6 +2772,10 @@
 
   .py-6 {
     padding-block: calc(var(--spacing) * 6);
+  }
+
+  .py-7 {
+    padding-block: calc(var(--spacing) * 7);
   }
 
   .py-8 {
@@ -3715,6 +3748,12 @@
   }
 
   @media (hover: hover) {
+    .hover\:bg-muted:hover {
+      background-color: var(--muted);
+    }
+  }
+
+  @media (hover: hover) {
     .hover\:bg-muted\/30:hover {
       background-color: var(--muted);
     }
@@ -4379,6 +4418,18 @@
   }
 
   @media (width >= 48rem) {
+    .md\:right-4 {
+      right: calc(var(--spacing) * 4);
+    }
+  }
+
+  @media (width >= 48rem) {
+    .md\:left-auto {
+      left: auto;
+    }
+  }
+
+  @media (width >= 48rem) {
     .md\:mb-5 {
       margin-bottom: calc(var(--spacing) * 5);
     }
@@ -4625,6 +4676,13 @@
     .md\:text-5xl {
       font-size: var(--text-5xl);
       line-height: var(--tw-leading, var(--text-5xl--line-height));
+    }
+  }
+
+  @media (width >= 48rem) {
+    .md\:text-base {
+      font-size: var(--text-base);
+      line-height: var(--tw-leading, var(--text-base--line-height));
     }
   }
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Lightbulb, AlertCircle, ExternalLink, Maximize2, X } from 'lucide-react';
+import { ArrowLeft, Lightbulb, AlertCircle, ExternalLink, Maximize2, X, Monitor, Smartphone, Share2, Copy, Check } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { ProjectDetails } from './project-details';
@@ -88,6 +88,73 @@ export function ProjectLayout({
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showMobileWarning, setShowMobileWarning] = useState(false);
+  const [pendingExternalUrl, setPendingExternalUrl] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
+
+  // Detect if user is on mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Handle external link click
+  const handleExternalLinkClick = (url: string) => {
+    if (isMobile) {
+      setPendingExternalUrl(url);
+      setShowMobileWarning(true);
+    } else {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  // Handle share link
+  const handleShareLink = async () => {
+    if (!pendingExternalUrl) return;
+
+    // Try Web Share API first (native mobile sharing)
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Assorta - Retail Visual Platform',
+          text: 'Prueba Assorta desde tu ordenador para la mejor experiencia',
+          url: pendingExternalUrl
+        });
+        setShowMobileWarning(false);
+        return;
+      } catch (err) {
+        // User cancelled or error - fallback to clipboard
+        console.log('Share cancelled or failed, falling back to clipboard');
+      }
+    }
+
+    // Fallback: Copy to clipboard
+    try {
+      await navigator.clipboard.writeText(pendingExternalUrl);
+      setLinkCopied(true);
+      setTimeout(() => {
+        setLinkCopied(false);
+        setShowMobileWarning(false);
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy link:', err);
+    }
+  };
+
+  // Handle open anyway
+  const handleOpenAnyway = () => {
+    if (pendingExternalUrl) {
+      window.open(pendingExternalUrl, '_blank', 'noopener,noreferrer');
+      setShowMobileWarning(false);
+      setPendingExternalUrl(null);
+    }
+  };
 
   // Native fullscreen handler for Figma prototypes
   const handleFullscreen = (containerId: string) => {
@@ -571,10 +638,10 @@ export function ProjectLayout({
                         <div className="pt-2">
                           <Button
                             size="lg"
-                            onClick={() => window.open(section.externalLink!.url, '_blank', 'noopener,noreferrer')}
+                            onClick={() => handleExternalLinkClick(section.externalLink!.url)}
                             className="bg-gradient-to-r from-secondary to-accent text-foreground hover:from-secondary/90 hover:to-accent/90 px-10 py-6 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                           >
-                            Abrir {section.externalLink.url.replace(/^https?:\/\/(www\.)?/, '')}
+                            Probar Assorta
                             <ExternalLink className="w-5 h-5 ml-2" />
                           </Button>
                         </div>
@@ -679,6 +746,103 @@ export function ProjectLayout({
           </div>
         </ScrollReveal>
       </div>
+
+      {/* Mobile Warning Modal */}
+      {showMobileWarning && (
+        <div 
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={() => setShowMobileWarning(false)}
+        >
+          <div 
+            className="bg-background border-2 border-border rounded-2xl shadow-2xl max-w-md w-full overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header with Icon */}
+            <div className="bg-gradient-to-br from-secondary/10 to-accent/10 p-8 text-center border-b border-border/50">
+              <div className="flex flex-col items-center gap-4">
+                <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center">
+                  <Monitor className="w-8 h-8 text-secondary" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                    Mejor en desktop
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Assorta está diseñado para pantallas grandes
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 space-y-6">
+              {/* Main CTA Button - Share/Copy */}
+              <Button
+                onClick={handleShareLink}
+                className="w-full bg-gradient-to-r from-secondary to-accent text-foreground hover:from-secondary/90 hover:to-accent/90 shadow-lg transition-all duration-300 py-7"
+                size="lg"
+              >
+                {linkCopied ? (
+                  <>
+                    <Check className="w-5 h-5 mr-2" />
+                    Enlace copiado
+                  </>
+                ) : (
+                  <>
+                    {navigator.share ? (
+                      <>
+                        <Share2 className="w-5 h-5 mr-2" />
+                        Compartir enlace
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-5 h-5 mr-2" />
+                        Copiar enlace
+                      </>
+                    )}
+                  </>
+                )}
+              </Button>
+
+              {/* Helper text */}
+              <p className="text-sm text-muted-foreground text-center leading-relaxed">
+                Guárdalo y ábrelo más tarde desde tu ordenador
+              </p>
+
+              {/* Cancel Button */}
+              <Button
+                onClick={() => {
+                  setShowMobileWarning(false);
+                  setPendingExternalUrl(null);
+                }}
+                variant="ghost"
+                className="w-full hover:bg-muted transition-all duration-300"
+                size="lg"
+              >
+                Cancelar
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Link Copied Snackbar */}
+      {linkCopied && (
+        <div className="fixed bottom-4 right-4 left-4 md:left-auto md:right-4 bg-accent/90 text-accent-foreground p-4 md:p-5 rounded-lg shadow-lg z-50 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Check className="w-5 h-5" />
+            <p className="text-sm md:text-base leading-relaxed">
+              Enlace copiado al portapapeles
+            </p>
+          </div>
+          <Button
+            onClick={() => setLinkCopied(false)}
+            className="bg-accent/10 text-accent-foreground hover:bg-accent/20 transition-all duration-300"
+          >
+            <X className="w-5 h-5" />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

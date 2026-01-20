@@ -6,7 +6,7 @@
 // URLs de assets desde Supabase Storage
 export const PROFILE_IMAGE_URL = "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/javier-profile.png";
 
-export const CV_URL = "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Docs/javier-garcia-sanz-CV-ES.pdf";
+export const CV_URL = "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Docs/CV%202026%20-%20Javier%20Garcia%20-%20ES.pdf";
 
 // Información de contacto
 export const CONTACT_INFO = {
