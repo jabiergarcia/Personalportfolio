@@ -11,12 +11,5 @@
         }
       ]
     }
-  ],
-  "rewrites": [
-    { "source": "/proyectos/assorta", "destination": "/api/proyectos/assorta" },
-    { "source": "/proyectos/puffykitten", "destination": "/api/proyectos/puffykitten" },
-    { "source": "/proyectos/chupsee", "destination": "/api/proyectos/chupsee" },
-    { "source": "/proyectos/gotapp", "destination": "/api/proyectos/gotapp" },
-    { "source": "/proyectos/pomeranian", "destination": "/api/proyectos/pomeranian" }
   ]
 }
