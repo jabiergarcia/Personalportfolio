@@ -1,4 +1,6 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
@@ -11,25 +13,10 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/proyectos",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/experiencia",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/proyectos/:project",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/admin",
-      "destination": "/index.html"
-    }
+    { "source": "/proyectos/assorta", "destination": "/api/proyectos/assorta" },
+    { "source": "/proyectos/puffykitten", "destination": "/api/proyectos/puffykitten" },
+    { "source": "/proyectos/chupsee", "destination": "/api/proyectos/chupsee" },
+    { "source": "/proyectos/gotapp", "destination": "/api/proyectos/gotapp" },
+    { "source": "/proyectos/pomeranian", "destination": "/api/proyectos/pomeranian" }
   ]
 }

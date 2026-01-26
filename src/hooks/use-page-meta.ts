@@ -31,31 +31,31 @@ const pageMeta: Record<string, PageMeta> = {
     title: 'PuffyKitten | E-commerce B2C - Jabier García Sanz',
     description: 'Caso de estudio: Plataforma e-commerce para productos de mascotas con metodología Design Thinking.',
     path: '/proyectos/puffykitten',
-    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png'
+    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/PuffyKitten/Cover-puffikitten.png'
   },
   assorta: {
     title: 'Assorta | Retail Visual Platform - Jabier García Sanz',
     description: 'Caso de estudio: SaaS B2B que digitaliza Visual Merchandising en retail de moda mediante Product-driven development.',
     path: '/proyectos/assorta',
-    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png'
+    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Cover%20Assorta%20Final.png'
   },
   chupsee: {
     title: 'Chupsee | App móvil B2C - Jabier García Sanz',
     description: 'Caso de estudio: App móvil con IA para identificación de plantas con metodología Design Sprint.',
     path: '/proyectos/chupsee',
-    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png'
+    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Cover%20Chupsee.png'
   },
   'ds-pomeranian': {
     title: 'Pomeranian | Design System - Jabier García Sanz',
     description: 'Sistema de diseño completo con Atomic Design, tokens y componentes reutilizables.',
     path: '/proyectos/pomeranian',
-    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png'
+    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Cover%20Design%20System.png'
   },
   gotapp: {
     title: 'GotApp | App móvil B2C - Jabier García Sanz',
     description: 'Caso de estudio: App de sostenibilidad y gamificación con metodología Design Sprint.',
     path: '/proyectos/gotapp',
-    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png'
+    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/GotApp/Cover-gotaap.png'
   },
   admin: {
     title: 'Panel de Administración - Jabier García Sanz',
