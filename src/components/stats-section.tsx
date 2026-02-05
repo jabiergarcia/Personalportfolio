@@ -1,28 +1,31 @@
 import { Card } from './ui/card';
 import { ScrollReveal } from './scroll-reveal';
 import { StaggerContainer, StaggerItem, staggerItemVariants } from './stagger-container';
+import { useLanguage } from '../hooks/use-language';
 
 export function StatsSection() {
+  const { t } = useLanguage();
+  
   const stats = [
     {
       number: "13",
-      label: "años en moda",
-      description: "Experiencia previa que aporta una perspectiva única al diseño digital"
+      label: t.stats.items.fashion.label,
+      description: t.stats.items.fashion.description
     },
     {
       number: "5",
-      label: "proyectos UX/UI",
-      description: "Proyectos finalizados durante mi transición al diseño digital"
+      label: t.stats.items.projects.label,
+      description: t.stats.items.projects.description
     },
     {
       number: "100%",
-      label: "pasión por UX",
-      description: "Dedicación completa a crear experiencias centradas en el usuario"
+      label: t.stats.items.passion.label,
+      description: t.stats.items.passion.description
     },
     {
       number: "∞",
-      label: "ganas de aprender",
-      description: "Curiosidad constante por nuevas tecnologías y metodologías"
+      label: t.stats.items.learning.label,
+      description: t.stats.items.learning.description
     }
   ];
 
@@ -31,10 +34,9 @@ export function StatsSection() {
       <div className="max-w-6xl mx-auto px-3 sm:px-4 py-10 md:py-12">
         <ScrollReveal direction="up" delay={0.2}>
           <div className="text-center mb-10 md:mb-12">
-            <h2 className="font-bold mb-4 text-foreground text-3xl md:text-4xl lg:text-5xl">En números</h2>
+            <h2 className="font-bold mb-4 text-foreground text-3xl md:text-4xl lg:text-5xl">{t.stats.title}</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Mi trayectoria profesional reflejada en datos que demuestran experiencia, 
-              dedicación y el compromiso con el crecimiento continuo en UX/UI.
+              {t.stats.description}
             </p>
           </div>
         </ScrollReveal>

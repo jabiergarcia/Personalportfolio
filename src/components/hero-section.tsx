@@ -4,8 +4,10 @@ import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { motion } from 'motion/react';
 import { useAnalytics } from '../hooks/use-analytics';
+import { useLanguage } from '../hooks/use-language';
+import { useCV } from '../hooks/use-cv';
 import { MapPin, Mail, Phone } from 'lucide-react';
-import { PROFILE_IMAGE_URL, CV_URL, CONTACT_INFO } from '../utils/constants';
+import { PROFILE_IMAGE_URL, CONTACT_INFO } from '../utils/constants';
 import { EASING, HERO_TIMING, getDuration, getDelay } from '../utils/animation-constants';
 
 interface HeroSectionProps {
@@ -16,6 +18,8 @@ interface HeroSectionProps {
 
 export function HeroSection({ onNavigateToProjects, onNavigateToExperiences, onOpenContact }: HeroSectionProps) {
   const analytics = useAnalytics();
+  const { t } = useLanguage();
+  const { cvUrl, cvFileName } = useCV();
 
   const handleProjectsClick = () => {
     if (onNavigateToProjects) {
@@ -110,18 +114,19 @@ export function HeroSection({ onNavigateToProjects, onNavigateToExperiences, onO
                 ease: EASING.standard as any
               }}
             >
-              <h1 className="font-bold text-card-foreground mb-2 text-3xl md:text-4xl lg:text-5xl">{CONTACT_INFO.name}</h1>
+              <h1 className="font-bold text-card-foreground mb-2 text-3xl md:text-4xl lg:text-5xl">{t.hero.name}</h1>
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-4">
-                <p className="text-muted-foreground text-xl">Junior UX/UI Designer</p>
-                <Badge variant="secondary" className="bg-accent text-accent-foreground border-none self-start sm:self-center text-sm md:text-xs px-3 py-1">disponible</Badge>
+                <p className="text-muted-foreground text-xl">{t.hero.jobTitle}</p>
+                <Badge variant="secondary" className="bg-accent text-accent-foreground border-none self-start sm:self-center text-sm md:text-xs px-3 py-1">{t.hero.available}</Badge>
               </div>
               <p className="text-foreground mb-4 leading-relaxed">
-                Soy UX/UI Designer con más de 13 años de experiencia en moda y Visual Merchandising, y formación especializada en UX/UI (Neoland).
+                {t.hero.description.intro}
                 <br /><br />
-                Transformo la toma de decisiones visuales en experiencias digitales claras, usables y orientadas a negocio, conectando lo físico y lo digital.
+                {t.hero.description.middle}
                 <br /><br />
-                Aporto visión estética, pensamiento de producto, empatía y liderazgo, trabajando con research, user flows, prototipos y Figma.
-Actualmente busco sumarme a equipos de producto para diseñar experiencias digitales con impacto real.
+                {t.hero.description.skills}
+                {' '}
+                {t.hero.description.current}
               </p>
               <motion.div 
                 className="flex gap-3"
@@ -137,7 +142,7 @@ Actualmente busco sumarme a equipos de producto para diseñar experiencias digit
                   className="bg-secondary hover:bg-secondary/80 text-secondary-foreground hover:text-secondary-foreground transition-colors"
                   onClick={handleProjectsClick}
                 >
-                  Ver proyectos
+                  {t.hero.buttons.viewProjects}
                 </Button>
                 <Button 
                   variant="outline" 
@@ -145,14 +150,12 @@ Actualmente busco sumarme a equipos de producto para diseñar experiencias digit
                   asChild
                 >
                   <a 
-                    href={CV_URL}
-                    download="Jabier-Garcia-Sanz-CV-ES.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={cvUrl}
+                    download={cvFileName}
                     onClick={handleCVDownload}
                     className="dark:hover:text-secondary-foreground"
                   >
-                    Descargar CV
+                    {t.hero.buttons.downloadCV}
                   </a>
                 </Button>
               </motion.div>
@@ -185,13 +188,13 @@ Actualmente busco sumarme a equipos de producto para diseñar experiencias digit
               </a>
             </div>
             <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 justify-center sm:justify-end">
-              <span className="hidden md:inline text-center sm:text-right">¿Nos ponemos en contacto?</span>
+              <span className="hidden md:inline text-center sm:text-right">{t.hero.contact.cta}</span>
               <Button 
                 size="sm" 
                 className="bg-accent hover:bg-accent/80 text-accent-foreground w-full sm:w-auto"
                 onClick={handleContactClick}
               >
-                Contacto
+                {t.hero.contact.button}
               </Button>
             </div>
           </div>

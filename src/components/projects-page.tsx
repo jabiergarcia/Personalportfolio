@@ -1,7 +1,8 @@
 import { ScrollReveal } from './scroll-reveal';
 import { StaggerContainer, StaggerItem, staggerItemVariants } from './stagger-container';
 import { ProjectCard } from './project-card';
-import { projectsData } from '../utils/projects-data';
+import { getProjectsData } from '../utils/projects-data';
+import { useLanguage } from '../hooks/use-language';
 
 interface ProjectsPageProps {
   onNavigateHome: () => void;
@@ -9,6 +10,9 @@ interface ProjectsPageProps {
 }
 
 export function ProjectsPage({ onNavigateHome, onProjectClick }: ProjectsPageProps) {
+  const { t } = useLanguage();
+  const projectsData = getProjectsData(t);
+  
   const handleProjectClick = (slug: string) => {
     onProjectClick(slug);
   };
@@ -23,7 +27,7 @@ export function ProjectsPage({ onNavigateHome, onProjectClick }: ProjectsPagePro
               {/* Title with decorative underline */}
               <div className="mb-6">
                 <h1 className="font-bold text-foreground mb-3 relative inline-block text-4xl md:text-5xl lg:text-6xl">
-                  Proyectos
+                  {t.projectsPage.title}
                   <div className="absolute -bottom-1 left-0 w-20 h-1 bg-gradient-to-r from-secondary via-secondary/70 to-transparent rounded-full"></div>
                 </h1>
               </div>
@@ -31,12 +35,10 @@ export function ProjectsPage({ onNavigateHome, onProjectClick }: ProjectsPagePro
               {/* Description */}
               <div className="space-y-4">
                 <p className="text-foreground/90 leading-relaxed text-xl md:text-2xl">
-                  Diseño de experiencias digitales centradas en el usuario
+                  {t.projectsPage.subtitle}
                 </p>
                 <p className="text-muted-foreground leading-relaxed text-lg">
-                  Cada proyecto refleja mi enfoque en la investigación, ideación y validación con usuarios reales. 
-                  Desde e-commerce hasta aplicaciones móviles, combinando metodologías UX con soluciones creativas 
-                  que generan impacto real.
+                  {t.projectsPage.description}
                 </p>
               </div>
             </div>

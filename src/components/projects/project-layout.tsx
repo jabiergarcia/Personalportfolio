@@ -8,9 +8,10 @@ import { ShareProject } from '../share-project';
 import ImageCarousel from '../ImageCarousel';
 import { ThemeToggle } from '../theme-toggle';
 import { RelatedProjects } from '../related-projects';
-import { projectsData, getShareableProjectUrl } from '../../utils/projects-data';
+import { getProjectsData, getShareableProjectUrl } from '../../utils/projects-data';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { Card } from '../ui/card';
+import { useLanguage } from '../../hooks/use-language';
 
 interface ProjectLayoutProps {
   onNavigateHome: () => void;
@@ -92,6 +93,7 @@ export function ProjectLayout({
   const [pendingExternalUrl, setPendingExternalUrl] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
+  const { t } = useLanguage();
 
   // Detect if user is on mobile
   useEffect(() => {
@@ -295,12 +297,13 @@ export function ProjectLayout({
       >
         <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6 py-3 flex items-center justify-between">
           <Button
-            variant="ghost"
             onClick={onNavigateToProjects}
+            variant="ghost"
+            size="sm"
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground hover:bg-secondary/10 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Volver a Proyectos
+            {t.projectLayout.backToProjects}
           </Button>
           {isDark !== undefined && onToggleTheme && (
             <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
@@ -347,7 +350,7 @@ export function ProjectLayout({
                     <ShareProject 
                       projectTitle={title}
                       projectDescription={typeof description === 'string' ? description : description?.introduction || `Proyecto ${title} | ${category}`}
-                      projectShortDescription={slug ? projectsData.find(p => p.slug === slug)?.shortDescription : undefined}
+                      projectShortDescription={slug ? getProjectsData(t).find(p => p.slug === slug)?.shortDescription : undefined}
                       projectUrl={slug ? getShareableProjectUrl(slug) : undefined}
                       iconOnly={true}
                     />
@@ -358,7 +361,7 @@ export function ProjectLayout({
                     <ShareProject 
                       projectTitle={title}
                       projectDescription={typeof description === 'string' ? description : description?.introduction || `Proyecto ${title} | ${category}`}
-                      projectShortDescription={slug ? projectsData.find(p => p.slug === slug)?.shortDescription : undefined}
+                      projectShortDescription={slug ? getProjectsData(t).find(p => p.slug === slug)?.shortDescription : undefined}
                       projectUrl={slug ? getShareableProjectUrl(slug) : undefined}
                       iconOnly={false}
                     />
@@ -398,7 +401,7 @@ export function ProjectLayout({
                         <div className="w-9 h-9 rounded-xl bg-destructive/20 dark:bg-destructive/30 flex items-center justify-center flex-shrink-0">
                           <span className="text-lg">✕</span>
                         </div>
-                        <h3 className="text-foreground">Problema</h3>
+                        <h3 className="text-foreground">{t.projectLayout.problem}</h3>
                       </div>
                       
                       {/* Content */}
@@ -419,7 +422,7 @@ export function ProjectLayout({
                         <div className="w-9 h-9 rounded-xl bg-secondary/30 dark:bg-secondary/40 flex items-center justify-center flex-shrink-0">
                           <span className="text-lg">✓</span>
                         </div>
-                        <h3 className="text-foreground">Solución</h3>
+                        <h3 className="text-foreground">{t.projectLayout.solution}</h3>
                       </div>
                       
                       {/* Content */}
@@ -589,8 +592,8 @@ export function ProjectLayout({
                           <button
                             onClick={() => handleFullscreen(`figma-prototype-container-${sectionIndex}`)}
                             className="absolute top-3 right-3 p-2.5 bg-background/95 hover:bg-background backdrop-blur-sm rounded-lg shadow-lg border border-border/50 hover:border-secondary/50 transition-all duration-300 hover:scale-110 group z-10"
-                            aria-label="Ver en pantalla completa"
-                            title="Ver en pantalla completa"
+                            aria-label={t.projectLayout.viewFullscreen}
+                            title={t.projectLayout.viewFullscreen}
                           >
                             <Maximize2 className="w-5 h-5 text-muted-foreground group-hover:text-secondary transition-colors duration-300" />
                           </button>
@@ -600,7 +603,7 @@ export function ProjectLayout({
                       {/* Hint text for interaction */}
                       <p className="text-xs text-muted-foreground text-center italic mt-3 flex items-center justify-center gap-1">
                         <Lightbulb className="inline w-3.5 h-3.5" />
-                        Interactúa con el prototipo a pantalla completa haciendo clic en
+                        {t.projectCommon.interactWithPrototype}
                         <Maximize2 className="inline w-3.5 h-3.5 mx-0.5" />
                       </p>
                     </div>
@@ -620,7 +623,7 @@ export function ProjectLayout({
                             <span className="relative inline-flex rounded-full h-3 w-3 bg-secondary"></span>
                           </span>
                           <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                            Aplicación en vivo
+                            {t.projectCommon.liveApp}
                           </span>
                         </div>
 
@@ -641,7 +644,7 @@ export function ProjectLayout({
                             onClick={() => handleExternalLinkClick(section.externalLink!.url)}
                             className="bg-gradient-to-r from-secondary to-accent text-foreground hover:from-secondary/90 hover:to-accent/90 px-10 py-6 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                           >
-                            Probar Assorta
+                            {section.externalLink.label}
                             <ExternalLink className="w-5 h-5 ml-2" />
                           </Button>
                         </div>
@@ -666,10 +669,10 @@ export function ProjectLayout({
           <ScrollReveal direction="up" delay={0.3}>
             <div className="mt-16 bg-gradient-to-r from-accent/20 to-secondary/20 rounded-lg p-8 text-center">
               <h3 className="text-xl font-semibold text-foreground mb-3">
-                ¿Te interesa ver más detalles?
+                {t.projectLayout.behanceSection.title}
               </h3>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Explora el proyecto completo con todas las pantallas, especificaciones técnicas y documentación detallada en mi perfil de Behance.
+                {t.projectLayout.behanceSection.description}
               </p>
               <Button
                 onClick={() => behanceUrl && window.open(behanceUrl, '_blank')}
@@ -677,7 +680,7 @@ export function ProjectLayout({
                 disabled={!behanceUrl}
               >
                 <ExternalLink className="w-4 h-4 mr-2" />
-                Ver Proyecto Completo en Behance
+                {t.projectLayout.behanceSection.button}
               </Button>
             </div>
           </ScrollReveal>
@@ -687,10 +690,10 @@ export function ProjectLayout({
         <ScrollReveal direction="up" delay={0.2}>
           <div className="mt-24 pt-12 border-t-2 border-border/50">
             <h2 className="text-2xl font-bold text-foreground mb-4">
-              Más proyectos
+              {t.projectLayout.relatedProjects.title}
             </h2>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              Explora otros casos de estudio donde aplico metodologías de diseño centrado en el usuario para crear experiencias digitales innovadoras.
+              {t.projectLayout.relatedProjects.description}
             </p>
 
             <div className="mb-12">
@@ -739,7 +742,7 @@ export function ProjectLayout({
                   variant="outline"
                   className="border-2 border-secondary text-foreground hover:bg-secondary hover:text-secondary-foreground hover:scale-105 transition-all duration-300"
                 >
-                  Ver Todos los Proyectos
+                  {t.projectLayout.relatedProjects.button}
                 </Button>
               </div>
             </ScrollReveal>
@@ -785,7 +788,7 @@ export function ProjectLayout({
                 {linkCopied ? (
                   <>
                     <Check className="w-5 h-5 mr-2" />
-                    Enlace copiado
+                    {t.projectLayout.share.linkCopied}
                   </>
                 ) : (
                   <>
@@ -797,7 +800,7 @@ export function ProjectLayout({
                     ) : (
                       <>
                         <Copy className="w-5 h-5 mr-2" />
-                        Copiar enlace
+                        {t.projectLayout.share.copyLink}
                       </>
                     )}
                   </>
@@ -832,7 +835,7 @@ export function ProjectLayout({
           <div className="flex items-center gap-3">
             <Check className="w-5 h-5" />
             <p className="text-sm md:text-base leading-relaxed">
-              Enlace copiado al portapapeles
+              {t.projectLayout.share.linkCopiedFull}
             </p>
           </div>
           <Button

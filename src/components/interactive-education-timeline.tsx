@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Calendar, MapPin, GraduationCap } from 'lucide-react';
 import { Badge } from './ui/badge';
+import { useLanguage } from '../hooks/use-language';
 
 interface EducationEvent {
   id: string;
@@ -10,44 +11,29 @@ interface EducationEvent {
   location: string;
   period: string;
   description: string;
-  skills: string[];
+  skills?: string[];
   color: string;
 }
 
-const educationData: EducationEvent[] = [
-  {
-    id: '1',
-    title: 'Bootcamp UX/UI Design',
-    institution: 'Neoland School',
-    location: 'Madrid, España',
-    period: '2025',
-    description: 'Experiencia formativa clave que ha consolidado mis competencias en investigación de usuarios, análisis de la competencia, arquitectura de la información y diseño de interfaces digitales responsivas alineadas con las necesidades reales de los usuarios.',
-    skills: ['User Research', 'Wireframing', 'Prototyping', 'Figma', 'Design Thinking', 'Design System'],
-    color: 'bg-muted-foreground'
-  },
-  {
-    id: '2',
-    title: 'Grado en Educación Social',
-    institution: 'Universidad de Alcalá',
-    location: 'Alcalá de Henares, España',
-    period: '2011 - 2015',
-    description: 'Formación para intervenir con personas y grupos en riesgo de exclusión, promoviendo su desarrollo mediante acciones socioeducativas y adquiriendo competencias en programas educativos, mediación, diversidad y compromiso social.',
-    skills: ['Intervención Socioeducativa', 'Comunicación Empática', 'Dinamización Grupal', 'Mediación Social', 'Diseño y evaluación de programas'],
-    color: 'bg-secondary'
-  },
-  {
-    id: '3',
-    title: 'Diseño de Moda',
-    institution: 'IED (Istituto Europeo di Design)',
-    location: 'Madrid, España',
-    period: '2009 - 2011',
-    description: 'Estudios en diseño de moda con visión sostenible, innovadora e inclusiva. Combina técnica y creatividad: desde patronaje, confección y materiales, hasta estilismo, comunicación, principios del diseño y liderazgo. Especialización en sastrería y patronaje.',
-    skills: ['Visual Composition', 'Color Theory', 'Art Direction', 'Creative Process', 'Visual Communication'],
-    color: 'bg-muted'
-  }
-];
-
 export const InteractiveEducationTimeline: React.FC = () => {
+  const { t } = useLanguage();
+  
+  // Mapear los datos de traducción al formato EducationEvent
+  const educationData: EducationEvent[] = t.educationTimeline.map((item, index) => ({
+    id: item.id,
+    title: item.title,
+    institution: item.institution,
+    location: item.location,
+    period: item.period,
+    description: item.description,
+    skills: index === 0
+      ? ['User Research', 'Wireframing', 'Prototyping', 'Figma', 'Design Thinking', 'Design System']
+      : index === 1
+      ? ['Intervención Socioeducativa', 'Comunicación Empática', 'Dinamización Grupal', 'Mediación Social', 'Diseño y evaluación de programas']
+      : ['Visual Composition', 'Color Theory', 'Art Direction', 'Creative Process', 'Visual Communication'],
+    color: index === 0 ? 'bg-muted-foreground' : index === 1 ? 'bg-secondary' : 'bg-[#ffccb6]'
+  }));
+
   const [activeEvent, setActiveEvent] = useState<string>(educationData[0].id);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
@@ -299,10 +285,10 @@ export const InteractiveEducationTimeline: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           <h2 className="text-3xl font-bold text-foreground mb-4">
-            Formación Académica
+            {t.experiencesPage.educationTitle}
           </h2>
           <p className="text-muted-foreground max-w-2xl">
-            Un camino de aprendizaje multidisciplinar
+            {t.experiencesPage.educationSubtitle}
           </p>
         </motion.div>
 
@@ -438,7 +424,7 @@ export const InteractiveEducationTimeline: React.FC = () => {
                     <div>
                       <h4 className="font-medium text-card-foreground mb-2">Habilidades desarrolladas:</h4>
                       <div className="flex flex-wrap gap-1.5">
-                        {event.skills.map((skill, idx) => (
+                        {event.skills?.map((skill, idx) => (
                           <Badge key={idx} variant="outline" className="border-secondary text-foreground text-sm md:text-xs px-3 py-1">
                             {skill}
                           </Badge>
@@ -549,7 +535,7 @@ export const InteractiveEducationTimeline: React.FC = () => {
                     <div>
                       <h4 className="font-medium text-card-foreground mb-3">Habilidades desarrolladas:</h4>
                       <div className="flex flex-wrap gap-2">
-                        {event.skills.map((skill, idx) => (
+                        {event.skills?.map((skill, idx) => (
                           <Badge key={idx} variant="outline" className="border-secondary text-foreground text-sm md:text-xs px-3 py-1">
                             {skill}
                           </Badge>

@@ -6,7 +6,14 @@
 // URLs de assets desde Supabase Storage
 export const PROFILE_IMAGE_URL = "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/javier-profile.png";
 
-export const CV_URL = "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Docs/CV%202026%20-%20Javier%20Garcia%20-%20ES.pdf";
+// URLs de CVs en diferentes idiomas
+export const CV_URLS = {
+  es: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Docs/CV%202026%20-%20Javier%20Garcia%20-%20ES.pdf",
+  en: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Docs/CV%202026%20-%20Javier%20Garcia%20-%20EN.pdf",
+} as const;
+
+// URL del CV (mantener por compatibilidad, usar CV_URLS en su lugar)
+export const CV_URL = CV_URLS.es;
 
 // Información de contacto
 export const CONTACT_INFO = {

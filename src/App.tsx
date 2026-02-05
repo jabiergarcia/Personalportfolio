@@ -3,12 +3,14 @@ import { LazyLoader, createLazyComponent } from './components/lazy-loader';
 import { ErrorBoundary } from './components/error-boundary';
 import { ProjectPageWrapper } from './components/project-page-wrapper';
 import { PageWrapper } from './components/page-wrapper';
+import { PageLoader } from './components/page-loader';
 import { HeroSection } from './components/hero-section';
 import { WorksSection } from './components/works-section';
 import { StatsSection } from './components/stats-section';
 import { ExperiencesSection } from './components/experiences-section';
 import { Footer } from './components/footer';
 import { LightboxProvider } from './contexts/lightbox-context';
+import { LanguageProvider } from './contexts/language-context';
 import { DomainChecker } from './components/domain-checker';
 import { useRouter, type Page } from './hooks/use-router';
 import { useTheme } from './hooks/use-theme';
@@ -62,18 +64,6 @@ const AdminPage = createLazyComponent(
   () => import('./components/admin-page').then(m => ({ default: m.AdminPage })),
   'AdminPage'
 );
-
-// Simple loading component
-function PageLoader() {
-  return (
-    <div className="flex items-center justify-center min-h-[400px]">
-      <div className="text-center space-y-3">
-        <div className="w-12 h-12 border-4 border-secondary border-t-transparent rounded-full animate-spin mx-auto"></div>
-        <p className="text-muted-foreground">Cargando...</p>
-      </div>
-    </div>
-  );
-}
 
 export default function App() {
   const { currentPage, navigate } = useRouter();
@@ -398,9 +388,11 @@ export default function App() {
   }
 
   return (
-    <LightboxProvider>
-      <DomainChecker />
-      {renderPage()}
-    </LightboxProvider>
+    <LanguageProvider>
+      <LightboxProvider>
+        <DomainChecker />
+        {renderPage()}
+      </LightboxProvider>
+    </LanguageProvider>
   );
 }

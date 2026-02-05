@@ -2,12 +2,14 @@ import { InteractiveExperienceTimeline } from './interactive-experience-timeline
 import { InteractiveEducationTimeline } from './interactive-education-timeline';
 import { ScrollReveal } from './scroll-reveal';
 import { motion } from 'motion/react';
+import { useLanguage } from '../hooks/use-language';
 
 interface ExperiencesPageProps {
   onNavigateHome: () => void;
 }
 
 export function ExperiencesPage({ onNavigateHome }: ExperiencesPageProps) {
+  const { t } = useLanguage();
 
   return (
     <motion.div 
@@ -25,7 +27,7 @@ export function ExperiencesPage({ onNavigateHome }: ExperiencesPageProps) {
               {/* Title with decorative underline */}
               <div className="mb-6">
                 <h1 className="font-bold text-foreground mb-3 relative inline-block text-4xl md:text-5xl lg:text-6xl">
-                  Experiencia
+                  {t.experiencesPage.title}
                   <div className="absolute -bottom-1 left-0 w-20 h-1 bg-gradient-to-r from-secondary via-secondary/70 to-transparent rounded-full"></div>
                 </h1>
               </div>
@@ -33,13 +35,10 @@ export function ExperiencesPage({ onNavigateHome }: ExperiencesPageProps) {
               {/* Description */}
               <div className="space-y-4">
                 <p className="text-foreground/90 leading-relaxed text-xl md:text-2xl">
-                  13 años de evolución desde el retail de moda hasta el diseño UX/UI
+                  {t.experiencesPage.subtitle}
                 </p>
                 <p className="text-muted-foreground leading-relaxed text-lg">
-                  Mi trayectoria profesional comenzó en el mundo de la moda, donde desarrollé mi sensibilidad visual 
-                  y comprensión del comportamiento del cliente. Tras completar un bootcamp intensivo en Neoland, 
-                  he aplicado esta experiencia al diseño de productos digitales, creando experiencias que conectan 
-                  marcas con usuarios.
+                  {t.experiencesPage.description}
                 </p>
               </div>
             </div>

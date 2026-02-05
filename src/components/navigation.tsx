@@ -1,10 +1,12 @@
 import { Button } from './ui/button';
 import { ThemeToggle } from './theme-toggle';
+import { LanguageToggle } from './language-toggle';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PROFILE_IMAGE_URL, CONTACT_INFO } from '../utils/constants';
 import { EASING, DURATION, getDuration, NAVBAR_ANIMATIONS } from '../utils/animation-constants';
+import { useLanguage } from '../hooks/use-language';
 
 // Global flag to track if navbar has been animated in this session
 // This persists across navigations but resets on page refresh
@@ -90,6 +92,8 @@ export function Navigation({
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const { t } = useLanguage();
+
   return (
     <>
       {/* Fixed Navigation Bar */}
@@ -171,7 +175,7 @@ export function Navigation({
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Proyectos
+                {t.nav.projects}
                 {/* Animated underline */}
                 <motion.span
                   className={`absolute bottom-0 left-0 h-[2px] bg-secondary ${
@@ -199,7 +203,7 @@ export function Navigation({
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Experiencia
+                {t.nav.experiences}
                 {/* Animated underline */}
                 <motion.span
                   className={`absolute bottom-0 left-0 h-[2px] bg-secondary ${
@@ -226,7 +230,7 @@ export function Navigation({
                   className="bg-accent hover:bg-accent/80 text-accent-foreground"
                   onClick={handleContactClick}
                 >
-                  Contacto
+                  {t.nav.contact}
                 </Button>
               </motion.div>
               
@@ -240,10 +244,20 @@ export function Navigation({
                   <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
                 </motion.div>
               )}
+              
+              {/* Language Toggle */}
+              <motion.div
+                initial={hasAnimated ? false : NAVBAR_ANIMATIONS.toggle.initial}
+                animate={hasAnimated ? false : NAVBAR_ANIMATIONS.toggle.animate}
+                transition={hasAnimated ? undefined : NAVBAR_ANIMATIONS.toggle.transition}
+              >
+                <LanguageToggle />
+              </motion.div>
             </div>
 
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center gap-2">
+              {/* Theme Toggle */}
               {isDark !== undefined && onToggleTheme && (
                 <motion.div
                   initial={hasAnimated ? false : NAVBAR_ANIMATIONS.toggle.initial}
@@ -253,6 +267,15 @@ export function Navigation({
                   <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
                 </motion.div>
               )}
+              
+              {/* Language Toggle */}
+              <motion.div
+                initial={hasAnimated ? false : NAVBAR_ANIMATIONS.toggle.initial}
+                animate={hasAnimated ? false : NAVBAR_ANIMATIONS.toggle.animate}
+                transition={hasAnimated ? undefined : NAVBAR_ANIMATIONS.toggle.transition}
+              >
+                <LanguageToggle />
+              </motion.div>
               <motion.button
                 initial={hasAnimated ? false : NAVBAR_ANIMATIONS.hamburger.initial}
                 animate={hasAnimated ? false : NAVBAR_ANIMATIONS.hamburger.animate}
@@ -340,7 +363,7 @@ export function Navigation({
                       }`}
                       onClick={handleHomeClick}
                     >
-                      Inicio
+                      {t.nav.home}
                     </Button>
                     <Button 
                       variant="ghost" 
@@ -349,7 +372,7 @@ export function Navigation({
                       }`}
                       onClick={handleProjectsClick}
                     >
-                      Proyectos
+                      {t.nav.projects}
                     </Button>
                     <Button 
                       variant="ghost" 
@@ -358,7 +381,7 @@ export function Navigation({
                       }`}
                       onClick={handleExperiencesClick}
                     >
-                      Experiencia
+                      {t.nav.experiences}
                     </Button>
                   </div>
                 </div>
@@ -372,7 +395,7 @@ export function Navigation({
                     className="w-full h-12 bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-2xl transition-all duration-200 shadow-md hover:shadow-lg"
                     onClick={handleContactClick}
                   >
-                    Contacto
+                    {t.nav.contact}
                   </Button>
                 </div>
 

@@ -1,8 +1,9 @@
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { projectsData } from '../utils/projects-data';
+import { getProjectsData } from '../utils/projects-data';
 import { memo, useCallback, useMemo } from 'react';
+import { useLanguage } from '../hooks/use-language';
 
 interface RelatedProjectsProps {
   currentProjectSlug: string;
@@ -15,12 +16,15 @@ interface RelatedProjectsProps {
  * Optimizado con memoización para prevenir re-renders innecesarios
  */
 export const RelatedProjects = memo(function RelatedProjects({ currentProjectSlug, onProjectClick }: RelatedProjectsProps) {
+  const { t } = useLanguage();
+  const projectsData = getProjectsData(t);
+  
   // Memoize filtered projects to avoid recalculation
   const relatedProjects = useMemo(() => {
     return projectsData
       .filter(p => p.slug !== currentProjectSlug)
       .slice(0, 3);
-  }, [currentProjectSlug]);
+  }, [currentProjectSlug, projectsData]);
 
   const handleClick = useCallback((slug: string) => {
     if (onProjectClick) {

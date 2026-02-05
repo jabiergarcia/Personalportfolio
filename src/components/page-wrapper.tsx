@@ -2,6 +2,7 @@ import { ReactNode, useEffect } from 'react';
 import { Navigation } from './navigation';
 import { AdaptiveToaster } from './adaptive-toaster';
 import { ContactModal } from './contact-modal';
+import { useLanguage } from '../hooks/use-language';
 
 interface PageWrapperProps {
   children: ReactNode;
@@ -44,6 +45,8 @@ export function PageWrapper({
     };
   }, [isContactModalOpen]);
 
+  const { t } = useLanguage();
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Skip to main content link for accessibility */}
@@ -51,7 +54,7 @@ export function PageWrapper({
         href="#main-content" 
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-accent focus:text-accent-foreground focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
       >
-        Saltar al contenido principal
+        {t.nav.skipToContent}
       </a>
 
       {showNavigation && (

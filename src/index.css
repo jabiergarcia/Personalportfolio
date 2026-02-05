@@ -1883,6 +1883,14 @@
     border-left-color: #0000;
   }
 
+  .bg-\[\#ffccb6\] {
+    background-color: #ffccb6;
+  }
+
+  .bg-\[\#ffccb6\]\/10 {
+    background-color: oklab(88.4261% .046624 .0458604 / .1);
+  }
+
   .bg-accent {
     background-color: var(--accent);
   }
@@ -3299,6 +3307,11 @@
     filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
   }
 
+  .grayscale {
+    --tw-grayscale: grayscale(100%);
+    filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
+  }
+
   .filter {
     filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
   }
@@ -3654,6 +3667,12 @@
       .hover\:border-white\/40:hover {
         border-color: color-mix(in oklab, var(--color-white) 40%, transparent);
       }
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:bg-\[\#ffccb6\]\/20:hover {
+      background-color: oklab(88.4261% .046624 .0458604 / .2);
     }
   }
 

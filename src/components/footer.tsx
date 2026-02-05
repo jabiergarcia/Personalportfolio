@@ -1,16 +1,18 @@
 import { ScrollReveal } from './scroll-reveal';
 import { Mail, Phone, Coffee, Linkedin, Download } from 'lucide-react';
-import { CV_URL, CONTACT_INFO, SOCIAL_LINKS } from '../utils/constants';
+import { CONTACT_INFO, SOCIAL_LINKS } from '../utils/constants';
+import { useLanguage } from '../hooks/use-language';
+import { useCV } from '../hooks/use-cv';
 
 interface FooterProps {
   onOpenContact?: () => void;
   profileImageUrl?: string;
 }
 
-export function Footer({
-  onOpenContact,
-  profileImageUrl
-}: FooterProps) {
+export function Footer({ onOpenContact, profileImageUrl }: FooterProps) {
+  const { t } = useLanguage();
+  const { cvUrl, cvFileName } = useCV();
+  
   return (
     <footer className="w-full bg-primary text-primary-foreground py-8 md:py-10 rounded-t-[28px] mt-8">
       <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6">
@@ -40,7 +42,7 @@ export function Footer({
             
             {/* Tagline */}
             <p className="text-primary-foreground/90 max-w-md">
-              Diseñando experiencias digitales desde Madrid
+              {t.footer.tagline}
             </p>
           </div>
         </ScrollReveal>
@@ -51,7 +53,7 @@ export function Footer({
             <button
               onClick={onOpenContact}
               className="group flex items-center gap-2.5 text-primary-foreground/80 hover:text-primary-foreground transition-all duration-200"
-              aria-label="Abrir formulario de contacto"
+              aria-label={t.footer.labels.openContactForm}
             >
               <Mail className="w-5 h-5 group-hover:scale-110 transition-transform" />
               <span className="underline decoration-primary-foreground/30 group-hover:decoration-primary-foreground transition-all">
@@ -62,7 +64,7 @@ export function Footer({
             <a
               href={`tel:${CONTACT_INFO.phone}`}
               className="group flex items-center gap-2.5 text-primary-foreground/80 hover:text-primary-foreground transition-all duration-200"
-              aria-label="Llamar por teléfono"
+              aria-label={t.footer.labels.callPhone}
             >
               <Phone className="w-5 h-5 group-hover:scale-110 transition-transform" />
               <span className="underline decoration-primary-foreground/30 group-hover:decoration-primary-foreground transition-all">
@@ -80,7 +82,7 @@ export function Footer({
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-all"
-              aria-label="Ver perfil de LinkedIn"
+              aria-label={t.footer.labels.viewLinkedIn}
             >
               <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
               <span className="text-sm">LinkedIn</span>
@@ -91,20 +93,20 @@ export function Footer({
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-all"
-              aria-label="Ver portafolio en Behance"
+              aria-label={t.footer.labels.viewBehance}
             >
               <span className="text-sm group-hover:scale-110 transition-transform inline-block">Be</span>
               <span className="text-sm">Behance</span>
             </a>
             
             <a
-              href={CV_URL}
-              download="jabier-garcia-sanz-CV-ES.pdf"
+              href={cvUrl}
+              download={cvFileName}
               className="group flex items-center gap-2 px-4 py-2 rounded-full bg-accent/90 hover:bg-accent text-accent-foreground transition-all"
-              aria-label="Descargar CV en PDF"
+              aria-label={t.footer.labels.downloadCV}
             >
               <Download className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              <span className="text-sm">Descargar CV</span>
+              <span className="text-sm">{t.footer.downloadCV}</span>
             </a>
           </div>
         </ScrollReveal>
@@ -121,7 +123,7 @@ export function Footer({
           {/* Copyright */}
           <div className="pt-6 border-t border-primary-foreground/20">
             <p className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-sm text-primary-foreground/60">
-              <span>&copy; 2025 Diseñado con Figma, React y mucho café</span>
+              <span>&copy; 2025 {t.footer.copyright}</span>
               <Coffee className="w-4 h-4" />
             </p>
           </div>

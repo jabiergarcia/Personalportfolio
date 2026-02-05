@@ -1,4 +1,7 @@
 import { ProjectLayout } from './project-layout';
+import { useLanguage } from '../../hooks/use-language';
+import { projectsDetailES } from '../../translations/projects-detail-es';
+import { projectsDetailEN } from '../../translations/projects-detail-en';
 
 interface ChupseeProjectProps {
   onNavigateHome: () => void;
@@ -9,29 +12,33 @@ interface ChupseeProjectProps {
 }
 
 export function ChupseeProject({ onNavigateHome, onNavigateToProjects, onProjectClick, isDark, onToggleTheme }: ChupseeProjectProps) {
+  
+  const { language, t } = useLanguage();
+  const projectDetail = language === 'es' ? projectsDetailES.chupsee : projectsDetailEN.chupsee;
+
   // Images for the empatizar section
   const empatizarImages = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Empatizar%20-%20Benchmark.png",
-      alt: "Empatizar - Benchmark",
-      title: "Benchmark",
-      description: "Análisis de competidores directos e indirectos del mercado",
+      alt: projectDetail.sections.empathize.images[0].alt,
+      title: projectDetail.sections.empathize.images[0].title,
+      description: projectDetail.sections.empathize.images[0].description,
       icon: "benchmark" as const,
       layout: "full" as const
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Empatizar%20-%20Encuestas%20y%20entrevistas.png",
-      alt: "Empatizar - Encuestas y entrevistas",
-      title: "Encuestas y entrevistas",
-      description: "Investigación cualitativa para entender necesidades de usuarios",
+      alt: projectDetail.sections.empathize.images[1].alt,
+      title: projectDetail.sections.empathize.images[1].title,
+      description: projectDetail.sections.empathize.images[1].description,
       icon: "interviews" as const,
       layout: "full" as const
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Empatizar-%20DAFO.png",
-      alt: "Empatizar - Análisis DAFO",
-      title: "Análisis DAFO",
-      description: "Evaluación de debilidades, amenazas, fortalezas y oportunidades",
+      alt: projectDetail.sections.empathize.images[2].alt,
+      title: projectDetail.sections.empathize.images[2].title,
+      description: projectDetail.sections.empathize.images[2].description,
       icon: "insights" as const,
       layout: "full" as const
     }
@@ -41,25 +48,25 @@ export function ChupseeProject({ onNavigateHome, onNavigateToProjects, onProject
   const definirImages = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Definir%20-%20Persona.png",
-      alt: "Definir - Persona",
-      title: "Persona",
-      description: "Arquetipos de usuarios basados en investigación real",
+      alt: projectDetail.sections.define.images[0].alt,
+      title: projectDetail.sections.define.images[0].title,
+      description: projectDetail.sections.define.images[0].description,
       icon: "empathy" as const,
       layout: "full" as const
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Definir%20-%20Mapa%20de%20empatia.png",
-      alt: "Definir - Mapa de empatía",
-      title: "Mapa de empatía",
-      description: "Análisis profundo de pensamientos, emociones y necesidades",
+      alt: projectDetail.sections.define.images[1].alt,
+      title: projectDetail.sections.define.images[1].title,
+      description: projectDetail.sections.define.images[1].description,
       icon: "empathy" as const,
       layout: "full" as const
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Definir%20-%20Journey%20Map.png",
-      alt: "Definir - Journey Map",
-      title: "Journey Map",
-      description: "Recorrido del usuario identificando puntos de dolor y oportunidades",
+      alt: projectDetail.sections.define.images[2].alt,
+      title: projectDetail.sections.define.images[2].title,
+      description: projectDetail.sections.define.images[2].description,
       icon: "journey" as const,
       layout: "full" as const
     }
@@ -69,33 +76,33 @@ export function ChupseeProject({ onNavigateHome, onNavigateToProjects, onProject
   const idearImages = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Idear%20-%20Business%20Model.png",
-      alt: "Idear - Business Model Canvas",
-      title: "Business Model Canvas",
-      description: "Modelo de negocio basado en afiliación y publicidad",
+      alt: projectDetail.sections.ideate.images[0].alt,
+      title: projectDetail.sections.ideate.images[0].title,
+      description: projectDetail.sections.ideate.images[0].description,
       icon: "business" as const,
       layout: "full" as const
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Idear%20-%20Point%20of%20View.png",
-      alt: "Idear - Point of View",
-      title: "Point of View",
-      description: "Reformulación del problema desde la perspectiva del usuario",
+      alt: projectDetail.sections.ideate.images[1].alt,
+      title: projectDetail.sections.ideate.images[1].title,
+      description: projectDetail.sections.ideate.images[1].description,
       icon: "insights" as const,
       layout: "full" as const
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Idear%20-%20Value%20Proposition.png",
-      alt: "Idear - Value Proposition",
-      title: "Value Proposition",
-      description: "Propuesta de valor centrada en control y simplicidad para el usuario",
+      alt: projectDetail.sections.ideate.images[2].alt,
+      title: projectDetail.sections.ideate.images[2].title,
+      description: projectDetail.sections.ideate.images[2].description,
       icon: "insights" as const,
       layout: "full" as const
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Idear%20-%20MoSKoW.png",
-      alt: "Idear - MoSCoW",
-      title: "MoSCoW",
-      description: "Priorización de funcionalidades esenciales del MVP",
+      alt: projectDetail.sections.ideate.images[3].alt,
+      title: projectDetail.sections.ideate.images[3].title,
+      description: projectDetail.sections.ideate.images[3].description,
       icon: "insights" as const,
       layout: "full" as const
     }
@@ -105,17 +112,17 @@ export function ChupseeProject({ onNavigateHome, onNavigateToProjects, onProject
   const prototiparImages = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Prototipar%20-%20Arquitectura%20de%20la%20informacion.png",
-      alt: "Prototipar - Arquitectura de la información",
-      title: "Arquitectura de la información",
-      description: "Estructura y organización de contenidos para navegación clara",
+      alt: projectDetail.sections.prototype.images[0].alt,
+      title: projectDetail.sections.prototype.images[0].title,
+      description: projectDetail.sections.prototype.images[0].description,
       icon: "wireframes" as const,
       layout: "full" as const
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Prototipar%20-%20Identidad%20Corporativa.png",
-      alt: "Prototipar - Identidad Corporativa",
-      title: "Identidad Corporativa",
-      description: "Sistema de diseño con tonos azules y violetas que transmiten tecnología y confianza",
+      alt: projectDetail.sections.prototype.images[1].alt,
+      title: projectDetail.sections.prototype.images[1].title,
+      description: projectDetail.sections.prototype.images[1].description,
       icon: "branding" as const,
       layout: "full" as const
     }
@@ -123,74 +130,52 @@ export function ChupseeProject({ onNavigateHome, onNavigateToProjects, onProject
 
   const projectDetails = [
     {
-      label: "Creación del proyecto",
-      value: "2025"
+      label: t.projectCommon.projectCreation,
+      value: projectDetail.details.creation
     },
     {
-      label: "Personas participantes",
-      value: "1 persona"
+      label: t.projectCommon.participants,
+      value: projectDetail.details.participants
     },
     {
-      label: "Metodología utilizada",
-      value: "Design Thinking"
+      label: t.projectCommon.methodology,
+      value: projectDetail.details.methodology
     },
     {
-      label: "Duración del proyecto",
-      value: "3 semanas"
+      label: t.projectCommon.duration,
+      value: projectDetail.details.duration
     }
   ];
 
   const sections = [
     {
-      title: "Empatizar",
-      bullets: [
-        "Benchmark de competidores directos (CamelCamelCamel, Keepa) e indirectos (Klarna) para identificar oportunidades",
-        "Análisis DAFO revelando fortalezas del mercado de comparadores de precios",
-        "Encuestas y entrevistas descubriendo necesidades clave: alertas personalizadas, wishlist propia, integración multiplataforma y experiencia intuitiva y confiable"
-      ],
+      title: projectDetail.sections.empathize.title,
+      bullets: projectDetail.sections.empathize.bullets,
       images: empatizarImages
     },
     {
-      title: "Definir",
-      bullets: [
-        "Tres perfiles (user, buyer y arquetipo) representando diferentes usuarios digitales",
-        "Mapa de empatía explorando pensamientos, emociones y necesidades",
-        "Journey map reflejando el recorrido completo, puntos de dolor y expectativas en el proceso de compra online"
-      ],
+      title: projectDetail.sections.define.title,
+      bullets: projectDetail.sections.define.bullets,
       images: definirImages
     },
     {
-      title: "Idear",
-      bullets: [
-        "Business Model Canvas basado en afiliación y publicidad como fuentes de ingresos",
-        "Value Proposition ofreciendo app gratuita que simplifica compras, da control total y visualiza información clara",
-        "Point of View reformulando el problema desde la perspectiva del usuario",
-        "Priorización MoSCoW definiendo funcionalidades esenciales: comparador multitienda, alertas inteligentes y wishlist personalizada"
-      ],
+      title: projectDetail.sections.ideate.title,
+      bullets: projectDetail.sections.ideate.bullets,
       images: idearImages
     },
     {
-      title: "Prototipar",
-      bullets: [
-        "Arquitectura de información garantizando navegación clara y coherente",
-        "Identidad visual en tonos azules y violetas transmitiendo tecnología y confianza",
-        "MVP con seguimiento de precios, alertas configurables, wishlist inteligente y gráficas de evolución",
-        "Futuribles contemplando integración con redes sociales y recomendaciones avanzadas mediante IA"
-      ],
+      title: projectDetail.sections.prototype.title,
+      bullets: projectDetail.sections.prototype.bullets,
       images: prototiparImages
     },
     {
-      title: "Resultado",
-      bullets: [
-        "Prototipo funcional desarrollado en Figma con experiencia completa navegable",
-        "Propuesta sólida de diseño UX/UI centrada en el usuario",
-        "Integración exitosa de investigación, estrategia e interfaz visual clara y atractiva"
-      ],
+      title: projectDetail.sections.result.title,
+      bullets: projectDetail.sections.result.bullets,
       figmaPrototype: {
         embedUrl: "https://embed.figma.com/proto/tvHmJqFcqz4WIf7356QEmm/Xabi.Garcia---Reto-2?page-id=0%3A1&node-id=31-101&viewport=-500%2C-54%2C0.8&scaling=scale-down&content-scaling=fixed&starting-point-node-id=57%3A331&embed-host=share",
-        title: "Prototipo Interactivo",
-        description: "Explora el prototipo completo de Chupsee y descubre cómo los usuarios pueden comparar precios, gestionar su wishlist y recibir alertas inteligentes para encontrar las mejores ofertas.",
-        type: "mobile" // Mobile app prototype - uses vertical aspect ratios
+        title: t.projectCommon.prototypeTitle,
+        description: projectDetail.sections.result.prototypeDescription,
+        type: "mobile" as const // Mobile app prototype - uses vertical aspect ratios
       }
     }
   ];
@@ -202,15 +187,21 @@ export function ChupseeProject({ onNavigateHome, onNavigateToProjects, onProject
       onProjectClick={onProjectClick}
       isDark={isDark}
       onToggleTheme={onToggleTheme}
-      title="Chupsee | App móvil B2C"
-      subtitle="App móvil B2C"
-      category="App Design"
+      title={t.projects.chupsee.title}
+      subtitle={t.projects.chupsee.subtitle}
+      category={t.projects.chupsee.category}
       slug="chupsee"
-      tags={["App", "E-commerce", "IA Predictiva", "Comparador", "Design Thinking"]}
+      tags={[
+        t.projects.chupsee.tags.app,
+        t.projects.chupsee.tags.ecommerce,
+        t.projects.chupsee.tags.aiPredictive,
+        t.projects.chupsee.tags.comparator,
+        t.projects.chupsee.tags.designThinking
+      ]}
       description={{
-        introduction: "Chupsee es una aplicación digital diseñada para encontrar las mejores ofertas online mediante monitoreo de precios, alertas personalizadas y análisis predictivo con IA. Permite tomar decisiones de compra más inteligentes y aprovechar descuentos en tiempo real, orientada a compradores digitales y analistas de precios.",
-        problem: "Dificultad para hacer seguimiento efectivo de precios en múltiples tiendas, pérdida frecuente de ofertas importantes y exceso de notificaciones irrelevantes. No existía una herramienta que centralizara comparadores, wishlists y alertas inteligentes en una misma aplicación.",
-        solution: "Una aplicación multiplataforma que centraliza comparación de precios, wishlists personalizadas y alertas configurables con gráficas de evolución. Integra inteligencia artificial predictiva para recomendar el momento óptimo de compra y filtrar notificaciones según preferencias del usuario."
+        introduction: projectDetail.introduction,
+        problem: projectDetail.problem,
+        solution: projectDetail.solution
       }}
       behanceUrl="https://www.behance.net/gallery/226923977/Chupsee-Seguimiento-de-ofertas"
       sections={sections}

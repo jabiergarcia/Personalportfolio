@@ -6,6 +6,7 @@ import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { toast } from './ui/sonner';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
+import { useLanguage } from '../hooks/use-language';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -20,6 +21,7 @@ interface ContactForm {
 }
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<ContactForm>({
     name: '',
     email: '',
@@ -38,28 +40,28 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   const validateForm = (): boolean => {
     if (!formData.name.trim()) {
-      toast.error('Por favor, introduce tu nombre');
-      setSubmitStatus('Error: Introduce tu nombre');
+      toast.error(t.contact.validation.nameRequired);
+      setSubmitStatus('Error: ' + t.contact.validation.nameRequired);
       return false;
     }
     if (!formData.email.trim()) {
-      toast.error('Por favor, introduce tu email');
-      setSubmitStatus('Error: Introduce tu email');
+      toast.error(t.contact.validation.emailRequired);
+      setSubmitStatus('Error: ' + t.contact.validation.emailRequired);
       return false;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      toast.error('Por favor, introduce un email válido');
-      setSubmitStatus('Error: Introduce un email válido');
+      toast.error(t.contact.validation.emailInvalid);
+      setSubmitStatus('Error: ' + t.contact.validation.emailInvalid);
       return false;
     }
     if (!formData.subject.trim()) {
-      toast.error('Por favor, introduce un asunto');
-      setSubmitStatus('Error: Introduce un asunto');
+      toast.error(t.contact.validation.subjectRequired);
+      setSubmitStatus('Error: ' + t.contact.validation.subjectRequired);
       return false;
     }
     if (!formData.message.trim()) {
-      toast.error('Por favor, introduce un mensaje');
-      setSubmitStatus('Error: Introduce un mensaje');
+      toast.error(t.contact.validation.messageRequired);
+      setSubmitStatus('Error: ' + t.contact.validation.messageRequired);
       return false;
     }
     return true;
@@ -85,10 +87,10 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
       if (!response.ok) {
         const errorData = await response.text();
-        throw new Error(errorData || 'Error al enviar el mensaje');
+        throw new Error(errorData || t.contact.messages.error);
       }
 
-      toast.success('¡Mensaje enviado correctamente! Te responderé lo antes posible.');
+      toast.success(t.contact.messages.success);
       
       // Reset form
       setFormData({
@@ -100,7 +102,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       
       onClose();
     } catch (error) {
-      toast.error('Error al enviar el mensaje. Por favor, inténtalo de nuevo.');
+      toast.error(t.contact.messages.error);
     } finally {
       setIsLoading(false);
     }
@@ -122,9 +124,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         <DialogOverlay className="bg-black/40 backdrop-blur-sm" />
         <DialogContent className="sm:max-w-[425px] bg-card border-border">
         <DialogHeader>
-          <DialogTitle className="text-foreground">¿Hablamos?</DialogTitle>
+          <DialogTitle className="text-foreground">{t.contact.title}</DialogTitle>
           <DialogDescription className="text-muted-foreground">
-            Cuéntame qué tienes entre manos y te responderé lo antes posible.
+            {t.contact.description}
           </DialogDescription>
         </DialogHeader>
         
@@ -141,13 +143,13 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
             <Label htmlFor="name" className="text-foreground">
-              Tu nombre completo *
+              {t.contact.form.name.label}
             </Label>
             <Input
               id="name"
               value={formData.name}
               onChange={(e) => handleInputChange('name', e.target.value)}
-              placeholder="¿Cómo te llamas?"
+              placeholder={t.contact.form.name.placeholder}
               className="bg-input-background border-border text-foreground placeholder:text-muted-foreground"
               disabled={isLoading}
               required
@@ -156,14 +158,14 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           </div>
           <div className="grid gap-2">
             <Label htmlFor="email" className="text-foreground">
-              tu@mail.com *
+              {t.contact.form.email.label}
             </Label>
             <Input
               id="email"
               type="email"
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
-              placeholder="Tu correo (prometo no hacer spam)"
+              placeholder={t.contact.form.email.placeholder}
               className="bg-input-background border-border text-foreground placeholder:text-muted-foreground"
               disabled={isLoading}
               required
@@ -172,13 +174,13 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           </div>
           <div className="grid gap-2">
             <Label htmlFor="subject" className="text-foreground">
-              ¿Qué tienes en mente? *
+              {t.contact.form.subject.label}
             </Label>
             <Input
               id="subject"
               value={formData.subject}
               onChange={(e) => handleInputChange('subject', e.target.value)}
-              placeholder="Dispara: ¿qué quieres diseñar?"
+              placeholder={t.contact.form.subject.placeholder}
               className="bg-input-background border-border text-foreground placeholder:text-muted-foreground"
               disabled={isLoading}
               required
@@ -187,13 +189,13 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           </div>
           <div className="grid gap-2">
             <Label htmlFor="message" className="text-foreground">
-              Abierto a ideas y nuevos retos *
+              {t.contact.form.message.label}
             </Label>
             <Textarea
               id="message"
               value={formData.message}
               onChange={(e) => handleInputChange('message', e.target.value)}
-              placeholder="Escríbeme y hablamos..."
+              placeholder={t.contact.form.message.placeholder}
               className="bg-input-background border-border text-foreground placeholder:text-muted-foreground min-h-[100px]"
               disabled={isLoading}
               required
@@ -208,14 +210,14 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             className="border-secondary text-foreground hover:bg-secondary/10 dark:hover:text-secondary-foreground"
             disabled={isLoading}
           >
-            Cancelar
+            {t.contact.buttons.cancel}
           </Button>
           <Button 
             className="bg-secondary hover:bg-secondary/80 text-secondary-foreground"
             onClick={handleSubmit}
             disabled={isLoading}
           >
-            {isLoading ? 'Enviando...' : 'Enviar mensaje'}
+            {isLoading ? t.contact.buttons.sending : t.contact.buttons.send}
           </Button>
         </div>
       </DialogContent>

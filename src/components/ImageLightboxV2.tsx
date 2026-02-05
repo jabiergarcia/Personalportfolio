@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ChevronLeft, ChevronRight, Info, ZoomIn, ZoomOut } from 'lucide-react';
-import { useLightbox } from '../contexts/lightbox-context';
+import { useLanguage } from '../contexts/language-context';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { useLightbox } from '../contexts/lightbox-context';
 
 interface ImageData {
   src: string;
@@ -55,6 +56,7 @@ const ImageLightboxV2: React.FC<ImageLightboxV2Props> = ({
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const imageTransformRef = useRef<HTMLDivElement>(null);
   const { setIsLightboxOpen } = useLightbox();
+  const { t } = useLanguage();
 
   // Reset zoom and pan when image changes
   useEffect(() => {
@@ -701,7 +703,7 @@ const ImageLightboxV2: React.FC<ImageLightboxV2Props> = ({
                   transform: 'translateZ(0)',
                   willChange: 'opacity'
                 }}
-                aria-label={showInfo ? 'Ocultar información' : 'Mostrar información'}
+                aria-label={showInfo ? t.common.hideInfo : t.common.showInfo}
               >
                 <Info size={20} className="text-white" />
               </button>

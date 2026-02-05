@@ -9,6 +9,9 @@ import { ProjectDetails } from './project-details';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { getShareableProjectUrl } from '../../utils/projects-data';
+import { useLanguage } from '../../hooks/use-language';
+import { projectsDetailES } from '../../translations/projects-detail-es';
+import { projectsDetailEN } from '../../translations/projects-detail-en';
 
 interface PomeranianProjectProps {
   onNavigateHome: () => void;
@@ -37,6 +40,10 @@ const GallerySection = memo(({ title, description, items, layout = 'asymmetric' 
 GallerySection.displayName = 'GallerySection';
 
 export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProjectClick, isDark, onToggleTheme }: PomeranianProjectProps) {
+  
+  const { language, t } = useLanguage();
+  const projectDetail = language === 'es' ? projectsDetailES.dsPomeranian : projectsDetailEN.dsPomeranian;
+
   const [isNavVisible, setIsNavVisible] = useState(true);
 
   useEffect(() => {
@@ -73,20 +80,20 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
 
   const projectDetails = [
     {
-      label: "Creación del proyecto",
-      value: "2025"
+      label: t.projectCommon.projectCreation,
+      value: projectDetail.details.creation
     },
     {
-      label: "Personas participantes",
-      value: "1 persona"
+      label: t.projectCommon.participants,
+      value: projectDetail.details.participants
     },
     {
-      label: "Modalidad del proyecto",
-      value: "DS Foundations"
+      label: t.projectCommon.methodology,
+      value: projectDetail.details.methodology
     },
     {
-      label: "Duración del proyecto",
-      value: "4 semanas"
+      label: t.projectCommon.duration,
+      value: projectDetail.details.duration
     }
   ];
 
@@ -98,9 +105,9 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const atomicDesignItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Atomic%20Design/Atomic%20Design.png",
-      alt: "Metodología Atomic Design aplicada al sistema Pomeranian - Átomos, Moléculas, Organismos, Templates y Páginas",
-      title: "Atomic Design",
-      description: "Arquitectura modular del sistema",
+      alt: projectDetail.styleGuide.atomicDesign.alt,
+      title: projectDetail.styleGuide.atomicDesign.title,
+      description: projectDetail.styleGuide.atomicDesign.description,
       icon: 'architecture',
       type: 'image',
       span: 'wide'
@@ -111,18 +118,18 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const colorsItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Colores/Colores%20principales.png",
-      alt: "Colores principales del Design System Pomeranian con valores HEX y tokens semánticos",
-      title: "Colores Principales",
-      description: "Paleta base y tokens semánticos",
+      alt: projectDetail.styleGuide.colors.main.alt,
+      title: projectDetail.styleGuide.colors.main.title,
+      description: projectDetail.styleGuide.colors.main.description,
       icon: 'branding',
       type: 'image',
       span: 'medium'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Colores/Paleta%20de%20colores.png",
-      alt: "Paleta de colores extendida con escala de grises y variaciones tonales",
-      title: "Paleta Extendida",
-      description: "Escalas tonales y grises",
+      alt: projectDetail.styleGuide.colors.extended.alt,
+      title: projectDetail.styleGuide.colors.extended.title,
+      description: projectDetail.styleGuide.colors.extended.description,
       icon: 'branding',
       type: 'image',
       span: 'medium'
@@ -133,9 +140,9 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const typographyItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Tipografia/Tipografia.png",
-      alt: "Sistema tipográfico completo con jerarquía de títulos, textos y especificaciones de uso",
-      title: "Sistema Tipográfico",
-      description: "Jerarquía, escalado y tokens",
+      alt: projectDetail.styleGuide.typography.alt,
+      title: projectDetail.styleGuide.typography.title,
+      description: projectDetail.styleGuide.typography.description,
       icon: 'wireframes',
       type: 'image',
       span: 'tall'
@@ -146,9 +153,9 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const shadowsItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Sombras/Sombras.png",
-      alt: "Sistema de elevación con tokens de sombras para crear jerarquía y profundidad visual",
-      title: "Sistema de Sombras",
-      description: "Elevación y profundidad visual",
+      alt: projectDetail.styleGuide.shadows.alt,
+      title: projectDetail.styleGuide.shadows.title,
+      description: projectDetail.styleGuide.shadows.description,
       icon: 'layers',
       type: 'image',
       span: 'small'
@@ -159,9 +166,9 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const gridItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Grid/Grid.png",
-      alt: "Sistema de grid mobile de 4 columnas con márgenes y gutters optimizados para dispositivos móviles",
-      title: "Grid Mobile",
-      description: "Sistema de 4 columnas optimizado para mobile",
+      alt: projectDetail.styleGuide.grid.alt,
+      title: projectDetail.styleGuide.grid.title,
+      description: projectDetail.styleGuide.grid.description,
       icon: 'architecture',
       type: 'image',
       span: 'tall'
@@ -172,9 +179,9 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const spacingItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Numeros/Tokens%20numeros.png",
-      alt: "Sistema de espaciado con tokens numéricos para padding, margin y dimensionado",
-      title: "Tokens Numéricos",
-      description: "Espaciado, padding y margin",
+      alt: projectDetail.styleGuide.spacing.alt,
+      title: projectDetail.styleGuide.spacing.title,
+      description: projectDetail.styleGuide.spacing.description,
       icon: 'benchmark',
       type: 'image',
       span: 'medium'
@@ -189,27 +196,27 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const avatarItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Avatar/Componente%20avatar.png",
-      alt: "Componente Avatar - Anatomía y estructura del componente con todos sus elementos",
-      title: "Componente Avatar",
-      description: "Anatomía y estructura base",
+      alt: projectDetail.components.avatar.component.alt,
+      title: projectDetail.components.avatar.component.title,
+      description: projectDetail.components.avatar.component.description,
       icon: 'architecture',
       type: 'image',
       span: 'medium'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Avatar/Propiedades%20avatar.png",
-      alt: "Propiedades del Avatar - Tamaños, estados y variantes del componente",
-      title: "Propiedades",
-      description: "Tamaños, estados y variantes",
+      alt: projectDetail.components.avatar.properties.alt,
+      title: projectDetail.components.avatar.properties.title,
+      description: projectDetail.components.avatar.properties.description,
       icon: 'insights',
       type: 'image',
       span: 'tall'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Avatar/Variables%20avatar.png",
-      alt: "Variables del Avatar - Tokens y valores para personalización del componente",
-      title: "Variables",
-      description: "Tokens y personalización",
+      alt: projectDetail.components.avatar.variables.alt,
+      title: projectDetail.components.avatar.variables.title,
+      description: projectDetail.components.avatar.variables.description,
       icon: 'wireframes',
       type: 'image',
       span: 'small'
@@ -220,27 +227,27 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const accordionItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Accordion/Componente%20accordion.png",
-      alt: "Componente Accordion - Anatomía y estructura del componente expandible",
-      title: "Componente Accordion",
-      description: "Anatomía y estructura base",
+      alt: projectDetail.components.accordion.component.alt,
+      title: projectDetail.components.accordion.component.title,
+      description: projectDetail.components.accordion.component.description,
       icon: 'architecture',
       type: 'image',
       span: 'wide'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Accordion/Propiedades%20accordion.png",
-      alt: "Propiedades del Accordion - Estados expandido/colapsado y variantes",
-      title: "Propiedades",
-      description: "Estados y variantes",
+      alt: projectDetail.components.accordion.properties.alt,
+      title: projectDetail.components.accordion.properties.title,
+      description: projectDetail.components.accordion.properties.description,
       icon: 'insights',
       type: 'image',
       span: 'small'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Accordion/Variables%20accordion.png",
-      alt: "Variables del Accordion - Tokens para personalización y comportamiento",
-      title: "Variables",
-      description: "Tokens y personalización",
+      alt: projectDetail.components.accordion.variables.alt,
+      title: projectDetail.components.accordion.variables.title,
+      description: projectDetail.components.accordion.variables.description,
       icon: 'wireframes',
       type: 'image',
       span: 'small'
@@ -251,27 +258,27 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const buttonItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Button/Componente%20button.png",
-      alt: "Componente Button - Anatomía y estructura del componente de acción",
-      title: "Componente Button",
-      description: "Anatomía y estructura base",
+      alt: projectDetail.components.button.component.alt,
+      title: projectDetail.components.button.component.title,
+      description: projectDetail.components.button.component.description,
       icon: 'architecture',
       type: 'image',
       span: 'small'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Button/Propiedades%20button.png",
-      alt: "Propiedades del Button - Variantes, estados y tamaños del componente",
-      title: "Propiedades",
-      description: "Variantes, estados y tamaños",
+      alt: projectDetail.components.button.properties.alt,
+      title: projectDetail.components.button.properties.title,
+      description: projectDetail.components.button.properties.description,
       icon: 'insights',
       type: 'image',
       span: 'tall'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Button/Variables%20button.png",
-      alt: "Variables del Button - Tokens para personalización de colores, padding y bordes",
-      title: "Variables",
-      description: "Tokens y personalización",
+      alt: projectDetail.components.button.variables.alt,
+      title: projectDetail.components.button.variables.title,
+      description: projectDetail.components.button.variables.description,
       icon: 'wireframes',
       type: 'image',
       span: 'medium'
@@ -282,27 +289,27 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const cardItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Card/Componente%20card.png",
-      alt: "Componente Card - Anatomía y estructura del contenedor de información",
-      title: "Componente Card",
-      description: "Anatomía y estructura base",
+      alt: projectDetail.components.card.component.alt,
+      title: projectDetail.components.card.component.title,
+      description: projectDetail.components.card.component.description,
       icon: 'architecture',
       type: 'image',
       span: 'tall'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Card/Propiedades%20card.png",
-      alt: "Propiedades del Card - Variantes de elevación, padding y organización de contenido",
-      title: "Propiedades",
-      description: "Elevación, padding y contenido",
+      alt: projectDetail.components.card.properties.alt,
+      title: projectDetail.components.card.properties.title,
+      description: projectDetail.components.card.properties.description,
       icon: 'insights',
       type: 'image',
       span: 'small'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Card/Vaeriables%20card.png",
-      alt: "Variables del Card - Tokens para bordes, sombras y espaciado interno",
-      title: "Variables",
-      description: "Tokens y personalización",
+      alt: projectDetail.components.card.variables.alt,
+      title: projectDetail.components.card.variables.title,
+      description: projectDetail.components.card.variables.description,
       icon: 'wireframes',
       type: 'image',
       span: 'small'
@@ -313,27 +320,27 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const carouselItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Carousel/Componente%20carousel.png",
-      alt: "Componente Carousel - Anatomía y estructura del componente de deslizamiento",
-      title: "Componente Carousel",
-      description: "Anatomía y estructura base",
+      alt: projectDetail.components.carousel.component.alt,
+      title: projectDetail.components.carousel.component.title,
+      description: projectDetail.components.carousel.component.description,
       icon: 'architecture',
       type: 'image',
       span: 'wide'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Carousel/Dots%20carousel.png",
-      alt: "Indicadores de navegación del Carousel - Sistema de dots para control de slides",
-      title: "Indicadores Dots",
-      description: "Navegación y control de slides",
+      alt: projectDetail.components.carousel.dots.alt,
+      title: projectDetail.components.carousel.dots.title,
+      description: projectDetail.components.carousel.dots.description,
       icon: 'insights',
       type: 'image',
       span: 'small'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Carousel/Propiedades%20carousel.png",
-      alt: "Propiedades del Carousel - Variantes, estados y configuración de transiciones",
-      title: "Propiedades",
-      description: "Variantes y transiciones",
+      alt: projectDetail.components.carousel.properties.alt,
+      title: projectDetail.components.carousel.properties.title,
+      description: projectDetail.components.carousel.properties.description,
       icon: 'wireframes',
       type: 'image',
       span: 'small'
@@ -344,27 +351,27 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const checkboxItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Checkbox/Componente%20checkbox.png",
-      alt: "Componente Checkbox - Anatomía y estructura del componente de selección",
-      title: "Componente Checkbox",
-      description: "Anatomía y estructura base",
+      alt: projectDetail.components.checkbox.component.alt,
+      title: projectDetail.components.checkbox.component.title,
+      description: projectDetail.components.checkbox.component.description,
       icon: 'architecture',
       type: 'image',
       span: 'small'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Checkbox/Propiedades%20checkbox.png",
-      alt: "Propiedades del Checkbox - Estados checked, unchecked, indeterminate y disabled",
-      title: "Propiedades",
-      description: "Estados y variantes",
+      alt: projectDetail.components.checkbox.properties.alt,
+      title: projectDetail.components.checkbox.properties.title,
+      description: projectDetail.components.checkbox.properties.description,
       icon: 'insights',
       type: 'image',
       span: 'tall'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Checkbox/Variables%20checkbox.png",
-      alt: "Variables del Checkbox - Tokens para colores, tamaños y espaciado",
-      title: "Variables",
-      description: "Tokens y personalización",
+      alt: projectDetail.components.checkbox.variables.alt,
+      title: projectDetail.components.checkbox.variables.title,
+      description: projectDetail.components.checkbox.variables.description,
       icon: 'wireframes',
       type: 'image',
       span: 'medium'
@@ -433,27 +440,27 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const listItemItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/List%20Item/Componente%20list%20item.png",
-      alt: "Componente List Item - Anatomía y estructura del elemento de lista",
-      title: "Componente List Item",
-      description: "Anatomía y estructura base",
+      alt: projectDetail.components.listItem.component.alt,
+      title: projectDetail.components.listItem.component.title,
+      description: projectDetail.components.listItem.component.description,
       icon: 'architecture',
       type: 'image',
       span: 'tall'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/List%20Item/Propiedades%20list%20item.png",
-      alt: "Propiedades del List Item - Estados, variantes y configuración de contenido",
-      title: "Propiedades",
-      description: "Estados y variantes",
+      alt: projectDetail.components.listItem.properties.alt,
+      title: projectDetail.components.listItem.properties.title,
+      description: projectDetail.components.listItem.properties.description,
       icon: 'insights',
       type: 'image',
       span: 'small'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/List%20Item/Variables%20list%20item.png",
-      alt: "Variables del List Item - Tokens para espaciado, colores y tipografía",
-      title: "Variables",
-      description: "Tokens y personalización",
+      alt: projectDetail.components.listItem.variables.alt,
+      title: projectDetail.components.listItem.variables.title,
+      description: projectDetail.components.listItem.variables.description,
       icon: 'wireframes',
       type: 'image',
       span: 'small'
@@ -464,27 +471,27 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const modalItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Modal/Componente%20modal.png",
-      alt: "Componente Modal - Anatomía y estructura de la ventana modal",
-      title: "Componente Modal",
-      description: "Anatomía y estructura base",
+      alt: projectDetail.components.modal.component.alt,
+      title: projectDetail.components.modal.component.title,
+      description: projectDetail.components.modal.component.description,
       icon: 'architecture',
       type: 'image',
       span: 'wide'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Modal/Propiedades%20modal.png",
-      alt: "Propiedades del Modal - Tamaños, posicionamiento y comportamiento",
-      title: "Propiedades",
-      description: "Tamaños y comportamiento",
+      alt: projectDetail.components.modal.properties.alt,
+      title: projectDetail.components.modal.properties.title,
+      description: projectDetail.components.modal.properties.description,
       icon: 'insights',
       type: 'image',
       span: 'tall'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Modal/Variables%20modal.png",
-      alt: "Variables del Modal - Tokens para overlay, dimensiones y animaciones",
-      title: "Variables",
-      description: "Tokens y personalización",
+      alt: projectDetail.components.modal.variables.alt,
+      title: projectDetail.components.modal.variables.title,
+      description: projectDetail.components.modal.variables.description,
       icon: 'wireframes',
       type: 'image',
       span: 'small'
@@ -495,27 +502,27 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const textAreaItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Text%20Area/Componente%20text%20area.png",
-      alt: "Componente Text Area - Anatomía y estructura del campo de texto multilínea",
-      title: "Componente Text Area",
-      description: "Anatomía y estructura base",
+      alt: projectDetail.components.textArea.component.alt,
+      title: projectDetail.components.textArea.component.title,
+      description: projectDetail.components.textArea.component.description,
       icon: 'architecture',
       type: 'image',
       span: 'small'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Text%20Area/Propiedades%20text%20area.png",
-      alt: "Propiedades del Text Area - Estados, tamaños y configuración de altura",
-      title: "Propiedades",
-      description: "Estados y tamaños",
+      alt: projectDetail.components.textArea.properties.alt,
+      title: projectDetail.components.textArea.properties.title,
+      description: projectDetail.components.textArea.properties.description,
       icon: 'insights',
       type: 'image',
       span: 'tall'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Text%20Area/Variables%20text%20area.png",
-      alt: "Variables del Text Area - Tokens para bordes, padding y redimensionamiento",
-      title: "Variables",
-      description: "Tokens y personalización",
+      alt: projectDetail.components.textArea.variables.alt,
+      title: projectDetail.components.textArea.variables.title,
+      description: projectDetail.components.textArea.variables.description,
       icon: 'wireframes',
       type: 'image',
       span: 'medium'
@@ -526,27 +533,27 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const textInputItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Text%20Input/Componente%20text%20input.png",
-      alt: "Componente Text Input - Anatomía y estructura del campo de entrada",
-      title: "Componente Text Input",
-      description: "Anatomía y estructura base",
+      alt: projectDetail.components.textInput.component.alt,
+      title: projectDetail.components.textInput.component.title,
+      description: projectDetail.components.textInput.component.description,
       icon: 'architecture',
       type: 'image',
       span: 'medium'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Text%20Input/Propiedades%20text%20input.png",
-      alt: "Propiedades del Text Input - Estados, variantes y configuración",
-      title: "Propiedades",
-      description: "Estados y variantes",
+      alt: projectDetail.components.textInput.properties.alt,
+      title: projectDetail.components.textInput.properties.title,
+      description: projectDetail.components.textInput.properties.description,
       icon: 'insights',
       type: 'image',
       span: 'tall'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Text%20Input/Variables%20text%20input.png",
-      alt: "Variables del Text Input - Tokens para bordes, colores y tipografía",
-      title: "Variables",
-      description: "Tokens y personalización",
+      alt: projectDetail.components.textInput.variables.alt,
+      title: projectDetail.components.textInput.variables.title,
+      description: projectDetail.components.textInput.variables.description,
       icon: 'wireframes',
       type: 'image',
       span: 'small'
@@ -557,27 +564,27 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   const toggleItems: MosaicItem[] = [
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Toggle/Componente%20toggle.png",
-      alt: "Componente Toggle - Anatomía y estructura del switch binario",
-      title: "Componente Toggle",
-      description: "Anatomía y estructura base",
+      alt: projectDetail.components.toggle.component.alt,
+      title: projectDetail.components.toggle.component.title,
+      description: projectDetail.components.toggle.component.description,
       icon: 'architecture',
       type: 'image',
       span: 'small'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Toggle/Propiedades%20toggle.png",
-      alt: "Propiedades del Toggle - Estados, tamaños y comportamiento",
-      title: "Propiedades",
-      description: "Estados y tamaños",
+      alt: projectDetail.components.toggle.properties.alt,
+      title: projectDetail.components.toggle.properties.title,
+      description: projectDetail.components.toggle.properties.description,
       icon: 'insights',
       type: 'image',
       span: 'tall'
     },
     {
       src: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Toggle/Variables%20toggle.png",
-      alt: "Variables del Toggle - Tokens para colores, dimensiones y transiciones",
-      title: "Variables",
-      description: "Tokens y personalización",
+      alt: projectDetail.components.toggle.variables.alt,
+      title: projectDetail.components.toggle.variables.title,
+      description: projectDetail.components.toggle.variables.description,
       icon: 'wireframes',
       type: 'image',
       span: 'medium'
@@ -601,7 +608,7 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground hover:bg-secondary/10 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Volver a Proyectos
+            {t.projectLayout.backToProjects}
           </Button>
           {isDark !== undefined && onToggleTheme && (
             <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
@@ -643,19 +650,20 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
                   {/* Mobile: Solo icono */}
                   <div className="sm:hidden">
                     <ShareProject 
-                      projectTitle="Pomeranian | Design System"
-                      projectDescription="Sistema de diseño con metodología Atomic Design, tokens visuales y librería de 12 componentes reutilizables. Garantiza consistencia y eficiencia en diseño y desarrollo."
-                      projectShortDescription="Design System con Atomic Design y librería de componentes reutilizables."
+                      projectTitle={projectDetail.title}
+                      projectDescription={projectDetail.description}
+                      projectShortDescription={projectDetail.shortDescription}
                       projectUrl={getShareableProjectUrl('ds-pomeranian')}
                       iconOnly={true}
                     />
                   </div>
+                  
                   {/* Desktop: Botón completo */}
                   <div className="hidden sm:block">
                     <ShareProject 
-                      projectTitle="Pomeranian | Design System"
-                      projectDescription="Sistema de diseño con metodología Atomic Design, tokens visuales y librería de 12 componentes reutilizables. Garantiza consistencia y eficiencia en diseño y desarrollo."
-                      projectShortDescription="Design System con Atomic Design y librería de componentes reutilizables."
+                      projectTitle={projectDetail.title}
+                      projectDescription={projectDetail.description}
+                      projectShortDescription={projectDetail.shortDescription}
                       projectUrl={getShareableProjectUrl('ds-pomeranian')}
                       iconOnly={false}
                     />
@@ -674,7 +682,7 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             <div className="space-y-6 md:space-y-8">
               {/* Introduction limpia */}
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Pomeranian es un Design System desarrollado para dar soporte a la aplicación Chupsee, estableciendo una base sólida de reglas visuales, tokens y componentes reutilizables. Su propósito fue crear un sistema escalable que garantizara consistencia en diseño y desarrollo, facilitando interfaces accesibles y alineadas con la identidad de marca.
+                {projectDetail.introduction}
               </p>
               
               {/* Problem and Solution - Cards limpias con iconos neutros */}
@@ -690,12 +698,12 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
                       <div className="w-9 h-9 rounded-xl bg-destructive/20 dark:bg-destructive/30 flex items-center justify-center flex-shrink-0">
                         <span className="text-lg">✕</span>
                       </div>
-                      <h3 className="text-foreground">Problema</h3>
+                      <h3 className="text-foreground">{t.projectLayout.problem}</h3>
                     </div>
                     
                     {/* Content */}
                     <p className="text-base text-foreground/90 dark:text-foreground/95 leading-relaxed">
-                      Chupsee requería la creación de un sistema de diseño completo desde cero antes de iniciar el desarrollo. El desafío principal era establecer fundamentos visuales sólidos y una librería de componentes reutilizables que evitaran futuros problemas de consistencia, escalabilidad y eficiencia en el flujo de trabajo.
+                      {projectDetail.problem}
                     </p>
                   </div>
                 </div>
@@ -711,12 +719,12 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
                       <div className="w-9 h-9 rounded-xl bg-secondary/30 dark:bg-secondary/40 flex items-center justify-center flex-shrink-0">
                         <span className="text-lg">✓</span>
                       </div>
-                      <h3 className="text-foreground">Solución</h3>
+                      <h3 className="text-foreground">{t.projectLayout.solution}</h3>
                     </div>
                     
                     {/* Content */}
                     <p className="text-base text-foreground/90 dark:text-foreground/95 leading-relaxed">
-                      Design System completo basado en metodología Atomic Design con fundamentos visuales: colores, tipografía, espaciado, sombras y grid. Incluye librería de 12 componentes reutilizables completamente documentados que proporcionan a Chupsee una base sólida para crecer de manera consistente y escalable.
+                      {projectDetail.solution}
                     </p>
                   </div>
                 </div>
@@ -738,126 +746,92 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
         <ScrollReveal direction="up" delay={0.1}>
           <div className="mb-16">
             <div className="mb-8">
-              <h2 className="text-2xl font-semibold text-foreground uppercase tracking-wider no-underline">Guía de Estilos</h2>
+              <h2 className="text-2xl font-semibold text-foreground uppercase tracking-wider no-underline">{projectDetail.sections.styleGuide.title}</h2>
             </div>
             <p className="text-muted-foreground leading-relaxed max-w-4xl mb-12">
-              Los fundamentos visuales del sistema de diseño definen la base sobre la cual se construyen 
-              todos los componentes y experiencias de usuario. Esta guía establece las reglas de color, 
-              tipografía, espaciado y otros elementos fundamentales que garantizan consistencia visual.
+              {projectDetail.sections.styleGuide.intro}
             </p>
 
             {/* Atomic Design */}
             <div className="mb-16">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">Atomic Design</h3>
+              <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.atomicDesign.title}</h3>
               <ul className="space-y-3 text-muted-foreground mb-6">
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Cinco niveles jerárquicos: tomos, moléculas, organismos, templates y páginas</span>
-                </li>
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Arquitectura modular garantizando escalabilidad, reutilización y coherencia</span>
-                </li>
+                {projectDetail.sections.styleGuide.atomicDesignBullets.map((bullet, index) => (
+                  <li key={index} className="flex items-start gap-3 leading-relaxed">
+                    <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
               </ul>
               <MosaicGallery items={atomicDesignItems} layout="asymmetric" />
             </div>
 
             {/* Colores */}
             <div className="mb-16">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">Colores</h3>
+              <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.colors.title}</h3>
               <ul className="space-y-3 text-muted-foreground mb-6">
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Tokens semánticos definiendo paleta principal y escala extendida con variaciones tonales</span>
-                </li>
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Validación WCAG 2.1 asegurando contraste suficiente para accesibilidad</span>
-                </li>
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Escalas de grises y variantes para estados interactivos</span>
-                </li>
+                {projectDetail.sections.styleGuide.colorsBullets.map((bullet, index) => (
+                  <li key={index} className="flex items-start gap-3 leading-relaxed">
+                    <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
               </ul>
               <MosaicGallery items={colorsItems} layout="balanced" />
             </div>
 
             {/* Tipografía */}
             <div className="mb-16">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">Tipografía</h3>
+              <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.typography.title}</h3>
               <ul className="space-y-3 text-muted-foreground mb-6">
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Escala modular con tokens específicos para tamaño, peso y altura de línea</span>
-                </li>
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Adaptación responsiva optimizando legibilidad en cada breakpoint</span>
-                </li>
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Especificaciones para títulos (H1-H5), cuerpo de texto, etiquetas y elementos interactivos</span>
-                </li>
+                {projectDetail.sections.styleGuide.typographyBullets.map((bullet, index) => (
+                  <li key={index} className="flex items-start gap-3 leading-relaxed">
+                    <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
               </ul>
               <MosaicGallery items={typographyItems} layout="asymmetric" />
             </div>
 
             {/* Sombras */}
             <div className="mb-16">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">Sombras</h3>
+              <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.shadows.title}</h3>
               <ul className="space-y-3 text-muted-foreground mb-6">
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Tokens de sombras progresivos creando profundidad y jerarquía visual</span>
-                </li>
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Niveles desde subtle hasta elevated para diferentes necesidades de interacción</span>
-                </li>
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Feedback visual en estados hover y focus</span>
-                </li>
+                {projectDetail.sections.styleGuide.shadowsBullets.map((bullet, index) => (
+                  <li key={index} className="flex items-start gap-3 leading-relaxed">
+                    <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
               </ul>
               <MosaicGallery items={shadowsItems} layout="asymmetric" />
             </div>
 
             {/* Grid */}
             <div className="mb-16">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">Grid</h3>
+              <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.grid.title}</h3>
               <ul className="space-y-3 text-muted-foreground mb-6">
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Sistema de 4 columnas optimizado para experiencias mobile-first</span>
-                </li>
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Márgenes y gutters adaptados aprovechando el espacio de forma inteligente</span>
-                </li>
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Consistencia visual y mejor usabilidad en dispositivos táctiles</span>
-                </li>
+                {projectDetail.sections.styleGuide.gridBullets.map((bullet, index) => (
+                  <li key={index} className="flex items-start gap-3 leading-relaxed">
+                    <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
               </ul>
               <MosaicGallery items={gridItems} layout="asymmetric" />
             </div>
 
             {/* Espaciado */}
             <div className="mb-16">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">Espaciado</h3>
+              <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.spacing.title}</h3>
               <ul className="space-y-3 text-muted-foreground mb-6">
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Escala consistente basada en múltiplos (4px, 8px, 16px...) para padding, margin y dimensionado</span>
-                </li>
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Sistema modular asegurando ritmo vertical, alineación precisa y coherencia espacial</span>
-                </li>
-                <li className="flex items-start gap-3 leading-relaxed">
-                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                  <span>Simplifica implementación manteniendo armonía visual del producto</span>
-                </li>
+                {projectDetail.sections.styleGuide.spacingBullets.map((bullet, index) => (
+                  <li key={index} className="flex items-start gap-3 leading-relaxed">
+                    <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
               </ul>
               <MosaicGallery items={spacingItems} layout="balanced" />
             </div>
@@ -869,144 +843,116 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
         {/* ============================================ */}
         <div className="mb-16">
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-foreground uppercase tracking-wider no-underline">Componentes</h2>
+            <h2 className="text-2xl font-semibold text-foreground uppercase tracking-wider no-underline">{projectDetail.sections.components.title}</h2>
           </div>
           <p className="text-muted-foreground leading-relaxed max-w-4xl mb-12">
-            Esta librería completa de componentes reutilizables documenta anatomía, propiedades y variables 
-            de cada elemento del sistema. Cada componente incluye su estructura base, estados interactivos, 
-            variantes disponibles y tokens de personalización, garantizando una implementación consistente 
-            y mantenibilidad a largo plazo.
+            {projectDetail.sections.components.intro}
           </p>
 
           {/* Accordion */}
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-foreground mb-4">Accordion</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.accordion.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Componente expandible para organizar contenido en secciones colapsables. Incluye estados de 
-              expansión/contracción, iconografía de indicadores y soporte para acordeones individuales o en grupo. 
-              Ideal para FAQs, navegación secundaria y revelación progresiva de información.
+              {projectDetail.sections.components.accordionDescription}
             </p>
             <MosaicGallery items={accordionItems} layout="asymmetric" />
           </div>
 
           {/* Avatar */}
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-foreground mb-4">Avatar</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.avatar.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Componente para representación visual de usuarios mediante imagen circular. Soporta múltiples 
-              tamaños (XS, S, M, L, XL), badges de estado (online/offline/away), fallback con iniciales y 
-              agrupación de avatares. Optimizado para interfaces sociales y colaborativas.
+              {projectDetail.sections.components.avatarDescription}
             </p>
             <MosaicGallery items={avatarItems} layout="asymmetric" />
           </div>
 
           {/* Button */}
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-foreground mb-4">Button</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.button.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Componente de acción principal con variantes semánticas (primary, secondary, cancel), 
-              estados interactivos completos (default, hover, active, disabled) y tres tamaños 
-              responsivos. Incluye soporte para iconos y configuración de ancho completo.
+              {projectDetail.sections.components.buttonDescription}
             </p>
             <MosaicGallery items={buttonItems} layout="asymmetric" />
           </div>
 
           {/* Card */}
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-foreground mb-4">Card</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.card.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Contenedor flexible para agrupar información relacionada con elevación y jerarquía visual. 
-              Configuración de padding interno y organización modular de header, body y footer. Ideal para 
-              layouts tipo dashboard, galerías y presentación de contenido estructurado.
+              {projectDetail.sections.components.cardDescription}
             </p>
             <MosaicGallery items={cardItems} layout="asymmetric" />
           </div>
 
           {/* Carousel */}
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-foreground mb-4">Carousel</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.carousel.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Componente de deslizamiento para presentar contenido en secuencia horizontal o vertical. 
-              Incluye controles de navegación (flechas, dots), autoplay configurable, transiciones suaves 
-              y soporte para gestos táctiles. Ideal para galerías de imágenes, testimonios y showcases de productos.
+              {projectDetail.sections.components.carouselDescription}
             </p>
             <MosaicGallery items={carouselItems} layout="asymmetric" />
           </div>
 
           {/* Checkbox */}
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-foreground mb-4">Checkbox</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.checkbox.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Control de selección múltiple con tres estados (checked, unchecked, indeterminate) y completa 
-              accesibilidad. Documentación incluye anatomía, estados interactivos, variantes de tamaño y 
-              sistema de tokens para personalización. Esencial para formularios, selección masiva y configuraciones.
+              {projectDetail.sections.components.checkboxDescription}
             </p>
             <MosaicGallery items={checkboxItems} layout="asymmetric" />
           </div>
 
           {/* Dropdown */}
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-foreground mb-4">Dropdown</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.dropdown.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Menú desplegable complejo documentado en profundidad. Incluye anatomía del trigger, contenedor 
-              de opciones, estados de cada item, configuración de layout y posicionamiento. Soporta búsqueda, 
-              agrupación de items, iconos, y múltiples variantes para diferentes contextos de uso.
+              {projectDetail.sections.components.dropdownDescription}
             </p>
             <MosaicGallery items={dropdownItems} layout="balanced" />
           </div>
 
           {/* List Item */}
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-foreground mb-4">List Item</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.listItem.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Elemento fundamental para construcción de listas interactivas. Documentación completa de anatomía 
-              (leading icon, título, descripción, trailing action), estados (default, hover, active, selected), 
-              y configuración de altura. Base para navigation items, menús y contenido estructurado.
+              {projectDetail.sections.components.listItemDescription}
             </p>
             <MosaicGallery items={listItemItems} layout="asymmetric" />
           </div>
 
           {/* Modal */}
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-foreground mb-4">Modal</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.modal.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Ventana modal overlay con gestión de focus trap y backdrop. Documentación de anatomía (header, 
-              content, footer), tamaños predefinidos (S, M, L), posicionamiento centrado y sistema de tokens 
-              para overlay, dimensiones y animaciones de entrada/salida.
+              {projectDetail.sections.components.modalDescription}
             </p>
             <MosaicGallery items={modalItems} layout="asymmetric" />
           </div>
 
           {/* Text Area */}
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-foreground mb-4">Text Area</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.textArea.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Campo de texto multilínea para entrada de contenido extenso. Incluye estados de validación 
-              (default, error, success), configuración de altura mínima/máxima, contador de caracteres opcional 
-              y resize behavior. Tokens para bordes, padding y personalización de scrollbar.
+              {projectDetail.sections.components.textAreaDescription}
             </p>
             <MosaicGallery items={textAreaItems} layout="asymmetric" />
           </div>
 
           {/* Text Input */}
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-foreground mb-4">Text Input</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.textInput.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Campo de entrada de texto de línea única con soporte para iconos leading/trailing, estados de 
-              validación, placeholder styling y diferentes tipos (text, email, password, number). Sistema 
-              completo de tokens para bordes, estados de focus y personalización tipográfica.
+              {projectDetail.sections.components.textInputDescription}
             </p>
             <MosaicGallery items={textInputItems} layout="asymmetric" />
           </div>
 
           {/* Toggle */}
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-foreground mb-4">Toggle</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.toggle.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Switch binario interactivo documentado con anatomía del componente, propiedades de estado 
-              y comportamiento. La documentación abarca estados on/off, variantes de tamaño (S, M, L), 
-              estados interactivos (hover, focus, disabled) y sistema completo de variables para 
-              personalización de colores, dimensiones del track y knob, y transiciones animadas.
+              {projectDetail.sections.components.toggleDescription}
             </p>
             <MosaicGallery items={toggleItems} layout="asymmetric" />
           </div>
@@ -1016,9 +962,9 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
         {/* Related Projects */}
         <ScrollReveal direction="up" delay={0.3}>
           <div className="mt-16 pt-8 border-t-2 border-border/50">
-            <h2 className="text-2xl font-semibold text-foreground mb-4 uppercase tracking-wider no-underline">Más proyectos</h2>
+            <h2 className="text-2xl font-semibold text-foreground mb-4 uppercase tracking-wider no-underline">{projectDetail.sections.relatedProjects.title}</h2>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              Explora otros casos de estudio donde aplico metodologías de diseño centrado en el usuario para crear experiencias digitales innovadoras.
+              {projectDetail.sections.relatedProjects.description}
             </p>
             
             <div className="mb-12">
@@ -1036,7 +982,7 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
                   variant="outline"
                   className="border-2 border-secondary text-foreground hover:bg-secondary hover:text-secondary-foreground hover:scale-105 transition-all duration-300"
                 >
-                  Ver Todos los Proyectos
+                  {projectDetail.sections.relatedProjects.viewAll}
                 </Button>
               </div>
             </ScrollReveal>

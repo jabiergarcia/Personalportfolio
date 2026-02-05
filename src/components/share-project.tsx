@@ -5,6 +5,7 @@ import { Share2, Linkedin, Mail, Check, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { toast } from 'sonner@2.0.3';
 import { EASING, SPRING, DURATION, getDuration } from '../utils/animation-constants';
+import { useLanguage } from '../hooks/use-language';
 
 interface ShareProjectProps {
   projectTitle: string;
@@ -23,6 +24,7 @@ export const ShareProject: React.FC<ShareProjectProps> = ({
   className = "",
   iconOnly = false
 }) => {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [copiedLinkedIn, setCopiedLinkedIn] = useState(false);
 
@@ -122,20 +124,20 @@ export const ShareProject: React.FC<ShareProjectProps> = ({
 
 ${projectDescription}
 
-Proyecto de Jabier García Sanz, UX/UI Designer especializado en crear experiencias centradas en el usuario.
+${t.projectLayout.share.linkedInPost.authorCredit}
 
-👉 Ver más: ${shareUrl}
+👉 ${t.projectLayout.share.linkedInPost.viewMore} ${shareUrl}
 
 #UXDesign #UIDesign #ProductDesign #Portfolio`;
 
     const success = copyToClipboard(linkedInPost);
     if (success) {
       setCopiedLinkedIn(true);
-      toast.success('¡Texto copiado!', {
-        description: 'Listo para publicar en LinkedIn'
+      toast.success(t.projectLayout.share.toast.textCopied, {
+        description: t.projectLayout.share.toast.readyToPublish
       });
     } else {
-      toast.error('Error al copiar el texto');
+      toast.error(t.projectLayout.share.toast.errorCopying);
     }
   };
 
@@ -147,14 +149,14 @@ Proyecto de Jabier García Sanz, UX/UI Designer especializado en crear experienc
 
   // Share via email
   const handleEmailShare = () => {
-    const subject = encodeURIComponent(`Echa un vistazo a este proyecto: ${projectTitle}`);
+    const subject = encodeURIComponent(`${t.projectLayout.share.email.subject}: ${projectTitle}`);
     const body = encodeURIComponent(
-      `Hola,\n\n` +
-      `Te comparto este proyecto de Jabier García Sanz, UX/UI Designer:\n\n` +
-      `${projectTitle}\n\n` +
-      `${projectDescription}\n\n` +
-      `Ver proyecto completo:\n${shareUrl}\n\n` +
-      `¡Espero que te resulte interesante!`
+      `${t.projectLayout.share.email.intro}\\n\\n` +
+      `${t.projectLayout.share.email.body}\\n\\n` +
+      `${projectTitle}\\n\\n` +
+      `${projectDescription}\\n\\n` +
+      `${t.projectLayout.share.email.viewProject}\\n${shareUrl}\\n\\n` +
+      `${t.projectLayout.share.email.outro}`
     );
     window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
     setIsOpen(false);
@@ -199,11 +201,11 @@ Proyecto de Jabier García Sanz, UX/UI Designer especializado en crear experienc
                 <button
                   onClick={() => setIsOpen(false)}
                   className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted/50 transition-colors z-10"
-                  aria-label="Cerrar modal de compartir (Escape)"
+                  aria-label={t.projectLayout.share.ariaLabels.closeModal}
                 >
                   <X size={20} className="text-muted-foreground" />
                 </button>
-                <h2 id="share-modal-title" className="text-foreground pr-8 font-bold">Compartir proyecto</h2>
+                <h2 id="share-modal-title" className="text-foreground pr-8 font-bold">{t.projectLayout.share.shareProject}</h2>
                 <div className="mt-3 space-y-2">
                   <h3 className="text-foreground">{projectTitle}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
@@ -221,13 +223,13 @@ Proyecto de Jabier García Sanz, UX/UI Designer especializado en crear experienc
                   aria-atomic="true"
                   className="sr-only"
                 >
-                  {copiedLinkedIn && "Texto copiado al portapapeles exitosamente"}
+                  {copiedLinkedIn && t.projectLayout.share.linkCopiedFull}
                 </div>
 
                 {/* Share Options */}
                 <div className="space-y-3">
                   <label className="text-sm text-foreground block">
-                    Compartir en
+                    {t.projectLayout.share.shareOn}
                   </label>
 
                   {/* LinkedIn Button */}
@@ -235,11 +237,11 @@ Proyecto de Jabier García Sanz, UX/UI Designer especializado en crear experienc
                     onClick={handleCopyLinkedIn}
                     variant="outline"
                     className="w-full gap-3 border-border hover:bg-blue-50 dark:hover:bg-blue-900/40 hover:border-blue-300 dark:hover:border-blue-600 hover:text-blue-900 dark:hover:text-blue-100 transition-all duration-200 h-12 justify-start"
-                    aria-label={copiedLinkedIn ? "Texto copiado para LinkedIn" : "Copiar texto para publicar en LinkedIn"}
+                    aria-label={copiedLinkedIn ? t.projectLayout.share.linkCopied : t.projectLayout.share.copyLinkedInPost}
                   >
                     <Linkedin size={20} className="text-blue-600 dark:text-blue-400" />
                     <span className="flex-1 text-left">
-                      {copiedLinkedIn ? '¡Texto copiado!' : 'Copiar post para LinkedIn'}
+                      {copiedLinkedIn ? t.projectLayout.share.linkCopied : t.projectLayout.share.copyLinkedInPost}
                     </span>
                     {copiedLinkedIn && (
                       <Check size={18} className="text-blue-600 dark:text-blue-400" />
@@ -262,7 +264,7 @@ Proyecto de Jabier García Sanz, UX/UI Designer especializado en crear experienc
                               <Check size={12} className="text-white" />
                             </div>
                             <p>
-                              <strong>¡Perfecto!</strong> El texto se ha copiado al portapapeles. Ahora haz clic en el botón de abajo para abrir LinkedIn.
+                              <strong>{t.projectLayout.share.linkedInInstructions.title}</strong> {t.projectLayout.share.linkedInInstructions.description}
                             </p>
                           </div>
                           <Button
@@ -270,7 +272,7 @@ Proyecto de Jabier García Sanz, UX/UI Designer especializado en crear experienc
                             className="w-full bg-blue-600 hover:bg-blue-700 text-white gap-2 h-11"
                           >
                             <Linkedin size={18} />
-                            Abrir LinkedIn para publicar
+                            {t.projectLayout.share.linkedInInstructions.openButton}
                           </Button>
                         </div>
                       </motion.div>
@@ -284,7 +286,7 @@ Proyecto de Jabier García Sanz, UX/UI Designer especializado en crear experienc
                     className="w-full gap-3 border-border hover:bg-secondary/10 dark:hover:bg-secondary/30 hover:border-secondary/30 dark:hover:border-secondary/50 hover:text-foreground dark:hover:text-secondary-foreground transition-all duration-200 h-12 justify-start"
                   >
                     <Mail size={20} className="text-secondary" />
-                    <span className="flex-1 text-left">Compartir por email</span>
+                    <span className="flex-1 text-left">{t.projectLayout.share.shareByEmail}</span>
                   </Button>
 
                   {/* Native Share (if available) */}
@@ -306,7 +308,7 @@ Proyecto de Jabier García Sanz, UX/UI Designer especializado en crear experienc
                       className="w-full gap-3 border-border hover:bg-accent/10 dark:hover:bg-accent/25 hover:border-accent/30 dark:hover:border-accent/50 hover:text-accent-foreground dark:hover:text-accent-foreground transition-all duration-200 h-12 justify-start"
                     >
                       <Share2 size={20} className="text-accent-foreground" />
-                      <span className="flex-1 text-left">Más opciones</span>
+                      <span className="flex-1 text-left">{t.projectLayout.share.moreOptions}</span>
                     </Button>
                   )}
                 </div>
@@ -326,10 +328,10 @@ Proyecto de Jabier García Sanz, UX/UI Designer especializado en crear experienc
         size={iconOnly ? "icon" : "sm"}
         onClick={() => setIsOpen(true)}
         className={`${iconOnly ? '' : 'gap-2'} border-border hover:bg-secondary/10 hover:border-secondary/30 hover:text-secondary transition-all duration-300 ${className}`}
-        aria-label={`Compartir ${projectTitle}`}
+        aria-label={`${t.projectLayout.share.ariaLabels.shareProject} ${projectTitle}`}
       >
         <Share2 size={16} />
-        {!iconOnly && <span>Compartir</span>}
+        {!iconOnly && <span>{t.projectLayout.share.shareButton}</span>}
       </Button>
 
       {/* Portal Modal - Renders at document.body level */}

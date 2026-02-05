@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Calendar, MapPin, Briefcase, GraduationCap, Award } from 'lucide-react';
 import { Badge } from './ui/badge';
+import { useLanguage } from '../hooks/use-language';
 
 interface TimelineEvent {
   id: string;
@@ -14,97 +15,33 @@ interface TimelineEvent {
   description: string;
   achievements: string[];
   functions: string[];
-  skills: string[];
+  skills?: string[];
   color: string;
 }
 
-const timelineData: TimelineEvent[] = [
-  {
-    id: '1',
-    type: 'work',
-    title: 'Junior UX/UI Designer',
-    company: 'Proyectos personales',
-    location: 'Madrid, España',
-    period: '2025 - Presente',
-    typeLabel: 'Tiempo completo',
-    description: 'Desarrollo de proyectos de diseño UX/UI basados en la formación intensiva del Bootcamp de UX/UI Design en Neoland y en proyectos personales, aplicando metodologías de diseño centrado en el usuario y herramientas como Figma para crear experiencias digitales intuitivas y coherentes.',
-    achievements: [
-      'Investigación de usuarios y definición de user personas fundamentadas en datos cualitativos',
-      'Diseño de flujos de usuario, wireframes y prototipos de alta fidelidad para aplicaciones web y mobile',
-      'Creación y documentación de sistemas de diseño escalables utilizando principios de Atomic Design',
-      'Desarrollo de casos prácticos end-to-end, desde la investigación hasta la validación con pruebas de usabilidad'
-    ],
-    functions: [
-      'Analizar y comprender las necesidades de usuarios mediante entrevistas, encuestas y benchmark competitivo',
-      'Definir la arquitectura de la información y diseñar user flows que facilitan la navegación',
-      'Crear interfaces visuales accesibles, consistentes y eficaces empleando Figma',
-      'Prototipar interacciones y realizar user testing básico para iterar diseños según feedback'
-    ],
-    skills: ['Figma', 'User Interface', 'Prototyping', 'User Research', 'Design Systems'],
-    color: 'bg-muted-foreground'
-  },
-  {
-    id: '2',
-    type: 'work',
-    title: 'Senior Visual Merchandiser Manager',
-    company: 'Hennes & Mauritz S.L.',
-    location: 'Madrid, España',
-    period: '2018 - 2025',
-    typeLabel: 'Tiempo completo',
-    description: 'Gestión visual de tiendas flagship, desarrollo y presentación de conceptos de marca y liderazgo de equipos creativos en el sector retail de moda.',
-    achievements: [
-      'Incremento del 5% en ventas mediante estrategias visuales innovadoras',
-      'Liderazgo de equipos de 15+ personas en proyectos de rebuilding',
-      'Implementación de nuevos estándares visuales en varias tiendas',
-      'Optimización de layouts y experiencia de usuario',
-      'Colaboración directa con los diferentes equipos de tienda y service office',
-      'Análisis de métricas de venta por departamento y producto',
-      'Reconocimiento interno por innovación en presentación visual'
-    ],
-    functions: [
-      'Responsable de la consecución de objetivos de ventas, equipo y rentabilidad junto con el equipo de department y store manager en tienda, reportando directamente al area visual manager.',
-      'Ventas:',
-      'Asegurar la consistencia de la presentación de las prendas y el estilismo con las directrices de identidad visual corporativas, en tienda y escaparate.',
-      'Crear una clara línea entre el escaparate y el área principal, con sugerencias de compra comerciales.',
-      'Armonizar el equilibrio de los conceptos manteniendo el layout, el material visual y mobiliario, y la navegación en la tienda.',
-      'Tomar el pulso a las últimas tendencias de moda y técnicas de estilismo para anticipar las necesidades del cliente.',
-      'Rentabilidad:',
-      'Análisis y seguimiento diario de los KPIs de la tienda (ventas totales, tasa de conversión, piezas por ticket, ticket medio y tasa reclutamiento del programa de fidelidad de la compañía) para tomar decisiones basadas en datos que incrementen las ventas y consigan los objetivos del negocio.',
-      'Planificación de los recursos de la tienda para garantizar una correcta ejecución de los cambios comerciales semanales.',
-      'Equipo:',
-      'Identificar potenciales visual merchandisers entre el grupo de Sales Advisors y evaluar su encaje con la cultura corporativa para comunicarlo al management.',
-      'Seleccionado por el area visual manager para formar a otros visual merchandisers del país en temas clave –perfil de clientes, entender tendencias, ejecución del trabajo visual y técnicas de estilismo–.'
-    ],
-    skills: ['Visual Merchandising', 'Window & Indoor styling', 'Team Leadership', 'Store Analytics', 'Creative Direction','Trend Analysis'],
-    color: 'bg-secondary'
-  },
-  {
-    id: '3',
-    type: 'work',
-    title: 'Window & Indoor Styling Manager',
-    company: 'Hennes & Mauritz S.L.',
-    location: 'Madrid, España',
-    period: '2015 - 2018',
-    typeLabel: 'Tiempo completo',
-    description: 'Creación y ejecución de conceptos de escaparatismo para diferentes departamentos, desde moda hasta hogar, desarrollando narrativas visuales impactantes.',
-    achievements: [
-      'Diseño de más de 200 escaparates temáticos',
-      'Colaboración con equipos de marketing para campañas estacionales',
-      'Implementación de técnicas de iluminación y composición avanzadas',
-      'Reconocimiento interno por innovación en presentación visual'
-    ],
-    functions: [
-      'Diseño conceptual y ejecución de escaparates temáticos',
-      'Selección y coordinación de productos para displays',
-      'Gestión de cronogramas de instalación y cambios estacionales',
-      'Técnicas de planchado e identidad visual para cada tipo de concepto'
-    ],
-    skills: ['Window Display', 'Visual Composition', 'Lighting Design', 'Ironing Techniques', 'Conceptual Styling'],
-    color: 'bg-muted'
-  }
-];
-
-export const InteractiveExperienceTimeline: React.FC = () => {
+export function InteractiveExperienceTimeline() {
+  const { t } = useLanguage();
+  
+  // Mapear los datos de traducción al formato TimelineEvent
+  const timelineData: TimelineEvent[] = t.experienceTimeline.map((item, index) => ({
+    id: item.id,
+    type: 'work' as const,
+    title: item.title,
+    company: item.company,
+    location: item.location,
+    period: item.period,
+    typeLabel: item.typeLabel,
+    description: item.description,
+    achievements: item.achievements,
+    functions: item.functions,
+    skills: index === 0 
+      ? ['Figma', 'User Interface', 'Prototyping', 'User Research', 'Design Systems']
+      : index === 1
+      ? ['Visual Merchandising', 'Window & Indoor styling', 'Team Leadership', 'Store Analytics', 'Creative Direction','Trend Analysis']
+      : ['Visual Merchandising', 'Window Display', 'Campaign Design', 'Creative Strategy', 'Trend Forecasting'],
+    color: index === 0 ? 'bg-muted-foreground' : index === 1 ? 'bg-secondary' : 'bg-[#ffccb6]'
+  }));
+  
   const [activeEvent, setActiveEvent] = useState<string>(timelineData[0].id);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
@@ -370,10 +307,10 @@ export const InteractiveExperienceTimeline: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           <h2 className="text-3xl font-bold text-foreground mb-4">
-            Trayectoria Profesional
+            {t.experiencesPage.professionalTitle}
           </h2>
           <p className="text-muted-foreground max-w-2xl">
-            Un recorrido desde la moda hasta el diseño UX/UI
+            {t.experiencesPage.professionalSubtitle}
           </p>
         </motion.div>
 
@@ -519,7 +456,7 @@ export const InteractiveExperienceTimeline: React.FC = () => {
                     </p>
 
                     <div>
-                      <h4 className="font-medium text-card-foreground mb-2">Logros principales:</h4>
+                      <h4 className="font-medium text-card-foreground mb-2">{t.experiencesPage.keyAchievements}:</h4>
                       <ul className="space-y-1.5">
                         {event.achievements.map((achievement, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-muted-foreground ml-4">
@@ -531,7 +468,7 @@ export const InteractiveExperienceTimeline: React.FC = () => {
                     </div>
 
                     <div>
-                      <h4 className="font-medium text-card-foreground mb-2">Funciones principales:</h4>
+                      <h4 className="font-medium text-card-foreground mb-2">{t.experiencesPage.keyFunctions}:</h4>
                       <ul className="space-y-1.5">
                         {event.functions.map((func, idx) => {
                           const isCategory = func.endsWith(':');
@@ -555,9 +492,9 @@ export const InteractiveExperienceTimeline: React.FC = () => {
                     </div>
 
                     <div>
-                      <h4 className="font-medium text-card-foreground mb-2">Habilidades clave:</h4>
+                      <h4 className="font-medium text-card-foreground mb-2">{t.experiencesPage.keySkills}:</h4>
                       <div className="flex flex-wrap gap-2">
-                        {event.skills.map((skill, idx) => (
+                        {event.skills?.map((skill, idx) => (
                           <Badge key={idx} variant="outline" className="border-secondary text-foreground text-sm md:text-xs px-3 py-1">
                             {skill}
                           </Badge>
@@ -672,7 +609,7 @@ export const InteractiveExperienceTimeline: React.FC = () => {
                     </p>
 
                     <div>
-                      <h4 className="font-medium text-card-foreground mb-3">Logros principales:</h4>
+                      <h4 className="font-medium text-card-foreground mb-3">{t.experiencesPage.keyAchievements}:</h4>
                       <ul className="space-y-2">
                         {event.achievements.map((achievement, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-muted-foreground ml-4">
@@ -684,7 +621,7 @@ export const InteractiveExperienceTimeline: React.FC = () => {
                     </div>
 
                     <div>
-                      <h4 className="font-medium text-card-foreground mb-3">Funciones principales:</h4>
+                      <h4 className="font-medium text-card-foreground mb-3">{t.experiencesPage.keyFunctions}:</h4>
                       <ul className="space-y-2">
                         {event.functions.map((func, idx) => {
                           const isCategory = func.endsWith(':');
@@ -708,9 +645,9 @@ export const InteractiveExperienceTimeline: React.FC = () => {
                     </div>
 
                     <div>
-                      <h4 className="font-medium text-card-foreground mb-3">Habilidades clave:</h4>
+                      <h4 className="font-medium text-card-foreground mb-3">{t.experiencesPage.keySkills}:</h4>
                       <div className="flex flex-wrap gap-2">
-                        {event.skills.map((skill, idx) => (
+                        {event.skills?.map((skill, idx) => (
                           <Badge key={idx} variant="outline" className="border-secondary text-foreground text-sm md:text-xs px-3 py-1">
                             {skill}
                           </Badge>

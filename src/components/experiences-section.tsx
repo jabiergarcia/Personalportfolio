@@ -1,34 +1,37 @@
 import { Button } from './ui/button';
 import { ScrollReveal } from './scroll-reveal';
 import { StaggerContainer, StaggerItem, staggerItemVariants } from './stagger-container';
+import { useLanguage } from '../hooks/use-language';
 
 interface ExperiencesSectionProps {
   onNavigateToExperiences?: () => void;
 }
 
 export function ExperiencesSection({ onNavigateToExperiences }: ExperiencesSectionProps) {
+  const { t } = useLanguage();
+  
   const experiences = [
     {
-      period: "2025 - Presente",
-      title: "Junior UX/UI Designer",
-      company: "Freelance",
-      description: "Creación de soluciones digitales intuitivas mediante procesos de investigación, ideación y prototipado, integrando usabilidad, accesibilidad y diseño visual para optimizar la experiencia del usuario.",
+      period: "2025 - " + t.experiences.present,
+      title: t.experiences.items.current.title,
+      company: t.experiences.items.current.company,
+      description: t.experiences.items.current.description,
       skills: ["Figma", "Design Thinking", "User Research", "Prototyping"],
       type: "actual"
     },
     {
       period: "2018 - 2025",
-      title: "Senior Visual Merchandiser Manager",
-      company: "Hennes & Mauritz S.L.",
-      description: "Gestión visual de tiendas flagship, desarrollo y presentación de conceptos de marca y liderazgo de equipos creativos en el sector retail de moda.",
+      title: t.experiences.items.hm2.title,
+      company: t.experiences.items.hm2.company,
+      description: t.experiences.items.hm2.description,
       skills: ["Visual Merchandising", "Team Leadership", "Store Analytics", "Creative Direction"],
       type: "anterior"
     },
     {
       period: "2015 - 2018",
-      title: "Window & Indoor Styling Manager",
-      company: "Hennes & Mauritz S.L.",
-      description: "Creación y ejecución de conceptos de escaparatismo para diferentes departamentos, desde moda hasta hogar, desarrollando narrativas visuales impactantes.",
+      title: t.experiences.items.hm1.title,
+      company: t.experiences.items.hm1.company,
+      description: t.experiences.items.hm1.description,
       skills: ["Window Display", "Visual Composition", "Lighting Design", "Conceptual Styling"],
       type: "anterior"
     }
@@ -39,10 +42,9 @@ export function ExperiencesSection({ onNavigateToExperiences }: ExperiencesSecti
       <div className="max-w-6xl mx-auto px-3 sm:px-4 py-8 md:py-10">
         <ScrollReveal direction="up" delay={0.2}>
           <div className="text-center mb-8 md:mb-10">
-            <h2 className="font-bold mb-4 text-foreground text-3xl md:text-4xl lg:text-5xl">Experiencia</h2>
+            <h2 className="font-bold mb-4 text-foreground text-3xl md:text-4xl lg:text-5xl">{t.experiences.title}</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Un recorrido que combina años de experiencia en moda con mi nueva pasión por el diseño UX/UI, 
-              creando una perspectiva única en cada proyecto.
+              {t.experiences.description}
             </p>
           </div>
         </ScrollReveal>
@@ -88,12 +90,12 @@ export function ExperiencesSection({ onNavigateToExperiences }: ExperiencesSecti
 
         <ScrollReveal direction="up" delay={0.8}>
           <div className="text-center mt-8 sm:mt-12">
-            <p className="text-muted-foreground mb-4">¿Quieres conocer más sobre mi trayectoria?</p>
+            <p className="text-muted-foreground mb-4">{t.experiences.cta.question}</p>
             <Button 
               onClick={onNavigateToExperiences}
               className="bg-secondary hover:bg-secondary/80 text-secondary-foreground w-full sm:w-auto"
             >
-              Ver experiencia completa
+              {t.experiences.cta.button}
             </Button>
           </div>
         </ScrollReveal>
