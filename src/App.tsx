@@ -15,6 +15,7 @@ import { useTheme } from './hooks/use-theme';
 import { usePageMeta } from './hooks/use-page-meta';
 import { useServiceWorker } from './hooks/use-service-worker';
 import { useAnalytics } from './hooks/use-analytics';
+import { useClarity } from './hooks/use-clarity';
 import { PROFILE_IMAGE_URL } from './utils/constants';
 
 // Build ID: meta-fix-final-20250109-2345-CRITICAL-DEPLOY
@@ -84,6 +85,9 @@ export default function App() {
   
   // Register service worker for caching
   useServiceWorker();
+  
+  // Microsoft Clarity Analytics
+  useClarity('utnwnczfi2');
   
   // Analytics tracking
   const analytics = useAnalytics();
