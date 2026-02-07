@@ -7,6 +7,7 @@ import { ScrollReveal } from '../scroll-reveal';
 import { ShareProject } from '../share-project';
 import ImageCarousel from '../ImageCarousel';
 import { ThemeToggle } from '../theme-toggle';
+import { LanguageToggle } from '../language-toggle';
 import { RelatedProjects } from '../related-projects';
 import { getProjectsData, getShareableProjectUrl } from '../../utils/projects-data';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
@@ -305,9 +306,12 @@ export function ProjectLayout({
             <ArrowLeft className="w-4 h-4" />
             {t.projectLayout.backToProjects}
           </Button>
-          {isDark !== undefined && onToggleTheme && (
-            <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
-          )}
+          <div className="flex items-center gap-2">
+            {isDark !== undefined && onToggleTheme && (
+              <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
+            )}
+            <LanguageToggle />
+          </div>
         </div>
       </div>
 
@@ -527,10 +531,12 @@ export function ProjectLayout({
                           {/* Title */}
                           <div className="space-y-2">
                             <h4 className="text-2xl font-semibold text-foreground">
-                              Prototipo Interactivo
+                              {t.projectCommon.prototypeTitle}
                             </h4>
                             <p className="text-base text-muted-foreground max-w-md mx-auto">
-                              Explora el prototipo {section.figmaPrototype.type === 'mobile' ? 'móvil' : 'web'} completo en Figma
+                              {section.figmaPrototype.type === 'mobile' 
+                                ? t.projectCommon.explorePrototypeMobile 
+                                : t.projectCommon.explorePrototypeWeb}
                             </p>
                           </div>
                           
@@ -541,13 +547,13 @@ export function ProjectLayout({
                             className="group/button bg-gradient-to-r from-secondary to-accent text-foreground hover:from-secondary/90 hover:to-accent/90 px-8 py-6 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                           >
                             <ExternalLink className="w-5 h-5 mr-2" />
-                            Abrir Prototipo en Figma
+                            {t.projectCommon.openPrototype}
                           </Button>
                           
                           {/* Hint */}
                           <p className="text-xs text-muted-foreground/70 italic text-center">
                             <Lightbulb className="inline w-3 h-3 mr-1 -mt-0.5" />
-                            Se abrirá en una nueva pestaña para mejor experiencia
+                            {t.projectCommon.openInNewTab}
                           </p>
                         </div>
                       </div>

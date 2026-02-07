@@ -281,7 +281,7 @@ export function Navigation({
                 animate={hasAnimated ? false : NAVBAR_ANIMATIONS.hamburger.animate}
                 transition={hasAnimated ? undefined : NAVBAR_ANIMATIONS.hamburger.transition}
                 onClick={toggleMobileMenu}
-                className="relative h-12 w-12 rounded-2xl bg-accent/10 hover:bg-accent/20 flex items-center justify-center transition-colors"
+                className="relative h-12 w-12 rounded-2xl bg-[#70B8BA]/10 hover:bg-[#70B8BA]/20 flex items-center justify-center transition-colors"
                 aria-label={isMobileMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu"

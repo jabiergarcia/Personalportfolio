@@ -1883,6 +1883,10 @@
     border-left-color: #0000;
   }
 
+  .bg-\[\#70B8BA\]\/10 {
+    background-color: oklab(73.6223% -.068785 -.0223184 / .1);
+  }
+
   .bg-\[\#ffccb6\] {
     background-color: #ffccb6;
   }
@@ -3667,6 +3671,12 @@
       .hover\:border-white\/40:hover {
         border-color: color-mix(in oklab, var(--color-white) 40%, transparent);
       }
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:bg-\[\#70B8BA\]\/20:hover {
+      background-color: oklab(73.6223% -.068785 -.0223184 / .2);
     }
   }
 
