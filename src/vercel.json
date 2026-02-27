@@ -1,6 +1,122 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/proyectos/assorta",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawler|spider|crawling|LinkedInBot|Twitterbot|facebookexternalhit|WhatsApp|Slackbot).*"
+        }
+      ],
+      "destination": "/proyectos/assorta.html"
+    },
+    {
+      "source": "/proyectos/puffykitten",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawler|spider|crawling|LinkedInBot|Twitterbot|facebookexternalhit|WhatsApp|Slackbot).*"
+        }
+      ],
+      "destination": "/proyectos/puffykitten.html"
+    },
+    {
+      "source": "/proyectos/chupsee",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawler|spider|crawling|LinkedInBot|Twitterbot|facebookexternalhit|WhatsApp|Slackbot).*"
+        }
+      ],
+      "destination": "/proyectos/chupsee.html"
+    },
+    {
+      "source": "/proyectos/gotapp",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawler|spider|crawling|LinkedInBot|Twitterbot|facebookexternalhit|WhatsApp|Slackbot).*"
+        }
+      ],
+      "destination": "/proyectos/gotapp.html"
+    },
+    {
+      "source": "/proyectos/pomeranian",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawler|spider|crawling|LinkedInBot|Twitterbot|facebookexternalhit|WhatsApp|Slackbot).*"
+        }
+      ],
+      "destination": "/proyectos/pomeranian.html"
+    },
+    {
+      "source": "/projects/assorta",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawler|spider|crawling|LinkedInBot|Twitterbot|facebookexternalhit|WhatsApp|Slackbot).*"
+        }
+      ],
+      "destination": "/projects/assorta.html"
+    },
+    {
+      "source": "/projects/puffykitten",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawler|spider|crawling|LinkedInBot|Twitterbot|facebookexternalhit|WhatsApp|Slackbot).*"
+        }
+      ],
+      "destination": "/projects/puffykitten.html"
+    },
+    {
+      "source": "/projects/chupsee",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawler|spider|crawling|LinkedInBot|Twitterbot|facebookexternalhit|WhatsApp|Slackbot).*"
+        }
+      ],
+      "destination": "/projects/chupsee.html"
+    },
+    {
+      "source": "/projects/gotapp",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawler|spider|crawling|LinkedInBot|Twitterbot|facebookexternalhit|WhatsApp|Slackbot).*"
+        }
+      ],
+      "destination": "/projects/gotapp.html"
+    },
+    {
+      "source": "/projects/pomeranian",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(bot|crawler|spider|crawling|LinkedInBot|Twitterbot|facebookexternalhit|WhatsApp|Slackbot).*"
+        }
+      ],
+      "destination": "/projects/pomeranian.html"
+    },
+    {
+      "source": "/((?!proyectos/.*\\.html|projects/.*\\.html|sitemap\\.xml|robots\\.txt|404\\.html|.*\\..*).*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

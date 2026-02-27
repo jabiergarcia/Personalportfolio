@@ -285,33 +285,78 @@ app.post("/make-server-df6fcedb/analytics", async (c) => {
 app.get("/make-server-df6fcedb/analytics", async (c) => {
   try {
     console.log('📊 [Server] Fetching analytics data...');
-    const analytics = await kv.getByPrefix('analytics_');
+    
+    // Direct Supabase query to get recent analytics with proper ordering and limit
+    // This bypasses the default kv.getByPrefix limit of 1000 rows
+    const supabaseUrl = Deno.env.get('SUPABASE_URL');
+    const supabaseServiceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    
+    if (!supabaseUrl || !supabaseServiceRoleKey) {
+      throw new Error('Missing Supabase credentials');
+    }
+    
+    // Fetch from Supabase directly with proper ordering
+    const response = await fetch(
+      `${supabaseUrl}/rest/v1/kv_store_df6fcedb?select=key,value&key=like.analytics_%25&order=key.desc&limit=2000`,
+      {
+        headers: {
+          'apikey': supabaseServiceRoleKey,
+          'Authorization': `Bearer ${supabaseServiceRoleKey}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    
+    if (!response.ok) {
+      console.error('❌ [Server] Supabase query failed:', response.status, await response.text());
+      throw new Error('Failed to fetch from Supabase');
+    }
+    
+    const data = await response.json();
+    const analytics = data.map((d: any) => d.value);
     
     console.log(`📊 [Server] Found ${analytics?.length || 0} analytics events in database`);
+    
+    // Log date range if we have events
+    if (analytics && analytics.length > 0) {
+      const timestamps = analytics.map((e: any) => new Date(e.timestamp).getTime()).filter((t: number) => !isNaN(t));
+      if (timestamps.length > 0) {
+        const oldest = new Date(Math.min(...timestamps));
+        const newest = new Date(Math.max(...timestamps));
+        console.log(`📊 [Server] Date range: ${oldest.toISOString()} to ${newest.toISOString()}`);
+      }
+    }
     
     // No filtering - show all events since last cleanup
     const events = analytics || [];
     
     // Basic analytics aggregation
     const totalEvents = events.length;
-    const uniqueSessions = new Set(events.map(e => e.session_id)).size;
-    const pageViews = events.filter(e => e.event_type === 'page_view').length;
-    const projectViews = events.filter(e => e.event_type === 'project_view').length;
-    const contactOpens = events.filter(e => e.event_type === 'contact_open').length;
-    const cvDownloads = events.filter(e => e.event_type === 'cv_download').length;
+    const uniqueSessions = new Set(events.map((e: any) => e.session_id)).size;
+    const pageViews = events.filter((e: any) => e.event_type === 'page_view').length;
+    const projectViews = events.filter((e: any) => e.event_type === 'project_view').length;
+    const contactOpens = events.filter((e: any) => e.event_type === 'contact_open').length;
+    const cvDownloads = events.filter((e: any) => e.event_type === 'cv_download').length;
     
     console.log(`📊 [Server] Analytics summary: ${totalEvents} events, ${uniqueSessions} sessions, ${pageViews} page views`);
     
     // Popular pages
-    const pageViewsMap = {};
-    events.filter(e => e.event_type === 'page_view').forEach(e => {
+    const pageViewsMap: Record<string, number> = {};
+    events.filter((e: any) => e.event_type === 'page_view').forEach((e: any) => {
       pageViewsMap[e.page] = (pageViewsMap[e.page] || 0) + 1;
     });
     
     // Popular projects
-    const projectViewsMap = {};
-    events.filter(e => e.event_type === 'project_view').forEach(e => {
+    const projectViewsMap: Record<string, number> = {};
+    events.filter((e: any) => e.event_type === 'project_view').forEach((e: any) => {
       projectViewsMap[e.project] = (projectViewsMap[e.project] || 0) + 1;
+    });
+
+    // Sort events by timestamp descending (newest first)
+    const sortedEvents = events.sort((a: any, b: any) => {
+      const timeA = new Date(a.timestamp).getTime();
+      const timeB = new Date(b.timestamp).getTime();
+      return timeB - timeA;
     });
 
     const summary = {
@@ -321,20 +366,94 @@ app.get("/make-server-df6fcedb/analytics", async (c) => {
       projectViews,
       contactOpens,
       cvDownloads,
-      popularPages: Object.entries(pageViewsMap).sort(([,a], [,b]) => b - a).slice(0, 5),
-      popularProjects: Object.entries(projectViewsMap).sort(([,a], [,b]) => b - a).slice(0, 5),
-      recentEvents: events.slice(-20).reverse()
+      popularPages: Object.entries(pageViewsMap).sort(([,a], [,b]) => (b as number) - (a as number)).slice(0, 5),
+      popularProjects: Object.entries(projectViewsMap).sort(([,a], [,b]) => (b as number) - (a as number)).slice(0, 5),
+      recentEvents: sortedEvents.slice(0, 20) // Get 20 most recent events
     };
 
     console.log('✅ [Server] Analytics data prepared successfully');
+    console.log(`📊 [Server] Popular projects:`, summary.popularProjects.map(([proj, count]) => `${proj}:${count}`).join(', '));
 
     return c.json({ 
       summary,
-      events: events.slice(-100) // Last 100 events for detailed view
+      events: sortedEvents.slice(0, 100) // Last 100 events for detailed view
     });
   } catch (error) {
     console.error('❌ [Server] Error fetching analytics:', error);
     return c.json({ error: "Error al obtener datos de analytics" }, 500);
+  }
+});
+
+// Setup storage bucket for portfolio images (admin only)
+app.post("/make-server-df6fcedb/setup-storage", async (c) => {
+  try {
+    console.log('📦 [Server] Setting up storage bucket...');
+    
+    const supabaseUrl = Deno.env.get('SUPABASE_URL');
+    const supabaseServiceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    
+    if (!supabaseUrl || !supabaseServiceRoleKey) {
+      return c.json({ error: 'Missing Supabase credentials' }, 500);
+    }
+
+    const bucketName = 'portfolio-assets';
+
+    // Check if bucket exists
+    const listResponse = await fetch(`${supabaseUrl}/storage/v1/bucket`, {
+      headers: {
+        'Authorization': `Bearer ${supabaseServiceRoleKey}`,
+        'apikey': supabaseServiceRoleKey,
+      },
+    });
+
+    const buckets = await listResponse.json();
+    const bucketExists = buckets?.some((bucket: any) => bucket.name === bucketName);
+
+    if (bucketExists) {
+      console.log(`✅ [Server] Bucket '${bucketName}' already exists`);
+      return c.json({ 
+        success: true, 
+        message: `Bucket '${bucketName}' already exists`,
+        bucketName,
+        isPublic: true
+      });
+    }
+
+    // Create bucket
+    const createResponse = await fetch(`${supabaseUrl}/storage/v1/bucket`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${supabaseServiceRoleKey}`,
+        'apikey': supabaseServiceRoleKey,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: bucketName,
+        public: true,
+        fileSizeLimit: 52428800, // 50MB
+        allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml']
+      }),
+    });
+
+    if (!createResponse.ok) {
+      const error = await createResponse.text();
+      console.error(`❌ [Server] Failed to create bucket:`, error);
+      return c.json({ error: 'Failed to create storage bucket', details: error }, 500);
+    }
+
+    console.log(`✅ [Server] Successfully created bucket '${bucketName}'`);
+    
+    return c.json({ 
+      success: true, 
+      message: `Bucket '${bucketName}' created successfully`,
+      bucketName,
+      isPublic: true,
+      note: 'You can now upload images to this bucket via Supabase dashboard'
+    });
+
+  } catch (error) {
+    console.error('❌ [Server] Error setting up storage:', error);
+    return c.json({ error: "Error al configurar storage" }, 500);
   }
 });
 

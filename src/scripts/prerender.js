@@ -26,7 +26,7 @@ const projects = {
   'puffykitten': {
     title: 'PuffyKitten | E-commerce B2C - Jabier García Sanz',
     description: 'Caso de estudio: Plataforma e-commerce para productos de mascotas con metodología Design Thinking.',
-    image: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/PuffyKitten/Cover-puffikitten.png',
+    image: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/PuffyKitten/Cover-puffykitten.png',
     tags: ['Web + App', 'Mascotas', 'IoT', 'IA', 'Design Thinking']
   },
   'chupsee': {
@@ -38,7 +38,7 @@ const projects = {
   'gotapp': {
     title: 'GotApp | App móvil B2C - Jabier García Sanz',
     description: 'Caso de estudio: App de sostenibilidad y gamificación con metodología Design Sprint.',
-    image: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/GotApp/Cover-gotaap.png',
+    image: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/GotApp/Cover-gotapp.png',
     tags: ['App', 'Sostenibilidad', 'Gamificación', 'Monitorización', 'Design Sprint']
   },
   'pomeranian': {

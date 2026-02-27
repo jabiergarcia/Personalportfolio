@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  
+  <!-- Primary Meta Tags -->
+  <title>404 - Página no encontrada | Jabier García Sanz</title>
+  <meta name="description" content="La página que buscas no existe o ha sido movida." />
+  <meta name="robots" content="noindex, nofollow" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Favicon-JG.png" />
+  
+  <!-- Font: Clash Display -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ========================================
+       CSS Variables - Portfolio Style
+       ======================================== */
+    :root {
+      /* Light Mode Colors */
+      --background: #fffbf8;
+      --foreground: #10252a;
+      --primary: #10252a;
+      --primary-foreground: #fffbf8;
+      --secondary: #70b8ba;
+      --accent: #d8f878;
+      --accent-foreground: #10252a;
+      --muted: #ffccb6;
+      --muted-foreground: #2d5367;
+      --border: rgba(16, 37, 42, 0.1);
+      
+      /* Typography */
+      --font-clash: 'Clash Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --text-4xl: 2.25rem;    /* 36px */
+      --text-5xl: 3rem;       /* 48px */
+      --text-xl: 1.25rem;     /* 20px */
+      --text-base: 1rem;      /* 16px */
+    }
+    
+    /* Dark Mode */
+    .dark {
+      --background: oklch(0.145 0 0);
+      --foreground: oklch(0.985 0 0);
+      --primary: oklch(0.985 0 0);
+      --primary-foreground: oklch(0.205 0 0);
+      --secondary: oklch(0.45 0.1 185);
+      --accent: oklch(0.75 0.15 120);
+      --accent-foreground: oklch(0.145 0 0);
+      --muted: oklch(0.35 0 0);
+      --muted-foreground: oklch(0.85 0 0);
+      --border: oklch(0.35 0 0);
+    }
+    
+    /* Tablet */
+    @media (min-width: 768px) {
+      :root {
+        --text-4xl: 2.5rem;     /* 40px */
+        --text-5xl: 3.5rem;     /* 56px */
+        --text-xl: 1.375rem;    /* 22px */
+      }
+    }
+    
+    /* Desktop */
+    @media (min-width: 1024px) {
+      :root {
+        --text-4xl: 2.25rem;    /* 36px */
+        --text-5xl: 3rem;       /* 48px */
+        --text-xl: 1.25rem;     /* 20px */
+      }
+    }
+    
+    /* ========================================
+       Base Styles
+       ======================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: var(--font-clash);
+      background: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+    
+    /* ========================================
+       404 Container
+       ======================================== */
+    .error-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Decorative background elements */
+    .bg-decoration {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.1;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .bg-circle-1 {
+      width: 400px;
+      height: 400px;
+      background: var(--accent);
+      top: -200px;
+      right: -200px;
+      animation: float 20s ease-in-out infinite;
+    }
+    
+    .bg-circle-2 {
+      width: 300px;
+      height: 300px;
+      background: var(--secondary);
+      bottom: -150px;
+      left: -150px;
+      animation: float 15s ease-in-out infinite reverse;
+    }
+    
+    .bg-circle-3 {
+      width: 200px;
+      height: 200px;
+      background: var(--muted);
+      top: 50%;
+      left: 10%;
+      animation: float 25s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, -30px) scale(1.1); }
+    }
+    
+    /* Content wrapper */
+    .error-content {
+      text-align: center;
+      max-width: 600px;
+      z-index: 1;
+      animation: fadeInUp 0.8s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* 404 Number */
+    .error-code {
+      font-size: clamp(6rem, 15vw, 10rem);
+      font-weight: 700;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      animation: glitch 3s ease-in-out infinite;
+      position: relative;
+      display: inline-block;
+    }
+    
+    @keyframes glitch {
+      0%, 90%, 100% { transform: translate(0); }
+      91% { transform: translate(-2px, 2px); }
+      92% { transform: translate(2px, -2px); }
+      93% { transform: translate(-2px, -2px); }
+      94% { transform: translate(2px, 2px); }
+    }
+    
+    /* Title */
+    .error-title {
+      font-size: var(--text-4xl);
+      font-weight: 700;
+      color: var(--foreground);
+      margin-bottom: 1rem;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+    
+    /* Description */
+    .error-description {
+      font-size: var(--text-xl);
+      color: var(--muted-foreground);
+      margin-bottom: 2.5rem;
+      font-weight: 500;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+    
+    /* Buttons container */
+    .error-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+    
+    @media (min-width: 640px) {
+      .error-actions {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+    
+    /* Button styles */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: var(--font-clash);
+      font-size: var(--text-base);
+      font-weight: 600;
+      padding: 0.875rem 1.75rem;
+      border-radius: 1.5rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .btn:hover::before {
+      left: 100%;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: var(--accent-foreground);
+      box-shadow: 0 4px 12px rgba(216, 248, 120, 0.3);
+    }
+    
+    .btn-primary:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(216, 248, 120, 0.4);
+    }
+    
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--foreground);
+      border: 2px solid var(--border);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--muted);
+      border-color: var(--muted);
+      transform: translateY(-2px);
+    }
+    
+    .btn-secondary:active {
+      transform: translateY(0);
+    }
+    
+    /* Icon */
+    .icon {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+    }
+    
+    /* Theme toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      width: 48px;
+      height: 48px;
+      background: var(--muted);
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 100;
+      animation: fadeIn 0.8s ease-out 0.8s both;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .theme-toggle:hover {
+      transform: rotate(180deg) scale(1.1);
+      background: var(--accent);
+    }
+    
+    .theme-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--foreground);
+    }
+    
+    /* Language toggle */
+    .lang-toggle {
+      position: fixed;
+      top: 2rem;
+      right: 5rem;
+      display: flex;
+      gap: 0.5rem;
+      background: var(--muted);
+      border: 2px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 0.5rem;
+      z-index: 100;
+      animation: fadeIn 0.8s ease-out 1s both;
+    }
+    
+    .lang-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      background: transparent;
+      border: none;
+      font-family: var(--font-clash);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--foreground);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .lang-btn.active {
+      background: var(--accent);
+      color: var(--accent-foreground);
+    }
+    
+    .lang-btn:not(.active):hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .theme-toggle,
+      .lang-toggle {
+        top: 1rem;
+      }
+      
+      .theme-toggle {
+        right: 1rem;
+      }
+      
+      .lang-toggle {
+        right: 4rem;
+        padding: 0.25rem;
+      }
+      
+      .lang-btn {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.75rem;
+      }
+      
+      .error-container {
+        padding: 1rem;
+      }
+    }
+    
+    /* Hidden class for language switching */
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Theme detection script - MUST run before body renders -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else if (savedTheme === 'light') {
+          document.documentElement.classList.remove('dark');
+        } else {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (prefersDark) {
+            document.documentElement.classList.add('dark');
+          }
+        }
+      } catch (e) {
+        console.error('Theme detection error:', e);
+      }
+    })();
+  </script>
+  
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="es" aria-label="Español">ES</button>
+    <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+  </div>
+  
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">
+    <svg class="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+  </button>
+  
+  <!-- Background decorations -->
+  <div class="bg-decoration bg-circle-1"></div>
+  <div class="bg-decoration bg-circle-2"></div>
+  <div class="bg-decoration bg-circle-3"></div>
+  
+  <!-- Error Container -->
+  <div class="error-container">
+    <div class="error-content">
+      <!-- Spanish Content -->
+      <div class="content-es">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Página no encontrada</h1>
+        <p class="error-description">
+          Lo sentimos, la página que buscas no existe o ha sido movida.
+        </p>
+        <div class="error-actions">
+          <a href="/" class="btn btn-primary">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            Volver al inicio
+          </a>
+          <a href="/proyectos" class="btn btn-secondary">
+            Ver proyectos
+          </a>
+        </div>
+      </div>
+      
+      <!-- English Content -->
+      <div class="content-en hidden">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page not found</h1>
+        <p class="error-description">
+          Sorry, the page you're looking for doesn't exist or has been moved.
+        </p>
+        <div class="error-actions">
+          <a href="/" class="btn btn-primary">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            Back to home
+          </a>
+          <a href="/projects" class="btn btn-secondary">
+            View projects
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript for theme and language toggle -->
+  <script>
+    (function() {
+      // ============================================
+      // Theme Toggle
+      // ============================================
+      const themeToggle = document.querySelector('.theme-toggle');
+      const html = document.documentElement;
+      
+      themeToggle.addEventListener('click', () => {
+        const isDark = html.classList.contains('dark');
+        if (isDark) {
+          html.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        } else {
+          html.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        }
+      });
+      
+      // ============================================
+      // Language Toggle
+      // ============================================
+      const langButtons = document.querySelectorAll('.lang-btn');
+      const contentEs = document.querySelector('.content-es');
+      const contentEn = document.querySelector('.content-en');
+      
+      // Detect browser language on load
+      function detectLanguage() {
+        const savedLang = localStorage.getItem('language');
+        if (savedLang) {
+          return savedLang;
+        }
+        
+        const browserLang = navigator.language || navigator.userLanguage;
+        return browserLang.startsWith('en') ? 'en' : 'es';
+      }
+      
+      // Set language
+      function setLanguage(lang) {
+        localStorage.setItem('language', lang);
+        
+        // Update content visibility
+        if (lang === 'en') {
+          contentEs.classList.add('hidden');
+          contentEn.classList.remove('hidden');
+          document.documentElement.lang = 'en';
+        } else {
+          contentEs.classList.remove('hidden');
+          contentEn.classList.add('hidden');
+          document.documentElement.lang = 'es';
+        }
+        
+        // Update button states
+        langButtons.forEach(btn => {
+          if (btn.dataset.lang === lang) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+      }
+      
+      // Initialize with detected language
+      const initialLang = detectLanguage();
+      setLanguage(initialLang);
+      
+      // Add click listeners
+      langButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          setLanguage(btn.dataset.lang);
+        });
+      });
+      
+      // ============================================
+      // Keyboard Navigation (Accessibility)
+      // ============================================
+      document.addEventListener('keydown', (e) => {
+        // Press 'H' to go home
+        if (e.key === 'h' || e.key === 'H') {
+          window.location.href = '/';
+        }
+        
+        // Press 'T' to toggle theme
+        if (e.key === 't' || e.key === 'T') {
+          themeToggle.click();
+        }
+        
+        // Press 'L' to toggle language
+        if (e.key === 'l' || e.key === 'L') {
+          const currentLang = localStorage.getItem('language') || 'es';
+          setLanguage(currentLang === 'es' ? 'en' : 'es');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -172,6 +172,15 @@ export const en: TranslationKeys = {
     technicalDetails: 'Technical details',
   },
 
+  // Not Found Page
+  notFound: {
+    title: 'Page not found',
+    description: 'The page you\'re looking for doesn\'t exist or has been moved. But don\'t worry, we\'ll help you find what you need.',
+    backButton: 'Go back',
+    homeButton: 'Go to home',
+    suggestions: 'You can also visit:',
+  },
+
   // Projects Page
   projectsPage: {
     title: 'Projects',
@@ -236,7 +245,7 @@ export const en: TranslationKeys = {
   // Experiences Page
   experiencesPage: {
     title: 'Experience',
-    subtitle: 'A professional journey from retail design to UX/UI',
+    subtitle: 'A professional journey from fashion retail to UX/UI design',
     description: 'Explore my professional trajectory blending visual merchandising with digital design',
     experienceTitle: 'Professional Experience',
     experienceSubtitle: 'From H&M to digital design projects',

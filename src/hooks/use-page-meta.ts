@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { SITE_INFO, PROFILE_IMAGE_URL } from '../utils/constants';
+import { SITE_INFO } from '../utils/constants';
 
 interface PageMeta {
   title: string;
@@ -31,7 +31,7 @@ const pageMeta: Record<string, PageMeta> = {
     title: 'PuffyKitten | E-commerce B2C - Jabier García Sanz',
     description: 'Caso de estudio: Plataforma e-commerce para productos de mascotas con metodología Design Thinking.',
     path: '/proyectos/puffykitten',
-    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/PuffyKitten/Cover-puffikitten.png'
+    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/PuffyKitten/Cover-puffykitten.png'
   },
   assorta: {
     title: 'Assorta | Retail Visual Platform - Jabier García Sanz',
@@ -55,12 +55,18 @@ const pageMeta: Record<string, PageMeta> = {
     title: 'GotApp | App móvil B2C - Jabier García Sanz',
     description: 'Caso de estudio: App de sostenibilidad y gamificación con metodología Design Sprint.',
     path: '/proyectos/gotapp',
-    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/GotApp/Cover-gotaap.png'
+    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/GotApp/Cover-gotapp.png'
   },
   admin: {
     title: 'Panel de Administración - Jabier García Sanz',
     description: 'Panel administrativo para gestión de contenido del portfolio.',
     path: '/admin',
+    ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png'
+  },
+  '404': {
+    title: 'Página no encontrada - Jabier García Sanz',
+    description: 'La página que buscas no existe. Descubre mi portfolio de UX/UI Designer.',
+    path: '/404',
     ogImage: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png'
   }
 };
@@ -69,115 +75,78 @@ export const usePageMeta = (currentPage: string) => {
   useEffect(() => {
     try {
       const meta = pageMeta[currentPage] || pageMeta.home;
-      
-      // Update document title
+
       document.title = meta.title;
-      
-      // Batch DOM updates using requestAnimationFrame
+
       requestAnimationFrame(() => {
-        // Update meta description
-        let metaDescription = document.querySelector('meta[name="description"]');
-        if (!metaDescription) {
-          metaDescription = document.createElement('meta');
-          metaDescription.setAttribute('name', 'description');
-          document.head.appendChild(metaDescription);
-        }
-        metaDescription.setAttribute('content', meta.description);
-        
-        // Update meta author
-        let metaAuthor = document.querySelector('meta[name="author"]');
-        if (!metaAuthor) {
-          metaAuthor = document.createElement('meta');
-          metaAuthor.setAttribute('name', 'author');
-          document.head.appendChild(metaAuthor);
-        }
-        metaAuthor.setAttribute('content', 'Jabier García Sanz');
-        
-        // Update canonical URL
-        let canonical = document.querySelector('link[rel="canonical"]');
-        if (!canonical) {
-          canonical = document.createElement('link');
-          canonical.setAttribute('rel', 'canonical');
-          document.head.appendChild(canonical);
-        }
-        // Use path from meta instead of page name
+
+        // Helper: crea o actualiza un <meta> evitando duplicados en el DOM
+        const upsertMeta = (selector: string, attr: string, value: string) => {
+          let el = document.querySelector(selector);
+          if (!el) {
+            el = document.createElement('meta');
+            const [attrName, attrValue] = attr.split('=');
+            el.setAttribute(attrName, attrValue.replace(/"/g, ''));
+            document.head.appendChild(el);
+          }
+          el.setAttribute('content', value);
+        };
+
+        // Helper: crea o actualiza un <link> evitando duplicados en el DOM
+        const upsertLink = (rel: string, attr: string, value: string) => {
+          let el = document.querySelector(`link[rel="${rel}"]`);
+          if (!el) {
+            el = document.createElement('link');
+            el.setAttribute('rel', rel);
+            document.head.appendChild(el);
+          }
+          el.setAttribute(attr, value);
+        };
+
+        // SEO básico
+        upsertMeta('meta[name="description"]', 'name=description', meta.description);
+        upsertMeta('meta[name="author"]', 'name=author', 'Jabier García Sanz');
+
+        // Canonical URL
         if (SITE_INFO.domain) {
-          canonical.setAttribute('href', `${SITE_INFO.domain}${meta.path}`);
+          upsertLink('canonical', 'href', `${SITE_INFO.domain}${meta.path}`);
         }
-        
-        // Update Open Graph meta tags
-        let ogTitle = document.querySelector('meta[property="og:title"]');
-        if (!ogTitle) {
-          ogTitle = document.createElement('meta');
-          ogTitle.setAttribute('property', 'og:title');
-          document.head.appendChild(ogTitle);
+
+        // Open Graph
+        upsertMeta('meta[property="og:title"]', 'property=og:title', meta.title);
+        upsertMeta('meta[property="og:description"]', 'property=og:description', meta.description);
+        upsertMeta('meta[property="og:type"]', 'property=og:type', 'website');
+
+        if (SITE_INFO.domain) {
+          upsertMeta('meta[property="og:url"]', 'property=og:url', `${SITE_INFO.domain}${meta.path}`);
         }
-        ogTitle.setAttribute('content', meta.title);
-        
-        let ogDescription = document.querySelector('meta[property="og:description"]');
-        if (!ogDescription) {
-          ogDescription = document.createElement('meta');
-          ogDescription.setAttribute('property', 'og:description');
-          document.head.appendChild(ogDescription);
-        }
-        ogDescription.setAttribute('content', meta.description);
-        
-        // Update og:url with proper path
-        let ogUrl = document.querySelector('meta[property="og:url"]');
-        if (ogUrl && SITE_INFO.domain) {
-          ogUrl.setAttribute('content', `${SITE_INFO.domain}${meta.path}`);
-        }
-        
-        // Update og:image
+
         if (meta.ogImage) {
-          let ogImage = document.querySelector('meta[property="og:image"]');
-          if (!ogImage) {
-            ogImage = document.createElement('meta');
-            ogImage.setAttribute('property', 'og:image');
-            document.head.appendChild(ogImage);
-          }
-          ogImage.setAttribute('content', meta.ogImage);
-          
-          // Update og:image:secure_url
-          let ogImageSecure = document.querySelector('meta[property="og:image:secure_url"]');
-          if (!ogImageSecure) {
-            ogImageSecure = document.createElement('meta');
-            ogImageSecure.setAttribute('property', 'og:image:secure_url');
-            document.head.appendChild(ogImageSecure);
-          }
-          ogImageSecure.setAttribute('content', meta.ogImage);
+          upsertMeta('meta[property="og:image"]', 'property=og:image', meta.ogImage);
+          upsertMeta('meta[property="og:image:secure_url"]', 'property=og:image:secure_url', meta.ogImage);
+          upsertMeta('meta[property="og:image:width"]', 'property=og:image:width', '1200');
+          upsertMeta('meta[property="og:image:height"]', 'property=og:image:height', '630');
+          upsertMeta('meta[property="og:image:type"]', 'property=og:image:type', 'image/png');
         }
-        
-        // Update Twitter Card meta tags
-        let twitterTitle = document.querySelector('meta[name="twitter:title"]');
-        if (!twitterTitle) {
-          twitterTitle = document.createElement('meta');
-          twitterTitle.setAttribute('name', 'twitter:title');
-          document.head.appendChild(twitterTitle);
-        }
-        twitterTitle.setAttribute('content', meta.title);
-        
-        let twitterDescription = document.querySelector('meta[name="twitter:description"]');
-        if (!twitterDescription) {
-          twitterDescription = document.createElement('meta');
-          twitterDescription.setAttribute('name', 'twitter:description');
-          document.head.appendChild(twitterDescription);
-        }
-        twitterDescription.setAttribute('content', meta.description);
-        
-        // Update twitter:image
+
+        upsertMeta('meta[property="og:locale"]', 'property=og:locale', 'es_ES');
+        upsertMeta('meta[property="og:site_name"]', 'property=og:site_name', 'Jabier García Portfolio');
+
+        // Twitter / X
+        upsertMeta('meta[name="twitter:card"]', 'name=twitter:card', 'summary_large_image');
+        upsertMeta('meta[name="twitter:title"]', 'name=twitter:title', meta.title);
+        upsertMeta('meta[name="twitter:description"]', 'name=twitter:description', meta.description);
+
         if (meta.ogImage) {
-          let twitterImage = document.querySelector('meta[name="twitter:image"]');
-          if (!twitterImage) {
-            twitterImage = document.createElement('meta');
-            twitterImage.setAttribute('name', 'twitter:image');
-            document.head.appendChild(twitterImage);
-          }
-          twitterImage.setAttribute('content', meta.ogImage);
+          upsertMeta('meta[name="twitter:image"]', 'name=twitter:image', meta.ogImage);
+        }
+
+        if (SITE_INFO.domain) {
+          upsertMeta('meta[name="twitter:url"]', 'name=twitter:url', `${SITE_INFO.domain}${meta.path}`);
         }
       });
     } catch (error) {
-      // Error silencioso - no debe romper la app
+      // Error silencioso — no debe romper la app
     }
   }, [currentPage]);
 };

@@ -9,8 +9,9 @@ import { WorksSection } from './components/works-section';
 import { StatsSection } from './components/stats-section';
 import { ExperiencesSection } from './components/experiences-section';
 import { Footer } from './components/footer';
+import { NotFoundPage } from './components/not-found-page';
 import { LightboxProvider } from './contexts/lightbox-context';
-import { LanguageProvider } from './contexts/language-context';
+import { LanguageProvider, useLanguage } from './contexts/language-context';
 import { DomainChecker } from './components/domain-checker';
 import { useRouter, type Page } from './hooks/use-router';
 import { useTheme } from './hooks/use-theme';
@@ -65,10 +66,19 @@ const AdminPage = createLazyComponent(
   'AdminPage'
 );
 
-export default function App() {
-  const { currentPage, navigate } = useRouter();
+// Inner component that has access to Language context
+function AppContent() {
+  const { currentPage, navigate, updateURLForLanguage, urlLanguage } = useRouter();
+  const { language } = useLanguage();
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
+  
+  // Sync URL language with app language
+  useEffect(() => {
+    if (language !== urlLanguage) {
+      updateURLForLanguage(language);
+    }
+  }, [language, urlLanguage, updateURLForLanguage]);
   
   // Update page metadata
   usePageMeta(currentPage);
@@ -353,6 +363,20 @@ export default function App() {
       );
     }
 
+    // 404 Page - Not Found
+    if (currentPage === '404') {
+      return (
+        <ErrorBoundary>
+          <NotFoundPage 
+            onNavigateHome={navigateToHome} 
+            onNavigateToProjects={navigateToProjects}
+            onNavigateToExperiences={navigateToExperiences}
+            isDark={isDark} 
+          />
+        </ErrorBoundary>
+      );
+    }
+
     // Home page (default)
     return (
       <PageWrapper
@@ -388,11 +412,17 @@ export default function App() {
   }
 
   return (
+    <LightboxProvider>
+      <DomainChecker />
+      {renderPage()}
+    </LightboxProvider>
+  );
+}
+
+export default function App() {
+  return (
     <LanguageProvider>
-      <LightboxProvider>
-        <DomainChecker />
-        {renderPage()}
-      </LightboxProvider>
+      <AppContent />
     </LanguageProvider>
   );
 }

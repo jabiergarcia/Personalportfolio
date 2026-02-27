@@ -50,7 +50,7 @@ export function getProjectsData(t: TranslationKeys): Project[] {
       category: t.projects.puffykitten.category,
       description: t.projects.puffykitten.description,
       shortDescription: t.projects.puffykitten.shortDescription,
-      image: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/PuffyKitten/Cover-puffikitten.png",
+      image: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/PuffyKitten/Cover-puffykitten.png",
       color: "bg-gradient-to-br from-[#70b8ba]/20 to-[#d8f878]/20",
       tags: [
         t.projects.puffykitten.tags.webApp,
@@ -68,7 +68,7 @@ export function getProjectsData(t: TranslationKeys): Project[] {
       category: t.projects.gotapp.category,
       description: t.projects.gotapp.description,
       shortDescription: t.projects.gotapp.shortDescription,
-      image: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/GotApp/Cover-gotaap.png",
+      image: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/GotApp/Cover-gotapp.png",
       color: "bg-gradient-to-br from-[#ffccb6]/20 to-[#2d5367]/20",
       tags: [
         t.projects.gotapp.tags.app,
@@ -142,7 +142,7 @@ export const projectsData: Project[] = [
     category: "Web Design",
     description: "Ecosistema digital que combina e-commerce de productos para gatos, juguetes IoT con monitorización en tiempo real y análisis de IA del comportamiento felino.",
     shortDescription: "E-commerce de productos para gatos con juguetes IoT y análisis de comportamiento con IA.",
-    image: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/PuffyKitten/Cover-puffikitten.png",
+    image: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/PuffyKitten/Cover-puffykitten.png",
     color: "bg-gradient-to-br from-[#70b8ba]/20 to-[#d8f878]/20",
     tags: ["Web + App", "Mascotas", "IoT", "IA", "Design Thinking"]
   },
@@ -154,7 +154,7 @@ export const projectsData: Project[] = [
     category: "App Design",
     description: "App para consumo responsable de agua con monitorización inteligente y gamificación. Desarrollada en Design Sprint de 5 días para generar cambio de mentalidad.",
     shortDescription: "App de consumo responsable de agua con monitorización y gamificación.",
-    image: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/GotApp/Cover-gotaap.png",
+    image: "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/GotApp/Cover-gotapp.png",
     color: "bg-gradient-to-br from-[#ffccb6]/20 to-[#2d5367]/20",
     tags: ["App", "Sostenibilidad", "Gamificación", "Monitorización", "Design Sprint"]
   },

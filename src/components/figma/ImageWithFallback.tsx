@@ -75,18 +75,25 @@ export function ImageWithFallback({
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     loadAttempts.current++;
     
-    console.error(`[ImageWithFallback] ✗ Failed to load image (attempt ${loadAttempts.current}):`, {
-      src,
-      currentSrc: imgSrc,
-      alt,
-      error: e.type,
-      priority,
-      willUseFallback: imgSrc !== fallback
-    });
+    // Only log errors if it's not a Supabase storage URL (those are expected to fail without setup)
+    const isSupabaseStorage = imgSrc.includes('supabase.co/storage');
+    
+    if (!isSupabaseStorage) {
+      console.error(`[ImageWithFallback] ✗ Failed to load image (attempt ${loadAttempts.current}):`, {
+        src,
+        currentSrc: imgSrc,
+        alt,
+        error: e.type,
+        priority,
+        willUseFallback: imgSrc !== fallback
+      });
+    }
     
     // Only set fallback if we haven't already done so
     if (imgSrc !== fallback) {
-      console.log(`[ImageWithFallback] → Switching to fallback for: ${alt}`);
+      if (!isSupabaseStorage) {
+        console.log(`[ImageWithFallback] → Switching to fallback for: ${alt}`);
+      }
       setImgSrc(fallback);
     }
     setHasError(true);

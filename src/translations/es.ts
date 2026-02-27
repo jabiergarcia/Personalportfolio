@@ -164,10 +164,19 @@ export const es = {
   // Error Boundary
   errorBoundary: {
     title: 'Algo salió mal',
-    description: 'Ha ocurrido un error inesperado. Puedes intentar recargar la página o volver al inicio.',
+    description: 'Ha ocurrido un error inesperado. Puedes intentar recargar la página o volver a la página principal.',
     reloadButton: 'Recargar página',
     homeButton: 'Volver al inicio',
     technicalDetails: 'Detalles técnicos',
+  },
+
+  // Not Found Page
+  notFound: {
+    title: 'Página no encontrada',
+    description: 'La página que buscas no existe o ha sido movida. Pero no te preocupes, te ayudamos a encontrar lo que necesitas.',
+    backButton: 'Volver atrás',
+    homeButton: 'Ir al inicio',
+    suggestions: 'También puedes visitar:',
   },
 
   // Projects Page
@@ -234,7 +243,7 @@ export const es = {
   // Experiences Page
   experiencesPage: {
     title: 'Experiencia',
-    subtitle: 'Un recorrido profesional desde el diseño retail hasta UX/UI',
+    subtitle: 'Un recorrido profesional desde el retail moda hacia el diseño UX/UI',
     description: 'Explora mi trayectoria profesional fusionando visual merchandising con diseño digital',
     experienceTitle: 'Experiencia Profesional',
     experienceSubtitle: 'De H&M a proyectos de diseño digital',

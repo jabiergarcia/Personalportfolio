@@ -1,68 +1,241 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
-  <!-- Página principal -->
+  <!-- ============================================ -->
+  <!-- PÁGINAS PRINCIPALES - ESPAÑOL -->
+  <!-- ============================================ -->
+  
+  <!-- Página principal (español por defecto) -->
   <url>
-    <loc>https://www.jabiergarcia.com</loc>
-    <lastmod>2025-10-09</lastmod>
+    <loc>https://jabiergarcia.com</loc>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com" />
+    <image:image>
+      <image:loc>https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Image-linkedin.png</image:loc>
+      <image:title>Jabier García Sanz - UX/UI Designer Portfolio</image:title>
+    </image:image>
   </url>
   
-  <!-- Página de Proyectos -->
+  <!-- Página de Proyectos (español) -->
   <url>
-    <loc>https://www.jabiergarcia.com/proyectos</loc>
-    <lastmod>2025-10-09</lastmod>
+    <loc>https://jabiergarcia.com/proyectos</loc>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/proyectos" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/proyectos" />
   </url>
   
-  <!-- Página de Experiencia -->
+  <!-- Página de Experiencia (español) -->
   <url>
-    <loc>https://www.jabiergarcia.com/experiencia</loc>
-    <lastmod>2025-10-09</lastmod>
+    <loc>https://jabiergarcia.com/experiencia</loc>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/experiencia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/experience" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/experiencia" />
+  </url>
+  
+  <!-- ============================================ -->
+  <!-- PÁGINAS PRINCIPALES - INGLÉS -->
+  <!-- ============================================ -->
+  
+  <!-- Projects page (English) -->
+  <url>
+    <loc>https://jabiergarcia.com/projects</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/proyectos" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/proyectos" />
+  </url>
+  
+  <!-- Experience page (English) -->
+  <url>
+    <loc>https://jabiergarcia.com/experience</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/experiencia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/experience" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/experiencia" />
+  </url>
+  
+  <!-- ============================================ -->
+  <!-- PROYECTOS - ESPAÑOL -->
+  <!-- ============================================ -->
+  
+  <!-- Proyecto: Assorta -->
+  <url>
+    <loc>https://jabiergarcia.com/proyectos/assorta</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/proyectos/assorta" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/projects/assorta" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/proyectos/assorta" />
+    <image:image>
+      <image:loc>https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Cover%20Assorta%20Final.png</image:loc>
+      <image:title>Assorta | Retail Visual Platform</image:title>
+      <image:caption>SaaS B2B para Visual Merchandising en retail de moda</image:caption>
+    </image:image>
   </url>
   
   <!-- Proyecto: PuffyKitten -->
   <url>
-    <loc>https://www.jabiergarcia.com/proyectos/puffykitten</loc>
-    <lastmod>2025-10-09</lastmod>
+    <loc>https://jabiergarcia.com/proyectos/puffykitten</loc>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-  
-  <!-- Proyecto: Assorta -->
-  <url>
-    <loc>https://www.jabiergarcia.com/proyectos/assorta</loc>
-    <lastmod>2025-12-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/proyectos/puffykitten" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/projects/puffykitten" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/proyectos/puffykitten" />
+    <image:image>
+      <image:loc>https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/PuffyKitten/Cover-puffykitten.png</image:loc>
+      <image:title>PuffyKitten | E-commerce B2C</image:title>
+      <image:caption>Plataforma e-commerce para productos de mascotas</image:caption>
+    </image:image>
   </url>
   
   <!-- Proyecto: Chupsee -->
   <url>
-    <loc>https://www.jabiergarcia.com/proyectos/chupsee</loc>
-    <lastmod>2025-10-09</lastmod>
+    <loc>https://jabiergarcia.com/proyectos/chupsee</loc>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-  
-  <!-- Proyecto: Design System Pomeranian -->
-  <url>
-    <loc>https://www.jabiergarcia.com/proyectos/pomeranian</loc>
-    <lastmod>2025-10-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/proyectos/chupsee" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/projects/chupsee" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/proyectos/chupsee" />
+    <image:image>
+      <image:loc>https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Cover%20Chupsee.png</image:loc>
+      <image:title>Chupsee | App móvil B2C</image:title>
+      <image:caption>App de comparación de precios con IA predictiva</image:caption>
+    </image:image>
   </url>
   
   <!-- Proyecto: GotApp -->
   <url>
-    <loc>https://www.jabiergarcia.com/proyectos/gotapp</loc>
-    <lastmod>2025-10-09</lastmod>
+    <loc>https://jabiergarcia.com/proyectos/gotapp</loc>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/proyectos/gotapp" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/projects/gotapp" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/proyectos/gotapp" />
+    <image:image>
+      <image:loc>https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/GotApp/Cover-gotapp.png</image:loc>
+      <image:title>GotApp | App móvil B2C</image:title>
+      <image:caption>App de sostenibilidad y gamificación</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Proyecto: Design System Pomeranian -->
+  <url>
+    <loc>https://jabiergarcia.com/proyectos/pomeranian</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/proyectos/pomeranian" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/projects/pomeranian" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/proyectos/pomeranian" />
+    <image:image>
+      <image:loc>https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Cover%20Design%20System.png</image:loc>
+      <image:title>Pomeranian | Design System</image:title>
+      <image:caption>Sistema de diseño completo con Atomic Design</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- ============================================ -->
+  <!-- PROYECTOS - INGLÉS -->
+  <!-- ============================================ -->
+  
+  <!-- Project: Assorta (English) -->
+  <url>
+    <loc>https://jabiergarcia.com/projects/assorta</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/proyectos/assorta" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/projects/assorta" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/proyectos/assorta" />
+    <image:image>
+      <image:loc>https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Assorta/Cover%20Assorta%20Final.png</image:loc>
+      <image:title>Assorta | Retail Visual Platform</image:title>
+      <image:caption>B2B SaaS for Visual Merchandising in fashion retail</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Project: PuffyKitten (English) -->
+  <url>
+    <loc>https://jabiergarcia.com/projects/puffykitten</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/proyectos/puffykitten" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/projects/puffykitten" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/proyectos/puffykitten" />
+    <image:image>
+      <image:loc>https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/PuffyKitten/Cover-puffykitten.png</image:loc>
+      <image:title>PuffyKitten | B2C E-commerce</image:title>
+      <image:caption>E-commerce platform for pet products</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Project: Chupsee (English) -->
+  <url>
+    <loc>https://jabiergarcia.com/projects/chupsee</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/proyectos/chupsee" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/projects/chupsee" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/proyectos/chupsee" />
+    <image:image>
+      <image:loc>https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/Chupsee/Cover%20Chupsee.png</image:loc>
+      <image:title>Chupsee | B2C Mobile App</image:title>
+      <image:caption>Price comparison app with predictive AI</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Project: GotApp (English) -->
+  <url>
+    <loc>https://jabiergarcia.com/projects/gotapp</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/proyectos/gotapp" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/projects/gotapp" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/proyectos/gotapp" />
+    <image:image>
+      <image:loc>https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/GotApp/Cover-gotapp.png</image:loc>
+      <image:title>GotApp | B2C Mobile App</image:title>
+      <image:caption>Sustainability and gamification app</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Project: Design System Pomeranian (English) -->
+  <url>
+    <loc>https://jabiergarcia.com/projects/pomeranian</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jabiergarcia.com/proyectos/pomeranian" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jabiergarcia.com/projects/pomeranian" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jabiergarcia.com/proyectos/pomeranian" />
+    <image:image>
+      <image:loc>https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Images/DS-Pomeranian/Cover%20Design%20System.png</image:loc>
+      <image:title>Pomeranian | Design System</image:title>
+      <image:caption>Complete design system with Atomic Design</image:caption>
+    </image:image>
   </url>
   
 </urlset>

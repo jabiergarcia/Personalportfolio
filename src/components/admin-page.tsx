@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
 import { ScrollArea } from './ui/scroll-area';
-import { ArrowLeft, Mail, User, Calendar, MessageSquare, RefreshCw, BarChart3, Eye, MousePointer, Download, Trash2 } from 'lucide-react';
+import { ArrowLeft, Mail, User, Calendar, MessageSquare, RefreshCw, BarChart3, Eye, MousePointer, Download, Trash2, Database } from 'lucide-react';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
 import { toast } from 'sonner@2.0.3';
 import { ScrollReveal } from './scroll-reveal';
@@ -43,6 +43,7 @@ export function AdminPage({ onNavigateHome }: AdminPageProps) {
   const [selectedMessage, setSelectedMessage] = useState<ContactMessage | null>(null);
   const [activeTab, setActiveTab] = useState<'messages' | 'analytics'>('messages');
   const [isResetting, setIsResetting] = useState(false);
+  const [isSettingUpStorage, setIsSettingUpStorage] = useState(false);
 
   const fetchMessages = async () => {
     try {
@@ -139,6 +140,41 @@ export function AdminPage({ onNavigateHome }: AdminPageProps) {
       toast.error('Error al resetear las métricas de analytics');
     } finally {
       setIsResetting(false);
+    }
+  };
+
+  const setupStorage = async () => {
+    setIsSettingUpStorage(true);
+    try {
+      const response = await fetch(
+        `https://${projectId}.supabase.co/functions/v1/make-server-df6fcedb/setup-storage`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${publicAnonKey}`
+          }
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Error al configurar storage');
+      }
+
+      const data = await response.json();
+      
+      if (data.success) {
+        toast.success(`✅ ${data.message}`);
+        toast.info(`📦 Bucket creado: ${data.bucketName} (Público: ${data.isPublic ? 'Sí' : 'No'})`, { duration: 6000 });
+        if (data.note) {
+          toast.info(`💡 ${data.note}`, { duration: 6000 });
+        }
+      }
+    } catch (error: any) {
+      console.error('Error al configurar storage:', error);
+      toast.error(`Error: ${error.message}`);
+    } finally {
+      setIsSettingUpStorage(false);
     }
   };
 
@@ -386,7 +422,23 @@ export function AdminPage({ onNavigateHome }: AdminPageProps) {
                           📊 Total eventos: <span className="font-semibold text-foreground">{analytics.totalEvents}</span> {' | '}
                           🔄 Último refresh: <span className="font-semibold text-foreground">{new Date().toLocaleTimeString('es-ES')}</span>
                         </p>
-                        <p className="text-xs text-muted-foreground mt-1">
+                        {analytics.recentEvents && analytics.recentEvents.length > 0 && (
+                          <p className="text-sm text-muted-foreground mt-1">
+                            📅 Último evento: <span className="font-semibold text-foreground">
+                              {new Date(analytics.recentEvents[0].timestamp).toLocaleString('es-ES', {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                              })}
+                            </span>
+                            {analytics.recentEvents[0].project && (
+                              <> {' | '} Proyecto: <span className="font-semibold text-foreground">{analytics.recentEvents[0].project}</span></>
+                            )}
+                          </p>
+                        )}
+                        <p className="text-xs text-muted-foreground mt-2">
                           💡 Tip: Abre la consola del navegador (F12) para ver logs detallados de eventos. Si no ves cambios, sal del panel y navega por el portfolio.
                         </p>
                       </div>
@@ -471,6 +523,39 @@ export function AdminPage({ onNavigateHome }: AdminPageProps) {
                           <>
                             <Trash2 className="w-4 h-4" />
                             Resetear todo
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  </Card>
+
+                  {/* Setup Storage Button */}
+                  <Card className="p-4 bg-primary/5 border-primary/20">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-primary/10 rounded-lg">
+                          <Database className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-medium text-foreground">Configurar almacenamiento</p>
+                          <p className="text-sm text-muted-foreground">Crea el bucket público 'portfolio-assets' en Supabase Storage para las imágenes</p>
+                        </div>
+                      </div>
+                      <Button
+                        variant="default"
+                        onClick={setupStorage}
+                        disabled={isSettingUpStorage}
+                        className="flex items-center gap-2 bg-primary hover:bg-primary/90"
+                      >
+                        {isSettingUpStorage ? (
+                          <>
+                            <RefreshCw className="w-4 h-4 animate-spin" />
+                            Configurando...
+                          </>
+                        ) : (
+                          <>
+                            <Database className="w-4 h-4" />
+                            Configurar Storage
                           </>
                         )}
                       </Button>
