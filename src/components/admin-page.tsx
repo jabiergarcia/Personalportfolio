@@ -85,7 +85,8 @@ export function AdminPage({ onNavigateHome }: AdminPageProps) {
       if (!response.ok) {
         const errorText = await response.text();
         console.error('❌ [Admin] Failed to fetch analytics:', response.status, errorText);
-        throw new Error('Error al obtener analytics');
+        toast.error('Error al cargar analytics');
+        return;
       }
 
       const data = await response.json();

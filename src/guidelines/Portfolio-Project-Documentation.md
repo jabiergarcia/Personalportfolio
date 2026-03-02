@@ -12,7 +12,7 @@
 ### URLs y Enlaces
 - **URL Behance**: Por definir (si se sube el caso de estudio)
 - **URL del Prototipo Figma**: No aplica (el portfolio en vivo es el prototipo)
-- **URL del Portfolio en Vivo**: https://xabigarcia.com
+- **URL del Portfolio en Vivo**: https://jabigarcia.com
 
 ---
 

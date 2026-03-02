@@ -21,24 +21,37 @@ Hemos implementado un sistema de **pre-rendering selectivo** que sirve HTML est�
   ├── puffykitten.html     ← Para cada proyecto
   ├── chupsee.html
   ├── gotapp.html
-  └── pomeranian.html
+  ├── pomeranian.html
+  ├── _redirects           ← Configuración de Cloudflare Pages
+  └── _headers             ← Headers HTTP personalizados
 ```
 
 ### ⚙️ Funcionamiento
 
 1. **Usuario normal** (navegador):
    - Visita `https://jabiergarcia.com/proyectos/assorta`
-   - Vercel sirve `/index.html` (SPA React)
+   - El servidor sirve `/index.html` (SPA React)
    - La aplicación funciona normalmente
 
 2. **Crawler** (LinkedIn, Facebook, Twitter):
    - El bot visita `https://jabiergarcia.com/proyectos/assorta`
-   - Vercel detecta el user-agent del crawler
+   - Cloudflare/Vercel detecta el user-agent del crawler
    - Sirve `/proyectos/assorta.html` (HTML estático con meta tags)
    - El crawler lee las meta tags correctas
    - **Resultado**: ✅ Imagen correcta, ✅ Título correcto, ✅ Descripción correcta
 
-### 🔧 Configuración (vercel.json)
+### 🔧 Configuración
+
+#### Opción A: Cloudflare Pages (`_redirects`)
+
+```
+# /public/_redirects
+/proyectos/assorta  /proyectos/assorta.html  200
+/proyectos/puffykitten  /proyectos/puffykitten.html  200
+# ...más proyectos
+```
+
+#### Opción B: Vercel (`vercel.json`)
 
 ```json
 {
@@ -57,6 +70,8 @@ Hemos implementado un sistema de **pre-rendering selectivo** que sirve HTML est�
   ]
 }
 ```
+
+**Nota**: La web actualmente usa **Figma Make + Cloudflare**, por lo que los archivos `_redirects` y `_headers` son los que se aplican.
 
 ### 🎨 Características de los Archivos HTML Estáticos
 
@@ -87,7 +102,10 @@ Cada archivo `.html` incluye:
 
 1. Copia un archivo HTML existente de `/public/proyectos/`
 2. Modifica las meta tags (título, descripción, imagen)
-3. Actualiza el `vercel.json` para añadir la regla de rewrite
+3. Actualiza el archivo `_redirects` para añadir la nueva ruta:
+   ```
+   /proyectos/nuevo-proyecto  /proyectos/nuevo-proyecto.html  200
+   ```
 
 ### Opción 2: Automático (Script)
 
@@ -131,6 +149,7 @@ Abre `https://jabiergarcia.com/proyectos/assorta` en un navegador:
 ✅ **Performant**: HTML estático se sirve instantáneamente para crawlers
 ✅ **Maintainable**: Fácil de añadir nuevos proyectos
 ✅ **No requiere SSR**: No necesita Next.js ni configuración compleja
+✅ **Platform-agnostic**: Funciona con Cloudflare, Vercel, Netlify, etc.
 
 ## 🔄 Alternativas Consideradas
 
@@ -146,17 +165,19 @@ Abre `https://jabiergarcia.com/proyectos/assorta` en un navegador:
 - **Limitaciones**: No funciona bien con SPAs modernas
 - **Build time**: Aumenta tiempo de compilación
 
-### ✅ HTML Estático + Vercel Rewrites (Solución Actual)
-- **Simple**: Solo archivos HTML
+### ✅ HTML Estático + Cloudflare/_redirects (Solución Actual)
+- **Simple**: Solo archivos HTML + configuración de texto
 - **Efectivo**: Funciona perfectamente
 - **Gratis**: Sin costos adicionales
 - **Mantenible**: Fácil de actualizar
+- **Universal**: Funciona en cualquier hosting moderno
 
 ## 📚 Referencias
 
 - [Open Graph Protocol](https://ogp.me/)
 - [Twitter Card Documentation](https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/abouts-cards)
 - [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/)
+- [Cloudflare Pages Redirects](https://developers.cloudflare.com/pages/configuration/redirects/)
 - [Vercel Rewrites Documentation](https://vercel.com/docs/projects/project-configuration#rewrites)
 
 ## 🎉 Resultado Final
@@ -171,5 +192,5 @@ Ahora cuando compartas `https://jabiergarcia.com/proyectos/assorta` en LinkedIn:
 ---
 
 **Autor**: Jabier García Sanz  
-**Fecha**: Enero 2025  
-**Tecnologías**: React, Vite, Vercel, HTML5, Open Graph
+**Fecha**: Febrero 2026  
+**Tecnologías**: React, Vite, Cloudflare Pages, HTML5, Open Graph
