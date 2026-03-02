@@ -20,9 +20,188 @@ app.use(
   }),
 );
 
+// ==========================================
+// AUTHENTICATION HELPERS
+// ==========================================
+
+/**
+ * Genera un hash simple para comparación de contraseñas
+ * NOTA: Este es un hash básico. En producción se recomienda bcrypt o argon2.
+ */
+async function hashPassword(password: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashHex;
+}
+
+/**
+ * Genera un token de sesión seguro
+ */
+function generateToken(): string {
+  const array = new Uint8Array(32);
+  crypto.getRandomValues(array);
+  return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+/**
+ * Verifica si el token de admin es válido
+ */
+async function verifyAdminToken(token: string): Promise<boolean> {
+  if (!token) return false;
+  
+  try {
+    const session = await kv.get(`admin_session_${token}`);
+    
+    if (!session) return false;
+    
+    // Verificar que no haya expirado (24 horas)
+    const expiryTime = new Date(session.expiry).getTime();
+    const now = Date.now();
+    
+    if (now > expiryTime) {
+      // Token expirado, eliminarlo
+      await kv.del(`admin_session_${token}`);
+      return false;
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('Error verifying admin token:', error);
+    return false;
+  }
+}
+
+/**
+ * Middleware para proteger rutas de admin
+ */
+async function requireAdminAuth(c: any, next: any) {
+  const authHeader = c.req.header('Authorization');
+  const token = authHeader?.replace('Bearer ', '').replace(`${Deno.env.get('SUPABASE_ANON_KEY')} `, '').trim();
+  
+  // Extraer el token admin si existe (formato: "anon_key admin_token")
+  const parts = authHeader?.split(' ');
+  const adminToken = parts && parts.length > 2 ? parts[2] : token;
+  
+  const isValid = await verifyAdminToken(adminToken);
+  
+  if (!isValid) {
+    return c.json({ error: 'No autorizado. Token inválido o expirado.' }, 401);
+  }
+  
+  await next();
+}
+
 // Health check endpoint
 app.get("/make-server-df6fcedb/health", (c) => {
   return c.json({ status: "ok" });
+});
+
+// ==========================================
+// ADMIN AUTHENTICATION ENDPOINTS
+// ==========================================
+
+/**
+ * Endpoint de autenticación para admin
+ * Verifica la contraseña contra el hash almacenado en variables de entorno
+ */
+app.post("/make-server-df6fcedb/admin/auth", async (c) => {
+  try {
+    const body = await c.req.json();
+    const { password } = body;
+
+    if (!password) {
+      return c.json({ error: 'Contraseña requerida' }, 400);
+    }
+
+    // Obtener hash de contraseña de variables de entorno
+    const storedHash = Deno.env.get('ADMIN_PASSWORD_HASH');
+    
+    if (!storedHash) {
+      console.error('❌ ADMIN_PASSWORD_HASH no configurado en variables de entorno');
+      return c.json({ error: 'Configuración de autenticación incorrecta' }, 500);
+    }
+
+    // Hashear contraseña ingresada
+    const inputHash = await hashPassword(password);
+
+    // Comparar hashes
+    if (inputHash !== storedHash) {
+      console.log('❌ Intento de login fallido - contraseña incorrecta');
+      return c.json({ error: 'Contraseña incorrecta' }, 401);
+    }
+
+    // Generar token de sesión
+    const token = generateToken();
+    const expiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 horas
+
+    // Guardar sesión
+    await kv.set(`admin_session_${token}`, {
+      token,
+      created: new Date().toISOString(),
+      expiry: expiry.toISOString(),
+      ip: c.req.header('x-forwarded-for') || 'unknown'
+    });
+
+    console.log('✅ Admin login exitoso. Token generado:', token.substring(0, 8) + '...');
+
+    return c.json({
+      success: true,
+      token,
+      expiry: expiry.toISOString(),
+      message: 'Autenticación exitosa'
+    });
+
+  } catch (error) {
+    console.error('❌ Error en autenticación de admin:', error);
+    return c.json({ error: 'Error interno del servidor' }, 500);
+  }
+});
+
+/**
+ * Endpoint para verificar si un token es válido
+ */
+app.post("/make-server-df6fcedb/admin/verify", async (c) => {
+  try {
+    const body = await c.req.json();
+    const { token } = body;
+
+    if (!token) {
+      return c.json({ valid: false, error: 'Token requerido' }, 400);
+    }
+
+    const isValid = await verifyAdminToken(token);
+
+    return c.json({ valid: isValid });
+
+  } catch (error) {
+    console.error('❌ Error verificando token:', error);
+    return c.json({ valid: false, error: 'Error interno' }, 500);
+  }
+});
+
+/**
+ * Endpoint para cerrar sesión (logout)
+ */
+app.post("/make-server-df6fcedb/admin/logout", async (c) => {
+  try {
+    const authHeader = c.req.header('Authorization');
+    const parts = authHeader?.split(' ');
+    const token = parts && parts.length > 2 ? parts[2] : parts?.[1];
+
+    if (token) {
+      await kv.del(`admin_session_${token}`);
+      console.log('✅ Admin logout exitoso');
+    }
+
+    return c.json({ success: true, message: 'Sesión cerrada' });
+
+  } catch (error) {
+    console.error('❌ Error en logout:', error);
+    return c.json({ error: 'Error interno' }, 500);
+  }
 });
 
 // Contact form endpoint
@@ -171,8 +350,8 @@ app.post("/make-server-df6fcedb/contact", async (c) => {
   }
 });
 
-// Get contact messages (for admin use)
-app.get("/make-server-df6fcedb/contacts", async (c) => {
+// Get contact messages (for admin use) - PROTEGIDO
+app.get("/make-server-df6fcedb/contacts", requireAdminAuth, async (c) => {
   try {
     const contacts = await kv.getByPrefix('contact_');
     return c.json({ contacts });

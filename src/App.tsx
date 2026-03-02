@@ -13,6 +13,7 @@ import { NotFoundPage } from './components/not-found-page';
 import { LightboxProvider } from './contexts/lightbox-context';
 import { LanguageProvider, useLanguage } from './contexts/language-context';
 import { DomainChecker } from './components/domain-checker';
+import { AdminLogin } from './components/admin-login';
 import { useRouter, type Page } from './hooks/use-router';
 import { useTheme } from './hooks/use-theme';
 import { usePageMeta } from './hooks/use-page-meta';
@@ -71,7 +72,30 @@ function AppContent() {
   const { currentPage, navigate, updateURLForLanguage, urlLanguage } = useRouter();
   const { language } = useLanguage();
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
   const { isDark, toggleTheme } = useTheme();
+  
+  // Check admin authentication on mount
+  useEffect(() => {
+    const token = localStorage.getItem('admin_token');
+    const expiry = localStorage.getItem('admin_token_expiry');
+    
+    if (token && expiry) {
+      const expiryDate = new Date(expiry);
+      if (expiryDate > new Date()) {
+        setIsAdminAuthenticated(true);
+      } else {
+        // Token expirado, limpiar
+        localStorage.removeItem('admin_token');
+        localStorage.removeItem('admin_token_expiry');
+      }
+    }
+  }, []);
+  
+  // Función para manejar login exitoso
+  const handleAdminLoginSuccess = (token: string) => {
+    setIsAdminAuthenticated(true);
+  };
   
   // Sync URL language with app language
   useEffect(() => {
@@ -340,6 +364,12 @@ function AppContent() {
 
     // Admin page
     if (currentPage === 'admin') {
+      // Si no está autenticado, mostrar pantalla de login
+      if (!isAdminAuthenticated) {
+        return <AdminLogin onLoginSuccess={handleAdminLoginSuccess} />;
+      }
+      
+      // Si está autenticado, mostrar admin panel
       return (
         <ErrorBoundary>
           <ProjectPageWrapper

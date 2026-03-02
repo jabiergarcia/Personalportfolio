@@ -47,11 +47,12 @@ export function AdminPage({ onNavigateHome }: AdminPageProps) {
 
   const fetchMessages = async () => {
     try {
+      const adminToken = localStorage.getItem('admin_token');
       const response = await fetch(
         `https://${projectId}.supabase.co/functions/v1/make-server-df6fcedb/contacts`,
         {
           headers: {
-            'Authorization': `Bearer ${publicAnonKey}`
+            'Authorization': `Bearer ${publicAnonKey} ${adminToken}`
           }
         }
       );
@@ -73,11 +74,12 @@ export function AdminPage({ onNavigateHome }: AdminPageProps) {
   const fetchAnalytics = async () => {
     try {
       console.log('📊 [Admin] Fetching analytics from server...');
+      const adminToken = localStorage.getItem('admin_token');
       const response = await fetch(
         `https://${projectId}.supabase.co/functions/v1/make-server-df6fcedb/analytics`,
         {
           headers: {
-            'Authorization': `Bearer ${publicAnonKey}`
+            'Authorization': `Bearer ${publicAnonKey} ${adminToken}`
           }
         }
       );
@@ -105,12 +107,13 @@ export function AdminPage({ onNavigateHome }: AdminPageProps) {
 
     setIsResetting(true);
     try {
+      const adminToken = localStorage.getItem('admin_token');
       const response = await fetch(
         `https://${projectId}.supabase.co/functions/v1/make-server-df6fcedb/analytics/clear-all`,
         {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${publicAnonKey}`
+            'Authorization': `Bearer ${publicAnonKey} ${adminToken}`
           }
         }
       );
