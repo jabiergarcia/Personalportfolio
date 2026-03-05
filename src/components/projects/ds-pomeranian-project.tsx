@@ -1,10 +1,12 @@
 import { memo, useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { ScrollReveal } from '../scroll-reveal';
-import { MosaicGallery, MosaicItem } from '../mosaic-gallery';
 import { ThemeToggle } from '../theme-toggle';
+import { LanguageToggle } from '../language-toggle';
+import { ProjectNavbar } from './project-navbar';
 import { RelatedProjects } from '../related-projects';
 import { ShareProject } from '../share-project';
+import { ScrollReveal } from '../scroll-reveal';
+import { MosaicGallery, MosaicItem } from '../mosaic-gallery';
 import { ProjectDetails } from './project-details';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
@@ -596,28 +598,11 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-background/80">
       {/* Header Navigation - Auto Hide */}
-      <div 
-        className={`fixed top-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-b border-border z-40 transition-all duration-300 ease-in-out ${
-          isNavVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6 py-3 flex items-center justify-between">
-          <Button
-            variant="ghost"
-            onClick={onNavigateToProjects}
-            className="flex items-center gap-2 text-muted-foreground hover:text-foreground hover:bg-secondary/10 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            {t.projectLayout.backToProjects}
-          </Button>
-          {isDark !== undefined && onToggleTheme && (
-            <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
-          )}
-        </div>
-      </div>
-
-      {/* Spacer para compensar la navbar fixed */}
-      <div className="h-[60px]"></div>
+      <ProjectNavbar 
+        onNavigateToProjects={onNavigateToProjects}
+        isDark={isDark}
+        onToggleTheme={onToggleTheme}
+      />
 
       <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6 py-6 md:py-8 lg:py-10">
         {/* Project Header */}
@@ -751,105 +736,121 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             <p className="text-muted-foreground leading-relaxed max-w-4xl mb-12">
               {projectDetail.sections.styleGuide.intro}
             </p>
+          </div>
+        </ScrollReveal>
 
-            {/* Atomic Design */}
-            <div className="mb-16">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.atomicDesign.title}</h3>
-              <ul className="space-y-3 text-muted-foreground mb-6">
-                {projectDetail.sections.styleGuide.atomicDesignBullets.map((bullet, index) => (
-                  <li key={index} className="flex items-start gap-3 leading-relaxed">
-                    <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-              <MosaicGallery items={atomicDesignItems} layout="asymmetric" />
-            </div>
+        {/* Atomic Design */}
+        <ScrollReveal direction="up" delay={0.1}>
+          <div className="mb-16">
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.atomicDesign.title}</h3>
+            <ul className="space-y-3 text-muted-foreground mb-6">
+              {projectDetail.sections.styleGuide.atomicDesignBullets.map((bullet, index) => (
+                <li key={index} className="flex items-start gap-3 leading-relaxed">
+                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+            <MosaicGallery items={atomicDesignItems} layout="asymmetric" />
+          </div>
+        </ScrollReveal>
 
-            {/* Colores */}
-            <div className="mb-16">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.colors.title}</h3>
-              <ul className="space-y-3 text-muted-foreground mb-6">
-                {projectDetail.sections.styleGuide.colorsBullets.map((bullet, index) => (
-                  <li key={index} className="flex items-start gap-3 leading-relaxed">
-                    <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-              <MosaicGallery items={colorsItems} layout="balanced" />
-            </div>
+        {/* Colores */}
+        <ScrollReveal direction="up" delay={0.2}>
+          <div className="mb-16">
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.colors.title}</h3>
+            <ul className="space-y-3 text-muted-foreground mb-6">
+              {projectDetail.sections.styleGuide.colorsBullets.map((bullet, index) => (
+                <li key={index} className="flex items-start gap-3 leading-relaxed">
+                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+            <MosaicGallery items={colorsItems} layout="balanced" />
+          </div>
+        </ScrollReveal>
 
-            {/* Tipografía */}
-            <div className="mb-16">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.typography.title}</h3>
-              <ul className="space-y-3 text-muted-foreground mb-6">
-                {projectDetail.sections.styleGuide.typographyBullets.map((bullet, index) => (
-                  <li key={index} className="flex items-start gap-3 leading-relaxed">
-                    <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-              <MosaicGallery items={typographyItems} layout="asymmetric" />
-            </div>
+        {/* Tipografía */}
+        <ScrollReveal direction="up" delay={0.1}>
+          <div className="mb-16">
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.typography.title}</h3>
+            <ul className="space-y-3 text-muted-foreground mb-6">
+              {projectDetail.sections.styleGuide.typographyBullets.map((bullet, index) => (
+                <li key={index} className="flex items-start gap-3 leading-relaxed">
+                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+            <MosaicGallery items={typographyItems} layout="asymmetric" />
+          </div>
+        </ScrollReveal>
 
-            {/* Sombras */}
-            <div className="mb-16">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.shadows.title}</h3>
-              <ul className="space-y-3 text-muted-foreground mb-6">
-                {projectDetail.sections.styleGuide.shadowsBullets.map((bullet, index) => (
-                  <li key={index} className="flex items-start gap-3 leading-relaxed">
-                    <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-              <MosaicGallery items={shadowsItems} layout="asymmetric" />
-            </div>
+        {/* Sombras */}
+        <ScrollReveal direction="up" delay={0.2}>
+          <div className="mb-16">
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.shadows.title}</h3>
+            <ul className="space-y-3 text-muted-foreground mb-6">
+              {projectDetail.sections.styleGuide.shadowsBullets.map((bullet, index) => (
+                <li key={index} className="flex items-start gap-3 leading-relaxed">
+                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+            <MosaicGallery items={shadowsItems} layout="asymmetric" />
+          </div>
+        </ScrollReveal>
 
-            {/* Grid */}
-            <div className="mb-16">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.grid.title}</h3>
-              <ul className="space-y-3 text-muted-foreground mb-6">
-                {projectDetail.sections.styleGuide.gridBullets.map((bullet, index) => (
-                  <li key={index} className="flex items-start gap-3 leading-relaxed">
-                    <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-              <MosaicGallery items={gridItems} layout="asymmetric" />
-            </div>
+        {/* Grid */}
+        <ScrollReveal direction="up" delay={0.1}>
+          <div className="mb-16">
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.grid.title}</h3>
+            <ul className="space-y-3 text-muted-foreground mb-6">
+              {projectDetail.sections.styleGuide.gridBullets.map((bullet, index) => (
+                <li key={index} className="flex items-start gap-3 leading-relaxed">
+                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+            <MosaicGallery items={gridItems} layout="asymmetric" />
+          </div>
+        </ScrollReveal>
 
-            {/* Espaciado */}
-            <div className="mb-16">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.spacing.title}</h3>
-              <ul className="space-y-3 text-muted-foreground mb-6">
-                {projectDetail.sections.styleGuide.spacingBullets.map((bullet, index) => (
-                  <li key={index} className="flex items-start gap-3 leading-relaxed">
-                    <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-              <MosaicGallery items={spacingItems} layout="balanced" />
-            </div>
+        {/* Espaciado */}
+        <ScrollReveal direction="up" delay={0.2}>
+          <div className="mb-16">
+            <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.styleGuide.spacing.title}</h3>
+            <ul className="space-y-3 text-muted-foreground mb-6">
+              {projectDetail.sections.styleGuide.spacingBullets.map((bullet, index) => (
+                <li key={index} className="flex items-start gap-3 leading-relaxed">
+                  <span className="text-secondary mt-1.5 flex-shrink-0">●</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+            <MosaicGallery items={spacingItems} layout="balanced" />
           </div>
         </ScrollReveal>
 
         {/* ============================================ */}
         {/* COMPONENTES SECTION */}
         {/* ============================================ */}
-        <div className="mb-16">
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-foreground uppercase tracking-wider no-underline">{projectDetail.sections.components.title}</h2>
+        <ScrollReveal direction="up" delay={0.1}>
+          <div className="mb-16">
+            <div className="mb-8">
+              <h2 className="text-2xl font-semibold text-foreground uppercase tracking-wider no-underline">{projectDetail.sections.components.title}</h2>
+            </div>
+            <p className="text-muted-foreground leading-relaxed max-w-4xl mb-12">
+              {projectDetail.sections.components.intro}
+            </p>
           </div>
-          <p className="text-muted-foreground leading-relaxed max-w-4xl mb-12">
-            {projectDetail.sections.components.intro}
-          </p>
+        </ScrollReveal>
 
-          {/* Accordion */}
+        {/* Accordion */}
+        <ScrollReveal direction="up" delay={0.1}>
           <div className="mb-16">
             <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.accordion.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -857,8 +858,10 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             </p>
             <MosaicGallery items={accordionItems} layout="asymmetric" />
           </div>
+        </ScrollReveal>
 
-          {/* Avatar */}
+        {/* Avatar */}
+        <ScrollReveal direction="up" delay={0.2}>
           <div className="mb-16">
             <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.avatar.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -866,8 +869,10 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             </p>
             <MosaicGallery items={avatarItems} layout="asymmetric" />
           </div>
+        </ScrollReveal>
 
-          {/* Button */}
+        {/* Button */}
+        <ScrollReveal direction="up" delay={0.1}>
           <div className="mb-16">
             <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.button.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -875,8 +880,10 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             </p>
             <MosaicGallery items={buttonItems} layout="asymmetric" />
           </div>
+        </ScrollReveal>
 
-          {/* Card */}
+        {/* Card */}
+        <ScrollReveal direction="up" delay={0.2}>
           <div className="mb-16">
             <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.card.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -884,8 +891,10 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             </p>
             <MosaicGallery items={cardItems} layout="asymmetric" />
           </div>
+        </ScrollReveal>
 
-          {/* Carousel */}
+        {/* Carousel */}
+        <ScrollReveal direction="up" delay={0.1}>
           <div className="mb-16">
             <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.carousel.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -893,8 +902,10 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             </p>
             <MosaicGallery items={carouselItems} layout="asymmetric" />
           </div>
+        </ScrollReveal>
 
-          {/* Checkbox */}
+        {/* Checkbox */}
+        <ScrollReveal direction="up" delay={0.2}>
           <div className="mb-16">
             <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.checkbox.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -902,8 +913,10 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             </p>
             <MosaicGallery items={checkboxItems} layout="asymmetric" />
           </div>
+        </ScrollReveal>
 
-          {/* Dropdown */}
+        {/* Dropdown */}
+        <ScrollReveal direction="up" delay={0.1}>
           <div className="mb-16">
             <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.dropdown.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -911,8 +924,10 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             </p>
             <MosaicGallery items={dropdownItems} layout="balanced" />
           </div>
+        </ScrollReveal>
 
-          {/* List Item */}
+        {/* List Item */}
+        <ScrollReveal direction="up" delay={0.2}>
           <div className="mb-16">
             <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.listItem.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -920,8 +935,10 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             </p>
             <MosaicGallery items={listItemItems} layout="asymmetric" />
           </div>
+        </ScrollReveal>
 
-          {/* Modal */}
+        {/* Modal */}
+        <ScrollReveal direction="up" delay={0.1}>
           <div className="mb-16">
             <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.modal.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -929,8 +946,10 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             </p>
             <MosaicGallery items={modalItems} layout="asymmetric" />
           </div>
+        </ScrollReveal>
 
-          {/* Text Area */}
+        {/* Text Area */}
+        <ScrollReveal direction="up" delay={0.2}>
           <div className="mb-16">
             <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.textArea.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -938,8 +957,10 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             </p>
             <MosaicGallery items={textAreaItems} layout="asymmetric" />
           </div>
+        </ScrollReveal>
 
-          {/* Text Input */}
+        {/* Text Input */}
+        <ScrollReveal direction="up" delay={0.1}>
           <div className="mb-16">
             <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.textInput.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -947,8 +968,10 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             </p>
             <MosaicGallery items={textInputItems} layout="asymmetric" />
           </div>
+        </ScrollReveal>
 
-          {/* Toggle */}
+        {/* Toggle */}
+        <ScrollReveal direction="up" delay={0.2}>
           <div className="mb-16">
             <h3 className="text-2xl font-semibold text-foreground mb-4">{projectDetail.components.toggle.title}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -956,8 +979,7 @@ export function PomeranianProject({ onNavigateHome, onNavigateToProjects, onProj
             </p>
             <MosaicGallery items={toggleItems} layout="asymmetric" />
           </div>
-
-        </div>
+        </ScrollReveal>
 
         {/* Related Projects */}
         <ScrollReveal direction="up" delay={0.3}>

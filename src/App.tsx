@@ -14,6 +14,7 @@ import { LightboxProvider } from './contexts/lightbox-context';
 import { LanguageProvider, useLanguage } from './contexts/language-context';
 import { DomainChecker } from './components/domain-checker';
 import { AdminLogin } from './components/admin-login';
+import { HashGenerator } from './components/hash-generator';
 import { useRouter, type Page } from './hooks/use-router';
 import { useTheme } from './hooks/use-theme';
 import { usePageMeta } from './hooks/use-page-meta';
@@ -358,6 +359,15 @@ function AppContent() {
           >
             {component}
           </ProjectPageWrapper>
+        </ErrorBoundary>
+      );
+    }
+
+    // Hash Generator page (utility)
+    if (currentPage === 'hash-generator') {
+      return (
+        <ErrorBoundary>
+          <HashGenerator />
         </ErrorBoundary>
       );
     }

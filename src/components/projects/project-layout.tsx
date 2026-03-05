@@ -3,11 +3,10 @@ import { ArrowLeft, Lightbulb, AlertCircle, ExternalLink, Maximize2, X, Monitor,
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { ProjectDetails } from './project-details';
+import { ProjectNavbar } from './project-navbar';
 import { ScrollReveal } from '../scroll-reveal';
 import { ShareProject } from '../share-project';
 import ImageCarousel from '../ImageCarousel';
-import { ThemeToggle } from '../theme-toggle';
-import { LanguageToggle } from '../language-toggle';
 import { RelatedProjects } from '../related-projects';
 import { getProjectsData, getShareableProjectUrl } from '../../utils/projects-data';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
@@ -291,32 +290,11 @@ export function ProjectLayout({
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-background/80">
       {/* Header Navigation - Auto Hide */}
-      <div 
-        className={`fixed top-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-b border-border z-40 transition-all duration-300 ease-in-out ${
-          isNavVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6 py-3 flex items-center justify-between">
-          <Button
-            onClick={onNavigateToProjects}
-            variant="ghost"
-            size="sm"
-            className="flex items-center gap-2 text-muted-foreground hover:text-foreground hover:bg-secondary/10 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            {t.projectLayout.backToProjects}
-          </Button>
-          <div className="flex items-center gap-2">
-            {isDark !== undefined && onToggleTheme && (
-              <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
-            )}
-            <LanguageToggle />
-          </div>
-        </div>
-      </div>
-
-      {/* Spacer para compensar la navbar fixed */}
-      <div className="h-[60px]"></div>
+      <ProjectNavbar 
+        onNavigateToProjects={onNavigateToProjects}
+        isDark={isDark}
+        onToggleTheme={onToggleTheme}
+      />
 
       <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6 py-6 md:py-8 lg:py-10">
         {/* Project Header */}
