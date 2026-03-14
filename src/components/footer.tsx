@@ -125,7 +125,7 @@ export function Footer({ onOpenContact, profileImageUrl }: FooterProps) {
             <div className="flex items-center justify-center gap-4 relative">
               {/* Design System Link - a la izquierda */}
               <a
-                href="./design-system.html"
+                href="/design-system.html"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-primary-foreground/50 hover:text-primary-foreground/90 hover:bg-primary-foreground/10 transition-all absolute left-0"

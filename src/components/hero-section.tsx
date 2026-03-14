@@ -40,8 +40,8 @@ export function HeroSection({ onNavigateToProjects, onNavigateToExperiences, onO
 
   const handleOpenDesignSystem = () => {
     analytics.trackDesignSystemOpened();
-    // Usar ruta relativa en lugar de absoluta para funcionar en preview de Figma
-    window.open('./design-system.html', '_blank');
+    // Ruta absoluta para que funcione correctamente en producción
+    window.open('/design-system.html', '_blank');
   };
 
   return (
