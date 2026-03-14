@@ -12,6 +12,14 @@ export function ExperiencesSection({ onNavigateToExperiences }: ExperiencesSecti
   
   const experiences = [
     {
+      period: t.experiences.items.harbiz.period,
+      title: t.experiences.items.harbiz.title,
+      company: t.experiences.items.harbiz.company,
+      description: t.experiences.items.harbiz.description,
+      skills: ["Product Design", "UX/UI Design", "Interaction Design", "Design Systems"],
+      type: "actual"
+    },
+    {
       period: "2025 - " + t.experiences.present,
       title: t.experiences.items.current.title,
       company: t.experiences.items.current.company,

@@ -35,11 +35,13 @@ export function InteractiveExperienceTimeline() {
     achievements: item.achievements,
     functions: item.functions,
     skills: index === 0 
-      ? ['Figma', 'User Interface', 'Prototyping', 'User Research', 'Design Systems']
+      ? ['Product Design', 'UX/UI Design', 'Interaction Design', 'User Flows', 'Design Systems', 'Usability Testing', 'Figma', 'Cross-platform Design', 'Product Thinking']
       : index === 1
+      ? ['Figma', 'User Interface', 'Prototyping', 'User Research', 'Design Systems']
+      : index === 2
       ? ['Visual Merchandising', 'Window & Indoor styling', 'Team Leadership', 'Store Analytics', 'Creative Direction','Trend Analysis']
       : ['Visual Merchandising', 'Window Display', 'Campaign Design', 'Creative Strategy', 'Trend Forecasting'],
-    color: index === 0 ? 'bg-muted-foreground' : index === 1 ? 'bg-secondary' : 'bg-[#ffccb6]'
+    color: index === 0 ? 'bg-accent' : index === 1 ? 'bg-muted-foreground' : index === 2 ? 'bg-secondary' : 'bg-[#ffccb6]'
   }));
   
   const [activeEvent, setActiveEvent] = useState<string>(timelineData[0].id);

@@ -123,11 +123,11 @@ export function Footer({ onOpenContact, profileImageUrl, onNavigateToDesignSyste
         >
           {/* Copyright + Design System Link */}
           <div className="pt-6 border-t border-primary-foreground/20">
-            <div className="flex items-center justify-center gap-4 relative">
-              {/* Design System Link - a la izquierda */}
+            <div className="flex flex-col-reverse md:flex-row items-center justify-center gap-3 md:gap-4 md:relative">
+              {/* Design System Link */}
               <button
                 onClick={onNavigateToDesignSystem}
-                className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-primary-foreground/50 hover:text-primary-foreground/90 hover:bg-primary-foreground/10 transition-all absolute left-0 cursor-pointer bg-transparent border-0"
+                className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-primary-foreground/50 hover:text-primary-foreground/90 hover:bg-primary-foreground/10 transition-all md:absolute md:left-0 cursor-pointer bg-transparent border-0 z-10"
                 aria-label="Ver Design System"
               >
                 <Palette className="w-4 h-4 group-hover:scale-110 transition-transform" />

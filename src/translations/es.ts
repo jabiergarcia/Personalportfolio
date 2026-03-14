@@ -75,6 +75,12 @@ export const es = {
       button: 'Ver experiencia completa',
     },
     items: {
+      harbiz: {
+        title: 'Product Designer',
+        company: 'Harbiz',
+        period: '2026 – Presente',
+        description: 'Diseño de nuevas funcionalidades y optimización de flujos en Harbiz, mejorando la experiencia de usuario y la coherencia del producto en web y aplicaciones.',
+      },
       current: {
         title: 'Junior UX/UI Designer',
         company: 'Freelance',
@@ -249,8 +255,8 @@ export const es = {
     title: 'Experiencia',
     subtitle: 'Un recorrido profesional desde el retail moda hacia el diseño UX/UI',
     description: 'Explora mi trayectoria profesional fusionando visual merchandising con diseño digital',
-    experienceTitle: 'Experiencia Profesional',
-    experienceSubtitle: 'De H&M a proyectos de diseño digital',
+    professionalTitle: 'Trayectoria profesional',
+    professionalSubtitle: 'Del retail de moda al diseño de producto digital',
     educationTitle: 'Formación Académica',
     educationSubtitle: 'Un camino de aprendizaje multidisciplinar',
     achievements: 'Logros destacados',
@@ -368,6 +374,29 @@ export const es = {
   // EXPERIENCE TIMELINE DATA
   // ============================================
   experienceTimeline: [
+    {
+      id: '0',
+      title: 'Product Designer (UX/UI)',
+      company: 'Harbiz',
+      location: 'Madrid, España',
+      period: '2026 – Presente',
+      typeLabel: 'Tiempo completo',
+      description: 'Product Designer dentro del equipo de diseño de producto en Harbiz, una plataforma SaaS enfocada en profesionales del fitness y bienestar. Trabajo en la evolución de funcionalidades y flujos dentro del producto, asegurando coherencia visual, usabilidad y consistencia entre dispositivos (Desktop, Mobile y Tablet). Colaboro estrechamente con diseñadores, product managers, developers y equipos de contenido para mejorar la experiencia del usuario y reforzar la relación entre el producto y sus clientes.',
+      achievements: [
+        'Diseño y optimización de flujos de interacción y funcionalidades dentro de la plataforma Harbiz',
+        'Adaptación de interfaces para experiencias consistentes en múltiples dispositivos',
+        'Participación en pruebas de usuario y análisis de navegación para detectar oportunidades de mejora',
+        'Benchmarking de producto para identificar buenas prácticas y oportunidades de innovación',
+        'Diseño de comunicaciones dentro del producto para mejorar la relación con los usuarios finales'
+      ],
+      functions: [
+        'Diseñar nuevos flujos de producto y mejorar funcionalidades existentes',
+        'Garantizar la coherencia visual y la calidad de la experiencia en diferentes dispositivos',
+        'Colaborar con Product Designers, UX Writers, Researchers y Developers',
+        'Analizar el comportamiento de usuarios para detectar fricciones y oportunidades',
+        'Realizar benchmarking y análisis de productos del mercado'
+      ],
+    },
     {
       id: '1',
       title: 'Junior UX/UI Designer',
