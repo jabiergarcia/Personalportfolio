@@ -638,3 +638,126 @@ img[width][height] {
     print-color-adjust: exact;
   }
 }
+
+/* ===================================
+   TOAST NOTIFICATIONS (Sonner)
+   =================================== */
+
+/* Override Sonner default success/error colors with portfolio palette */
+[data-sonner-toast][data-type="success"] {
+  background: var(--background) !important;
+  border: 2px solid var(--secondary) !important;
+  color: var(--foreground) !important;
+}
+
+[data-sonner-toast][data-type="success"] [data-icon] {
+  color: var(--secondary) !important;
+}
+
+[data-sonner-toast][data-type="success"] [data-title] {
+  color: var(--foreground) !important;
+  font-weight: 500;
+}
+
+[data-sonner-toast][data-type="success"] [data-description] {
+  color: var(--muted-foreground) !important;
+}
+
+[data-sonner-toast][data-type="error"] {
+  background: var(--background) !important;
+  border: 2px solid var(--destructive) !important;
+  color: var(--foreground) !important;
+}
+
+[data-sonner-toast][data-type="error"] [data-icon] {
+  color: var(--destructive) !important;
+}
+
+[data-sonner-toast][data-type="error"] [data-title] {
+  color: var(--foreground) !important;
+  font-weight: 500;
+}
+
+[data-sonner-toast][data-type="error"] [data-description] {
+  color: var(--muted-foreground) !important;
+}
+
+/* Info toasts use muted color */
+[data-sonner-toast][data-type="info"] {
+  background: var(--background) !important;
+  border: 2px solid var(--border) !important;
+  color: var(--foreground) !important;
+}
+
+[data-sonner-toast][data-type="info"] [data-icon] {
+  color: var(--muted-foreground) !important;
+}
+
+/* Toast close button */
+[data-sonner-toast] [data-close-button] {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+  opacity: 1 !important;
+  transition: all 0.2s ease;
+}
+
+[data-sonner-toast] [data-close-button]:hover {
+  background: var(--muted) !important;
+  color: var(--foreground) !important;
+  border-color: var(--muted) !important;
+}
+
+/* Toast container */
+[data-sonner-toaster] {
+  font-family: 'Clash Display', sans-serif !important;
+}
+
+/* Toast animation */
+[data-sonner-toast] {
+  border-radius: var(--radius) !important;
+  padding: 1rem !important;
+  box-shadow: 0 10px 30px rgba(16, 37, 42, 0.15) !important;
+}
+
+.dark [data-sonner-toast] {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ===================================
+   MICRO PULSE ANIMATION (Design System Easter Egg)
+   =================================== */
+
+@keyframes microPulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 6px rgba(216, 248, 120, 0.4);
+  }
+  50% { 
+    transform: scale(1.03);
+    box-shadow: 0 0 8px rgba(216, 248, 120, 0.5);
+  }
+}
+
+.micro-pulse {
+  animation: microPulse 10s ease-in-out infinite;
+  box-shadow: 0 0 6px rgba(216, 248, 120, 0.4);
+}
+
+/* Dark mode adjustments */
+.dark .micro-pulse {
+  box-shadow: 0 0 6px rgba(184, 232, 64, 0.4);
+  animation: microPulse 10s ease-in-out infinite;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .micro-pulse {
+    animation: none;
+    box-shadow: 0 0 6px rgba(216, 248, 120, 0.4);
+  }
+  
+  .dark .micro-pulse {
+    box-shadow: 0 0 6px rgba(184, 232, 64, 0.4);
+  }
+}

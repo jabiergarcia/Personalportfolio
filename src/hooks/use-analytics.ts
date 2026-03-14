@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
 
 interface AnalyticsEvent {
-  event_type: 'page_view' | 'project_view' | 'contact_open' | 'cv_download' | 'prototype_interaction';
+  event_type: 'page_view' | 'project_view' | 'contact_open' | 'cv_download' | 'prototype_interaction' | 'design_system_opened' | 'custom';
   page?: string;
   project?: string;
+  custom_data?: Record<string, any>;
   timestamp: string;
   user_agent: string;
   viewport: string;
@@ -83,6 +84,8 @@ export const useAnalytics = () => {
     trackProjectView: (project: string) => void trackEvent({ event_type: 'project_view', project }),
     trackContactOpen: () => void trackEvent({ event_type: 'contact_open' }),
     trackCVDownload: () => void trackEvent({ event_type: 'cv_download' }),
-    trackPrototypeInteraction: (project: string) => void trackEvent({ event_type: 'prototype_interaction', project })
+    trackPrototypeInteraction: (project: string) => void trackEvent({ event_type: 'prototype_interaction', project }),
+    trackDesignSystemOpened: () => void trackEvent({ event_type: 'design_system_opened' }),
+    trackCustomEvent: (customData: Record<string, any>) => void trackEvent({ event_type: 'custom', custom_data: customData })
   };
 };

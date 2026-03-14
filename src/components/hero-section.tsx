@@ -38,6 +38,12 @@ export function HeroSection({ onNavigateToProjects, onNavigateToExperiences, onO
     analytics.trackCVDownload();
   };
 
+  const handleOpenDesignSystem = () => {
+    analytics.trackDesignSystemOpened();
+    // Usar ruta relativa en lugar de absoluta para funcionar en preview de Figma
+    window.open('./design-system.html', '_blank');
+  };
+
   return (
     <motion.div 
       className="py-4 md:py-6"
@@ -93,7 +99,7 @@ export function HeroSection({ onNavigateToProjects, onNavigateToExperiences, onO
                 />
               </div>
               <motion.div 
-                className="absolute -bottom-3 -right-3 w-8 h-8 bg-accent rounded-full border-3 border-background"
+                className="absolute -bottom-3 -right-3 cursor-pointer"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ 
@@ -101,7 +107,27 @@ export function HeroSection({ onNavigateToProjects, onNavigateToExperiences, onO
                   delay: getDelay(HERO_TIMING.greenDot.delay), 
                   ease: EASING.bounce 
                 }}
-              ></motion.div>
+                onClick={handleOpenDesignSystem}
+                role="button"
+                aria-label={t.hero.openDesignSystem}
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleOpenDesignSystem();
+                  }
+                }}
+              >
+                <span className="relative flex h-8 w-8">
+                  {/* Outer - animate ping */}
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                  
+                  {/* Inner - glow + micro pulse */}
+                  <span 
+                    className="relative inline-flex rounded-full h-8 w-8 bg-accent border-3 border-background micro-pulse"
+                  ></span>
+                </span>
+              </motion.div>
             </motion.div>
             
             <motion.div 

@@ -96,41 +96,60 @@ export const ShareProject: React.FC<ShareProjectProps> = ({
   
   const displayDescription = projectShortDescription || projectDescription;
 
-  // Robust copy function
-  const copyToClipboard = (text: string): boolean => {
+  // Robust copy function - prioritizes legacy method for iframe compatibility
+  const copyToClipboard = async (text: string): Promise<boolean> => {
     try {
+      // Try legacy method first (works in iframes)
       const textarea = document.createElement('textarea');
       textarea.value = text;
       textarea.style.position = 'fixed';
       textarea.style.left = '-9999px';
       textarea.style.top = '-9999px';
+      textarea.style.opacity = '0';
       document.body.appendChild(textarea);
       
+      textarea.focus();
       textarea.select();
       textarea.setSelectionRange(0, textarea.value.length);
-      const successful = document.execCommand('copy');
+      
+      let successful = false;
+      try {
+        successful = document.execCommand('copy');
+        console.log(successful ? '✅ Copied to clipboard using execCommand' : '❌ execCommand failed');
+      } catch (err) {
+        console.error('❌ execCommand error:', err);
+      }
       
       document.body.removeChild(textarea);
       
-      return successful;
+      // If legacy method worked, return success
+      if (successful) {
+        return true;
+      }
+      
+      // If legacy method failed, try modern API as fallback
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(text);
+          console.log('✅ Copied to clipboard using Clipboard API');
+          return true;
+        } catch (clipboardError) {
+          console.error('❌ Clipboard API error:', clipboardError);
+        }
+      }
+      
+      return false;
     } catch (error) {
+      console.error('❌ Error copying to clipboard:', error);
       return false;
     }
   };
 
   // Copy LinkedIn post
-  const handleCopyLinkedIn = () => {
-    const linkedInPost = `🎯 ${projectTitle}
+  const handleCopyLinkedIn = async () => {
+    const linkedInPost = `🎯 ${projectTitle}\n\n${projectDescription}\n\n${t.projectLayout.share.linkedInPost.authorCredit}\n\n👉 ${t.projectLayout.share.linkedInPost.viewMore} ${shareUrl}\n\n#UXDesign #UIDesign #ProductDesign #Portfolio`;
 
-${projectDescription}
-
-${t.projectLayout.share.linkedInPost.authorCredit}
-
-👉 ${t.projectLayout.share.linkedInPost.viewMore} ${shareUrl}
-
-#UXDesign #UIDesign #ProductDesign #Portfolio`;
-
-    const success = copyToClipboard(linkedInPost);
+    const success = await copyToClipboard(linkedInPost);
     if (success) {
       setCopiedLinkedIn(true);
       toast.success(t.projectLayout.share.toast.textCopied, {
@@ -148,18 +167,75 @@ ${t.projectLayout.share.linkedInPost.authorCredit}
   };
 
   // Share via email
-  const handleEmailShare = () => {
-    const subject = encodeURIComponent(`${t.projectLayout.share.email.subject}: ${projectTitle}`);
-    const body = encodeURIComponent(
-      `${t.projectLayout.share.email.intro}\\n\\n` +
-      `${t.projectLayout.share.email.body}\\n\\n` +
-      `${projectTitle}\\n\\n` +
-      `${projectDescription}\\n\\n` +
-      `${t.projectLayout.share.email.viewProject}\\n${shareUrl}\\n\\n` +
-      `${t.projectLayout.share.email.outro}`
-    );
-    window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
-    setIsOpen(false);
+  const handleEmailShare = async () => {
+    const subject = `${t.projectLayout.share.email.subject}: ${projectTitle}`;
+    const body = 
+      `${t.projectLayout.share.email.intro}\n\n` +
+      `${t.projectLayout.share.email.body}\n\n` +
+      `${projectTitle}\n\n` +
+      `${projectDescription}\n\n` +
+      `${t.projectLayout.share.email.viewProject}\n` +
+      `${shareUrl}\n\n` +
+      `${t.projectLayout.share.email.outro}`;
+    
+    const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    console.log('📧 Attempting to share via email...');
+    
+    // Detect if user is on mobile device
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // On mobile: Close modal then try to open email client
+      setIsOpen(false);
+      setTimeout(() => {
+        console.log('📱 Mobile detected - opening email client');
+        try {
+          window.location.href = mailtoUrl;
+        } catch (error) {
+          console.error('Error opening email client:', error);
+          // Fallback to clipboard on mobile if mailto fails
+          const emailContent = `${subject}\n\n${body}`;
+          copyToClipboard(emailContent).then(copied => {
+            if (copied) {
+              toast.success(t.projectLayout.share.toast.emailContentCopied, {
+                description: t.projectLayout.share.toast.openEmailManually,
+                duration: 5000
+              });
+            } else {
+              toast.error(t.projectLayout.share.toast.errorCopying);
+            }
+          });
+        }
+      }, 150);
+    } else {
+      // On desktop: Copy to clipboard then show toast AFTER modal closes
+      console.log('💻 Desktop detected - copying email content to clipboard');
+      const emailContent = `${subject}\n\n${body}`;
+      
+      // Copy to clipboard first
+      const copied = await copyToClipboard(emailContent);
+      console.log('📋 Copy result:', copied);
+      
+      // Show toast IMMEDIATELY before closing modal
+      if (copied) {
+        console.log('✅ Showing success toast IMMEDIATELY');
+        const toastId = toast.success(t.projectLayout.share.toast.emailContentCopied, {
+          description: t.projectLayout.share.toast.openEmailManually,
+          duration: 5000
+        });
+        console.log('🆔 Toast ID:', toastId);
+      } else {
+        console.log('❌ Showing error toast IMMEDIATELY');
+        const toastId = toast.error(t.projectLayout.share.toast.errorCopying);
+        console.log('🆔 Toast ID:', toastId);
+      }
+      
+      // Close modal AFTER showing toast
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 100);
+    }
   };
 
   // Modal content

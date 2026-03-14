@@ -1,5 +1,5 @@
 import { ScrollReveal } from './scroll-reveal';
-import { Mail, Phone, Coffee, Linkedin, Download } from 'lucide-react';
+import { Mail, Phone, Coffee, Linkedin, Download, Palette } from 'lucide-react';
 import { CONTACT_INFO, SOCIAL_LINKS } from '../utils/constants';
 import { useLanguage } from '../hooks/use-language';
 import { useCV } from '../hooks/use-cv';
@@ -120,12 +120,27 @@ export function Footer({ onOpenContact, profileImageUrl }: FooterProps) {
             amount: 0.01 // Solo requiere 1% de visibilidad
           }}
         >
-          {/* Copyright */}
+          {/* Copyright + Design System Link */}
           <div className="pt-6 border-t border-primary-foreground/20">
-            <p className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-sm text-primary-foreground/60">
-              <span>&copy; 2025 {t.footer.copyright}</span>
-              <Coffee className="w-4 h-4" />
-            </p>
+            <div className="flex items-center justify-center gap-4 relative">
+              {/* Design System Link - a la izquierda */}
+              <a
+                href="./design-system.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-primary-foreground/50 hover:text-primary-foreground/90 hover:bg-primary-foreground/10 transition-all absolute left-0"
+                aria-label="Ver Design System"
+              >
+                <Palette className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span className="font-medium">DS</span>
+              </a>
+              
+              {/* Copyright - centrado */}
+              <p className="flex items-center justify-center gap-2 text-sm text-primary-foreground/60">
+                <span>&copy; 2025 {t.footer.copyright}</span>
+                <Coffee className="w-4 h-4" />
+              </p>
+            </div>
           </div>
         </ScrollReveal>
         

@@ -1,5 +1,5 @@
 import { Suspense, ComponentType, lazy, LazyExoticComponent } from 'react';
-import { useLanguage } from './contexts/language-context';
+import { useLanguage } from '../contexts/language-context';
 
 interface LazyLoaderProps {
   children: React.ReactNode;

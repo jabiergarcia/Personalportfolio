@@ -28,6 +28,7 @@ export const es = {
       cta: '¿Nos ponemos en contacto?',
       button: 'Contacto',
     },
+    openDesignSystem: 'Abrir Design System', // NUEVO
   },
 
   // Works Section
@@ -97,6 +98,7 @@ export const es = {
     tagline: 'Diseñando experiencias digitales desde Madrid',
     downloadCV: 'Descargar CV',
     copyright: 'Diseñado con Figma, React y mucho café',
+    designSystem: 'Ver Design System', // NUEVO
     labels: {
       openContactForm: 'Abrir formulario de contacto',
       callPhone: 'Llamar por teléfono',
@@ -235,7 +237,9 @@ export const es = {
       toast: {
         textCopied: '¡Texto copiado!',
         readyToPublish: 'Listo para publicar en LinkedIn',
-        errorCopying: 'Error al copiar el texto'
+        errorCopying: 'Error al copiar el texto',
+        emailContentCopied: 'Contenido del email copiado al portapapeles',
+        openEmailManually: 'Abre tu cliente de email y pega el contenido'
       }
     },
   },

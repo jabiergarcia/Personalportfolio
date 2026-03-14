@@ -1,0 +1,37 @@
+[Hydrated]
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:75 ✅ Dominio Configurado Correctamente
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:75 Dominio: https://jabiergarcia.com
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:75 📊 [Clarity] Initializing with project: utnwnczfi2
+sites-runtime.8b70425d68a4452fce0c06e84ff8b403fb8604776241f07610414337ec6491c4.js:1 Allow attribute will take precedence over 'allowfullscreen'.
+Ov @ sites-runtime.8b70425d68a4452fce0c06e84ff8b403fb8604776241f07610414337ec6491c4.js:1Understand this warning
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: Object
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: Object
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: Object
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: Object
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: Object
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: Object
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: Object
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: Object
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: Object
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: Object
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: Object
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: Object
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:57 📊 [Analytics] Tracking event: page_view puffykitten
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:75 ✅ [Clarity] Script loaded successfully
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:57 ✅ [Analytics] Event tracked successfully: page_view
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:94 📧 Attempting to share via email...
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:96 💻 Desktop detected - copying email content to clipboard
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: {src: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v…/Images/PuffyKitten/Empatizar%20-%20Benchmark.png', alt: 'Benchmark de competidores directos e indirectos de PuffyKitten', priority: true, naturalWidth: 1920, naturalHeight: 1080, …}
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: {src: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v…ssets/Images/PuffyKitten/Empatizar%20-%20DAFO.png', alt: 'Análisis DAFO de PuffyKitten con debilidades, amenazas, fortalezas y oportunidades', priority: true, naturalWidth: 1920, naturalHeight: 1080, …}
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: {src: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v…s/Images/PuffyKitten/Empatizar%20-%20Insights.png', alt: 'Insights clave obtenidos de encuestas y entrevistas a usuarios', priority: true, naturalWidth: 1920, naturalHeight: 1080, …}
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: {src: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v…sets/Images/PuffyKitten/Definir%20-%20Persona.png', alt: 'Perfiles de usuario, comprador y arquetipo de PuffyKitten', priority: true, naturalWidth: 1920, naturalHeight: 1080, …}
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: {src: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v…PuffyKitten/Definir%20-%20Mapa%20de%20Empatia.png', alt: 'Mapa de empatía con motivaciones, frustraciones y aspiraciones del usuario', priority: true, naturalWidth: 1920, naturalHeight: 1080, …}
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: {src: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v…mages/PuffyKitten/Definir%20-%20Journey%20Map.png', alt: 'Journey map del recorrido completo del usuario con PuffyKitten', priority: true, naturalWidth: 1920, naturalHeight: 1080, …}
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: {src: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v…ages/PuffyKitten/Idear%20-%20Business%20Model.png', alt: 'Business Model Canvas con actividades clave, propuesta de valor y alianzas estratégicas', priority: true, naturalWidth: 1920, naturalHeight: 1080, …}
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: {src: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v…s/PuffyKitten/Idear%20-%20Value%20Proposition.png', alt: 'Value Proposition Canvas centrada en experiencia digital, emocional y social', priority: true, naturalWidth: 1920, naturalHeight: 1080, …}
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: {src: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v…ges/PuffyKitten/Idear%20-%20Point%20of%20View.png', alt: 'Point of View definiendo la perspectiva y necesidades del usuario objetivo', priority: true, naturalWidth: 1920, naturalHeight: 1080, …}
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: {src: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v…ar%20-%20Arquitectura%20de%20la%20informacion.png', alt: 'Arquitectura de la información mostrando la organización del contenido y flujos de navegación', priority: true, naturalWidth: 1920, naturalHeight: 1080, …}
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: {src: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v…tten/Prototipar%20-%20Identidad%20Corporativa.png', alt: 'Identidad corporativa de PuffyKitten con logo, colores, tipografía y estilo neobrutalista', priority: true, naturalWidth: 1920, naturalHeight: 1080, …}
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: {src: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v…mages/PuffyKitten/Prototipar%20-%20Wireframes.png', alt: 'Wireframes de baja fidelidad con estructura y layout de pantallas principales', priority: true, naturalWidth: 1920, naturalHeight: 1080, …}
+8d311c705abd6857de33caf7d3ab35aca59c023c.js:9 [ImageWithFallback] ✓ Image loaded successfully: {src: 'https://jdylpqwurderryhujqgr.supabase.co/storage/v…/PuffyKitten/Idear%20(Priorizar)%20-%20MoSKoW.png', alt: 'Matriz de priorización MoSCoW con funcionalidades must-have, should-have y could-have', priority: false, naturalWidth: 1920, naturalHeight: 1080, …}
+puffykitten:1 The resource https://jabiergarcia.com/_json/5ef70017-fdd6-4c6e-b40a-4aea59eeaa3a/_index.json was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.Understand this warning

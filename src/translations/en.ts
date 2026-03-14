@@ -30,6 +30,7 @@ export const en: TranslationKeys = {
       cta: 'Let\'s get in touch?',
       button: 'Contact',
     },
+    openDesignSystem: 'Open Design System', // NUEVO
   },
 
   // Works Section
@@ -99,6 +100,7 @@ export const en: TranslationKeys = {
     tagline: 'Designing digital experiences from Madrid',
     downloadCV: 'Download CV',
     copyright: 'Designed with Figma, React and lots of coffee',
+    designSystem: 'View Design System', // NUEVO
     labels: {
       openContactForm: 'Open contact form',
       callPhone: 'Call phone',
@@ -237,7 +239,9 @@ export const en: TranslationKeys = {
       toast: {
         textCopied: 'Text copied!',
         readyToPublish: 'Ready to publish on LinkedIn',
-        errorCopying: 'Error copying text'
+        errorCopying: 'Error copying text',
+        emailContentCopied: 'Email content copied to clipboard',
+        openEmailManually: 'Open your email client and paste the content'
       }
     },
   },
