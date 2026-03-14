@@ -113,7 +113,7 @@
       "destination": "/projects/pomeranian.html"
     },
     {
-      "source": "/((?!proyectos/.*\\.html|projects/.*\\.html|design-system\\.html|sitemap\\.xml|robots\\.txt|404\\.html|.*\\..*).*)",
+      "source": "/((?!proyectos/.*\\.html|projects/.*\\.html|design-system\\.html|test-static\\.html|sitemap\\.xml|robots\\.txt|404\\.html|.*\\..*).*)",
       "destination": "/index.html"
     }
   ],

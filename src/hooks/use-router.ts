@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export type Page = 'home' | 'projects' | 'experiences' | 'puffykitten' | 'chupsee' | 'ds-pomeranian' | 'gotapp' | 'assorta' | 'admin' | 'hash-generator' | '404';
+export type Page = 'home' | 'projects' | 'experiences' | 'puffykitten' | 'chupsee' | 'ds-pomeranian' | 'gotapp' | 'assorta' | 'admin' | 'hash-generator' | 'design-system' | '404';
 
 export type Language = 'es' | 'en';
 
@@ -16,6 +16,7 @@ const routeMapES: Record<Page, string> = {
   assorta: '/proyectos/assorta',
   admin: '/admin',
   'hash-generator': '/hash-generator',
+  'design-system': '/design-system',
   '404': '/404'
 };
 
@@ -30,6 +31,7 @@ const routeMapEN: Record<Page, string> = {
   assorta: '/projects/assorta',
   admin: '/admin',
   'hash-generator': '/hash-generator',
+  'design-system': '/design-system',
   '404': '/404'
 };
 

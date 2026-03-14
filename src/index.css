@@ -1151,6 +1151,10 @@
     height: 1px;
   }
 
+  .h-screen {
+    height: 100vh;
+  }
+
   .max-h-full {
     max-height: 100%;
   }
@@ -1708,6 +1712,11 @@
     border-width: 1px;
   }
 
+  .border-0 {
+    border-style: var(--tw-border-style);
+    border-width: 0;
+  }
+
   .border-2 {
     border-style: var(--tw-border-style);
     border-width: 2px;
@@ -1746,6 +1755,11 @@
   .border-none {
     --tw-border-style: none;
     border-style: none;
+  }
+
+  .border-solid {
+    --tw-border-style: solid;
+    border-style: solid;
   }
 
   .border-accent\/20 {
@@ -1788,6 +1802,10 @@
     .border-border\/50 {
       border-color: color-mix(in oklab, var(--border) 50%, transparent);
     }
+  }
+
+  .border-current {
+    border-color: currentColor;
   }
 
   .border-destructive\/20 {
@@ -1912,6 +1930,10 @@
 
   .border-t-white {
     border-top-color: var(--color-white);
+  }
+
+  .border-r-transparent {
+    border-right-color: #0000;
   }
 
   .border-l-transparent {
@@ -2318,6 +2340,10 @@
 
   .bg-slate-900 {
     background-color: var(--color-slate-900);
+  }
+
+  .bg-transparent {
+    background-color: #0000;
   }
 
   .bg-white {
@@ -2733,6 +2759,10 @@
     object-position: center;
   }
 
+  .p-0 {
+    padding: calc(var(--spacing) * 0);
+  }
+
   .p-1 {
     padding: calc(var(--spacing) * 1);
   }
@@ -2923,6 +2953,10 @@
 
   .text-left {
     text-align: left;
+  }
+
+  .align-\[-0\.125em\] {
+    vertical-align: -.125em;
   }
 
   .font-mono {
@@ -4377,6 +4411,12 @@
 
   .data-\[state\=open\]\:zoom-in-95[data-state="open"] {
     --tw-enter-scale: .95;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motion-reduce\:animate-\[spin_1\.5s_linear_infinite\] {
+      animation: 1.5s linear infinite spin;
+    }
   }
 
   @media (width >= 40rem) {

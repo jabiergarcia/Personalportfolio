@@ -7,9 +7,10 @@ import { useCV } from '../hooks/use-cv';
 interface FooterProps {
   onOpenContact?: () => void;
   profileImageUrl?: string;
+  onNavigateToDesignSystem?: () => void;
 }
 
-export function Footer({ onOpenContact, profileImageUrl }: FooterProps) {
+export function Footer({ onOpenContact, profileImageUrl, onNavigateToDesignSystem }: FooterProps) {
   const { t } = useLanguage();
   const { cvUrl, cvFileName } = useCV();
   
@@ -124,16 +125,14 @@ export function Footer({ onOpenContact, profileImageUrl }: FooterProps) {
           <div className="pt-6 border-t border-primary-foreground/20">
             <div className="flex items-center justify-center gap-4 relative">
               {/* Design System Link - a la izquierda */}
-              <a
-                href="/design-system.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-primary-foreground/50 hover:text-primary-foreground/90 hover:bg-primary-foreground/10 transition-all absolute left-0"
+              <button
+                onClick={onNavigateToDesignSystem}
+                className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-primary-foreground/50 hover:text-primary-foreground/90 hover:bg-primary-foreground/10 transition-all absolute left-0 cursor-pointer bg-transparent border-0"
                 aria-label="Ver Design System"
               >
                 <Palette className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span className="font-medium">DS</span>
-              </a>
+              </button>
               
               {/* Copyright - centrado */}
               <p className="flex items-center justify-center gap-2 text-sm text-primary-foreground/60">

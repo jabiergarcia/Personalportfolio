@@ -10771,7 +10771,7 @@
         if (T[lang]?.[key] !== undefined) el.placeholder = T[lang][key];
       });
       document.querySelectorAll('[data-lang-switch]').forEach(btn => {
-        button.classList.toggle('is-active', button.dataset.langSwitch === lang);
+        btn.classList.toggle('is-active', btn.dataset.langSwitch === lang);
       });
       updateModeLabel();
     }

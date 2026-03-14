@@ -14,9 +14,10 @@ interface HeroSectionProps {
   onNavigateToProjects?: () => void;
   onNavigateToExperiences?: () => void;
   onOpenContact?: () => void;
+  onNavigateToDesignSystem?: () => void;
 }
 
-export function HeroSection({ onNavigateToProjects, onNavigateToExperiences, onOpenContact }: HeroSectionProps) {
+export function HeroSection({ onNavigateToProjects, onNavigateToExperiences, onOpenContact, onNavigateToDesignSystem }: HeroSectionProps) {
   const analytics = useAnalytics();
   const { t } = useLanguage();
   const { cvUrl, cvFileName } = useCV();
@@ -38,10 +39,11 @@ export function HeroSection({ onNavigateToProjects, onNavigateToExperiences, onO
     analytics.trackCVDownload();
   };
 
-  const handleOpenDesignSystem = () => {
+  const handleDesignSystemClick = () => {
     analytics.trackDesignSystemOpened();
-    // Ruta absoluta para que funcione correctamente en producción
-    window.open('/design-system.html', '_blank');
+    if (onNavigateToDesignSystem) {
+      onNavigateToDesignSystem();
+    }
   };
 
   return (
@@ -99,7 +101,7 @@ export function HeroSection({ onNavigateToProjects, onNavigateToExperiences, onO
                 />
               </div>
               <motion.div 
-                className="absolute -bottom-3 -right-3 cursor-pointer"
+                className="absolute -bottom-3 -right-3"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ 
@@ -107,26 +109,22 @@ export function HeroSection({ onNavigateToProjects, onNavigateToExperiences, onO
                   delay: getDelay(HERO_TIMING.greenDot.delay), 
                   ease: EASING.bounce 
                 }}
-                onClick={handleOpenDesignSystem}
-                role="button"
-                aria-label={t.hero.openDesignSystem}
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleOpenDesignSystem();
-                  }
-                }}
               >
-                <span className="relative flex h-8 w-8">
-                  {/* Outer - animate ping */}
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                  
-                  {/* Inner - glow + micro pulse */}
-                  <span 
-                    className="relative inline-flex rounded-full h-8 w-8 bg-accent border-3 border-background micro-pulse"
-                  ></span>
-                </span>
+                <button
+                  onClick={handleDesignSystemClick}
+                  className="cursor-pointer block bg-transparent border-0 p-0"
+                  aria-label={t.hero.openDesignSystem}
+                >
+                  <span className="relative flex h-8 w-8">
+                    {/* Outer - animate ping */}
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                    
+                    {/* Inner - glow + micro pulse */}
+                    <span 
+                      className="relative inline-flex rounded-full h-8 w-8 bg-accent border-3 border-background micro-pulse"
+                    ></span>
+                  </span>
+                </button>
               </motion.div>
             </motion.div>
             

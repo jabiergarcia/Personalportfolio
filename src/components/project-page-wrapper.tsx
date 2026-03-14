@@ -11,6 +11,7 @@ interface ProjectPageWrapperProps {
   onNavigateHome: () => void;
   onNavigateToProjects: () => void;
   onNavigateToExperiences: () => void;
+  onNavigateToDesignSystem?: () => void;
   isDark: boolean;
   onToggleTheme: () => void;
   isContactModalOpen: boolean;
@@ -31,6 +32,7 @@ export function ProjectPageWrapper({
   onNavigateHome,
   onNavigateToProjects,
   onNavigateToExperiences,
+  onNavigateToDesignSystem,
   isDark,
   onToggleTheme,
   isContactModalOpen,
@@ -64,6 +66,7 @@ export function ProjectPageWrapper({
         <Footer
           onOpenContact={onOpenContact}
           profileImageUrl={PROFILE_IMAGE_URL}
+          onNavigateToDesignSystem={onNavigateToDesignSystem}
         />
       )}
     </PageWrapper>

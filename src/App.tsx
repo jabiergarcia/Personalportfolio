@@ -68,6 +68,11 @@ const AdminPage = createLazyComponent(
   'AdminPage'
 );
 
+const DesignSystemPage = createLazyComponent(
+  () => import('./components/design-system-page').then(m => ({ default: m.DesignSystemPage })),
+  'DesignSystemPage'
+);
+
 // Inner component that has access to Language context
 function AppContent() {
   const { currentPage, navigate, updateURLForLanguage, urlLanguage } = useRouter();
@@ -207,6 +212,11 @@ function AppContent() {
     });
   };
 
+  const navigateToDesignSystem = () => {
+    // Abrir en nueva pestaña en lugar de navegar
+    window.open('/design-system', '_blank');
+  };
+
   const openContactModal = () => {
     setIsContactModalOpen(true);
   };
@@ -226,6 +236,7 @@ function AppContent() {
             onNavigateHome={navigateToHome}
             onNavigateToProjects={navigateToProjects}
             onNavigateToExperiences={navigateToExperiences}
+            onNavigateToDesignSystem={navigateToDesignSystem}
             isDark={isDark}
             onToggleTheme={toggleTheme}
             isContactModalOpen={isContactModalOpen}
@@ -250,6 +261,7 @@ function AppContent() {
             onNavigateHome={navigateToHome}
             onNavigateToProjects={navigateToProjects}
             onNavigateToExperiences={navigateToExperiences}
+            onNavigateToDesignSystem={navigateToDesignSystem}
             isDark={isDark}
             onToggleTheme={toggleTheme}
             isContactModalOpen={isContactModalOpen}
@@ -350,6 +362,7 @@ function AppContent() {
             onNavigateHome={navigateToHome}
             onNavigateToProjects={navigateToProjects}
             onNavigateToExperiences={navigateToExperiences}
+            onNavigateToDesignSystem={navigateToDesignSystem}
             isDark={isDark}
             onToggleTheme={toggleTheme}
             isContactModalOpen={isContactModalOpen}
@@ -387,6 +400,7 @@ function AppContent() {
             onNavigateHome={navigateToHome}
             onNavigateToProjects={navigateToProjects}
             onNavigateToExperiences={navigateToExperiences}
+            onNavigateToDesignSystem={navigateToDesignSystem}
             isDark={isDark}
             onToggleTheme={toggleTheme}
             isContactModalOpen={isContactModalOpen}
@@ -397,6 +411,33 @@ function AppContent() {
           >
             <LazyLoader fallback={<PageLoader />}>
               <AdminPage onNavigateHome={navigateToHome} />
+            </LazyLoader>
+          </ProjectPageWrapper>
+        </ErrorBoundary>
+      );
+    }
+
+    // Design System page
+    if (currentPage === 'design-system') {
+      return (
+        <ErrorBoundary>
+          <ProjectPageWrapper
+            currentPage="design-system"
+            onNavigateHome={navigateToHome}
+            onNavigateToProjects={navigateToProjects}
+            onNavigateToExperiences={navigateToExperiences}
+            onNavigateToDesignSystem={navigateToDesignSystem}
+            isDark={isDark}
+            onToggleTheme={toggleTheme}
+            isContactModalOpen={isContactModalOpen}
+            onOpenContact={openContactModal}
+            onCloseContact={closeContactModal}
+            showProfileImage={true}
+            showFooter={false}
+            showNavigation={false}
+          >
+            <LazyLoader fallback={<PageLoader />}>
+              <DesignSystemPage />
             </LazyLoader>
           </ProjectPageWrapper>
         </ErrorBoundary>
@@ -437,6 +478,7 @@ function AppContent() {
               onNavigateToProjects={navigateToProjects} 
               onNavigateToExperiences={navigateToExperiences}
               onOpenContact={openContactModal}
+              onNavigateToDesignSystem={navigateToDesignSystem}
             />
             <WorksSection onProjectClick={navigateToProject} />
             <StatsSection />
@@ -446,6 +488,7 @@ function AppContent() {
         <Footer 
           onOpenContact={openContactModal}
           profileImageUrl={PROFILE_IMAGE_URL}
+          onNavigateToDesignSystem={navigateToDesignSystem}
         />
       </PageWrapper>
     );

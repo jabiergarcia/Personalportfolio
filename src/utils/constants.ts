@@ -15,6 +15,9 @@ export const CV_URLS = {
 // URL del CV (mantener por compatibilidad, usar CV_URLS en su lugar)
 export const CV_URL = CV_URLS.es;
 
+// URL del Design System (HTML estático en Supabase Storage)
+export const DESIGN_SYSTEM_URL = "https://jdylpqwurderryhujqgr.supabase.co/storage/v1/object/public/portfolio-assets/Docs/design-system.html";
+
 // Información de contacto
 export const CONTACT_INFO = {
   name: "Jabier García Sanz",
