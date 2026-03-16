@@ -457,17 +457,19 @@ export function InteractiveExperienceTimeline() {
                       {event.description}
                     </p>
 
-                    <div>
-                      <h4 className="font-medium text-card-foreground mb-2">{t.experiencesPage.keyAchievements}:</h4>
-                      <ul className="space-y-1.5">
-                        {event.achievements.map((achievement, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-muted-foreground ml-4">
-                            <span className="w-1.5 h-1.5 bg-secondary rounded-full mt-1.5 flex-shrink-0"></span>
-                            <span className="leading-relaxed">{achievement}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    {event.id !== '0' && (
+                      <div>
+                        <h4 className="font-medium text-card-foreground mb-2">{t.experiencesPage.keyAchievements}:</h4>
+                        <ul className="space-y-1.5">
+                          {event.achievements.map((achievement, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-muted-foreground ml-4">
+                              <span className="w-1.5 h-1.5 bg-secondary rounded-full mt-1.5 flex-shrink-0"></span>
+                              <span className="leading-relaxed">{achievement}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
                     <div>
                       <h4 className="font-medium text-card-foreground mb-2">{t.experiencesPage.keyFunctions}:</h4>
@@ -610,17 +612,19 @@ export function InteractiveExperienceTimeline() {
                       {event.description}
                     </p>
 
-                    <div>
-                      <h4 className="font-medium text-card-foreground mb-3">{t.experiencesPage.keyAchievements}:</h4>
-                      <ul className="space-y-2">
-                        {event.achievements.map((achievement, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-muted-foreground ml-4">
-                            <span className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0"></span>
-                            <span className="leading-relaxed">{achievement}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    {event.id !== '0' && (
+                      <div>
+                        <h4 className="font-medium text-card-foreground mb-3">{t.experiencesPage.keyAchievements}:</h4>
+                        <ul className="space-y-2">
+                          {event.achievements.map((achievement, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-muted-foreground ml-4">
+                              <span className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0"></span>
+                              <span className="leading-relaxed">{achievement}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
                     <div>
                       <h4 className="font-medium text-card-foreground mb-3">{t.experiencesPage.keyFunctions}:</h4>
