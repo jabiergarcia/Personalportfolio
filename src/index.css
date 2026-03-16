@@ -88,6 +88,7 @@
     --color-blue-950: oklch(.282 .091 267.935);
     --color-slate-700: oklch(.372 .044 257.287);
     --color-slate-900: oklch(.208 .042 265.755);
+    --color-stone-600: oklch(.444 .011 73.639);
     --color-black: #000;
     --color-white: #fff;
     --spacing: .25rem;
@@ -2340,6 +2341,10 @@
 
   .bg-slate-900 {
     background-color: var(--color-slate-900);
+  }
+
+  .bg-stone-600 {
+    background-color: var(--color-stone-600);
   }
 
   .bg-transparent {

@@ -76,7 +76,7 @@ export const es = {
     },
     items: {
       harbiz: {
-        title: 'Product Designer',
+        title: 'Junior Product Designer',
         company: 'Harbiz',
         period: '2026 – Presente',
         description: 'Diseño de nuevas funcionalidades y optimización de flujos en Harbiz, mejorando la experiencia de usuario y la coherencia del producto en web y aplicaciones.',
@@ -376,7 +376,7 @@ export const es = {
   experienceTimeline: [
     {
       id: '0',
-      title: 'Product Designer (UX/UI)',
+      title: 'Junior Product Designer (UX/UI)',
       company: 'Harbiz',
       location: 'Madrid, España',
       period: '2026 – Presente',

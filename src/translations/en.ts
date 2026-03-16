@@ -78,7 +78,7 @@ export const en: TranslationKeys = {
     },
     items: {
       harbiz: {
-        title: 'Product Designer',
+        title: 'Junior Product Designer',
         company: 'Harbiz',
         period: '2026 – Present',
         description: 'Designing new features and optimizing flows at Harbiz, improving user experience and product consistency across web and mobile applications.',
@@ -378,7 +378,7 @@ export const en: TranslationKeys = {
   experienceTimeline: [
     {
       id: '0',
-      title: 'Product Designer (UX/UI)',
+      title: 'Junior Product Designer (UX/UI)',
       company: 'Harbiz',
       location: 'Madrid, Spain',
       period: '2026 – Present',

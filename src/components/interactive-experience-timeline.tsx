@@ -41,7 +41,7 @@ export function InteractiveExperienceTimeline() {
       : index === 2
       ? ['Visual Merchandising', 'Window & Indoor styling', 'Team Leadership', 'Store Analytics', 'Creative Direction','Trend Analysis']
       : ['Visual Merchandising', 'Window Display', 'Campaign Design', 'Creative Strategy', 'Trend Forecasting'],
-    color: index === 0 ? 'bg-accent' : index === 1 ? 'bg-muted-foreground' : index === 2 ? 'bg-secondary' : 'bg-[#ffccb6]'
+    color: index === 0 ? 'bg-stone-600' : index === 1 ? 'bg-muted-foreground' : index === 2 ? 'bg-secondary' : 'bg-[#ffccb6]'
   }));
   
   const [activeEvent, setActiveEvent] = useState<string>(timelineData[0].id);
